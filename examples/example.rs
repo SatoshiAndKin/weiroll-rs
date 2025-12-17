@@ -4,12 +4,12 @@ use ethers::abi::RawLog;
 use ethers::{abi::ParamType, prelude::*, utils::Anvil};
 use weiroll::bindings::events::{Events, EventsEvents};
 use weiroll::{
+    Planner,
     bindings::{
         erc20::BalanceOfCall,
         events::{LogStringCall, LogUintCall},
         testable_vm::TestableVM,
     },
-    Planner,
 };
 
 const WETH_ADDR: &str = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";

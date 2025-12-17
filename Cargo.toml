@@ -1,7 +1,7 @@
 [package]
 name = "weiroll"
 version = "0.1.1"
-edition = "2021"
+edition = "2024"
 description = "Weiroll planner for EVM using ethers-rs"
 repository = "https://github.com/georgewhewell/weiroll-rs"
 license = "MIT OR Apache-2.0"
