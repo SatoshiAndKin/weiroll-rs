@@ -11,11 +11,11 @@ include = ["**/*.rs"]
 
 [dependencies]
 bitflags = "2"
-bytes = "1.4.0"
-ethers = "2.0.3"
-slotmap = "1.0.6"
-thiserror = "1.0.40"
-tracing = "0.1.37"
+bytes = "1.11.0"
+ethers = "2.0.14"
+slotmap = "1.1.1"
+thiserror = "2.0.17"
+tracing = "0.1.43"
 
 [dev-dependencies]
-tokio = { version = "1.21", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.48", features = ["macros", "rt-multi-thread"] }
