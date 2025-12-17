@@ -232,10 +232,7 @@ impl<'a> Planner<'a> {
 
                 ps.return_slot_map.insert(cmd_key, ret);
 
-                ps.state_expirations
-                    .entry(*expiry)
-                    .or_insert_with(Vec::new)
-                    .push(ret);
+                ps.state_expirations.entry(*expiry).or_default().push(ret);
 
                 if ret == u8::try_from(ps.state.len())? {
                     ps.state.push(Bytes::default());
@@ -368,7 +365,7 @@ impl<'a> Planner<'a> {
             state.push(literal.bytes());
             state_expirations
                 .entry(last_command)
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(slot);
             literal_slot_map.insert(literal, slot);
         }
