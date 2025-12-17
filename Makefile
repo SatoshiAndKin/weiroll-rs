@@ -1,7 +1,4 @@
-bindings: rustfmt
-
-rustfmt: src/bindings
-	rustfmt src/bindings/*.rs
+bindings: src/bindings
 
 src/bindings: weiroll/node_modules
 	forge bind \
@@ -11,10 +8,15 @@ src/bindings: weiroll/node_modules
 		--bindings-path ./src/bindings \
 		--select-all
 
-weiroll/node_modules:
+submodules: weiroll/.git
+
+weiroll/.git:
+	git submodule update --init --recursive weiroll
+
+weiroll/node_modules: weiroll/.git
 	cd weiroll && npm install
 
 clean:
 	rm -rf ./src/bindings
 
-.PHONY: bindings clean rustfmt
+.PHONY: bindings clean rustfmt submodules
