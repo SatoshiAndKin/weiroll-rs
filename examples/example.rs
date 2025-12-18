@@ -19,20 +19,25 @@ const VIT_ADDR: Address = address!("0xab5801a7d398351b8be11c439e05c5b3259aec9b")
 const PROVIDER_URL: &str = "http://localhost:8545";
 
 #[tokio::main]
-pub async fn main() {
+pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Spawning anvil..");
     let anvil = Anvil::new().fork(PROVIDER_URL).spawn();
-    let wallet: PrivateKeySigner = anvil.keys().first().unwrap().clone().into();
+    let wallet = anvil
+        .keys()
+        .first()
+        .cloned()
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::Other, "anvil returned no keys"))?;
+    let wallet: PrivateKeySigner = wallet.into();
 
     let provider = ProviderBuilder::new()
         .wallet(wallet)
         .connect(&anvil.endpoint())
         .await
-        .unwrap();
+        ?;
 
     println!("Deploying contracts..");
-    let events = Events::deploy(&provider).await.unwrap();
-    let vm = TestableVM::deploy(&provider).await.unwrap();
+    let events = Events::deploy(&provider).await?;
+    let vm = TestableVM::deploy(&provider).await?;
 
     println!("Planner..");
     let mut planner = Planner::default();
@@ -42,18 +47,17 @@ pub async fn main() {
             vec![String::from("Checking balance..").into()],
             DynSolType::Uint(256),
         )
-        .unwrap();
+        ?;
     let balance = planner
-        .call::<ERC20::balanceOfCall>(WETH_ADDR, vec![VIT_ADDR.into()], DynSolType::Uint(256))
-        .unwrap();
+        .call::<ERC20::balanceOfCall>(WETH_ADDR, vec![VIT_ADDR.into()], DynSolType::Uint(256))?;
     planner
         .call::<Events::logUintCall>(
             *events.address(),
             vec![balance.into()],
             DynSolType::Uint(256),
         )
-        .unwrap();
-    let (commands, state) = planner.plan().unwrap();
+        ?;
+    let (commands, state) = planner.plan()?;
     let commands: Vec<FixedBytes<32>> = commands.into_iter().map(Into::into).collect();
 
     println!("Executing..");
@@ -61,16 +65,18 @@ pub async fn main() {
         .execute(commands, state)
         .send()
         .await
-        .unwrap()
+        ?
         .get_receipt()
         .await
-        .unwrap();
+        ?;
 
     println!("Logs:");
     for log in receipt.logs() {
         let topics: Vec<alloy::sol_types::Word> =
             log.data().topics().iter().copied().map(Into::into).collect();
-        let call = Events::EventsEvents::decode_raw_log(&topics, log.data().data.as_ref()).unwrap();
+        let call = Events::EventsEvents::decode_raw_log(&topics, log.data().data.as_ref())?;
         println!("{:?}", call);
     }
+
+    Ok(())
 }
