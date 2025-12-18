@@ -12,12 +12,15 @@ use weiroll::{
 
 const WETH_ADDR: Address = address!("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2");
 const AAVE_ADDR: Address = address!("0x4d5F47FA6A74757f35C14fD3a6Ef8E3C9BC514E8");
-const PROVIDER_URL: &str = "http://ski-nuc-3a:8545";
+const DEFAULT_PROVIDER_URL: &str = "http://localhost:8545";
 
 #[tokio::main]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let provider_url =
+        std::env::var("PROVIDER_URL").unwrap_or_else(|_| DEFAULT_PROVIDER_URL.to_string());
+
     println!("Spawning anvil..");
-    let anvil = Anvil::new().fork(PROVIDER_URL).spawn();
+    let anvil = Anvil::new().fork(provider_url).spawn();
     let wallet = anvil
         .keys()
         .first()
