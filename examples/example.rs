@@ -12,7 +12,7 @@ use weiroll::{
 
 const WETH_ADDR: Address = address!("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2");
 const VIT_ADDR: Address = address!("0xab5801a7d398351b8be11c439e05c5b3259aec9b");
-const PROVIDER_URL: &str = "http://ski-nuc-3a:8545";
+const PROVIDER_URL: &str = "http://localhost:8545";
 
 #[tokio::main]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
