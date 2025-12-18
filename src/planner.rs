@@ -77,39 +77,42 @@ impl_into_values_tuple!(A, B, C, D, E, F);
 impl_into_values_tuple!(A, B, C, D, E, F, G);
 impl_into_values_tuple!(A, B, C, D, E, F, G, H);
 
-pub trait ContractAddress {
-    fn contract_address(&self) -> Address;
+pub trait HasAddress {
+    fn address(&self) -> Address;
 }
 
-impl<P, N> ContractAddress for crate::bindings::erc20::ERC20::ERC20Instance<P, N>
-where
-    P: alloy::contract::private::Provider<N>,
-    N: alloy::contract::private::Network,
-{
-    fn contract_address(&self) -> Address {
-        *self.address()
-    }
+macro_rules! impl_has_address_for_instance {
+    ($path:path) => {
+        impl<P, N> HasAddress for $path
+        where
+            P: alloy::contract::private::Provider<N>,
+            N: alloy::contract::private::Network,
+        {
+            fn address(&self) -> Address {
+                *self.address()
+            }
+        }
+    };
 }
 
-impl<P, N> ContractAddress for crate::bindings::events::Events::EventsInstance<P, N>
-where
-    P: alloy::contract::private::Provider<N>,
-    N: alloy::contract::private::Network,
-{
-    fn contract_address(&self) -> Address {
-        *self.address()
-    }
-}
-
-impl<P, N> ContractAddress for crate::bindings::testable_vm::TestableVM::TestableVMInstance<P, N>
-where
-    P: alloy::contract::private::Provider<N>,
-    N: alloy::contract::private::Network,
-{
-    fn contract_address(&self) -> Address {
-        *self.address()
-    }
-}
+impl_has_address_for_instance!(crate::bindings::command_builder::CommandBuilder::CommandBuilderInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::command_builder_harness::CommandBuilderHarness::CommandBuilderHarnessInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::context::Context::ContextInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::erc20::ERC20::ERC20Instance<P, N>);
+impl_has_address_for_instance!(crate::bindings::events::Events::EventsInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::executor_token::ExecutorToken::ExecutorTokenInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::ierc20::IERC20::IERC20Instance<P, N>);
+impl_has_address_for_instance!(crate::bindings::ierc20_metadata::IERC20Metadata::IERC20MetadataInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::lib_tupler::LibTupler::LibTuplerInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::math::Math::MathInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::multi_return::MultiReturn::MultiReturnInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::payable::Payable::PayableInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::revert::Revert::RevertInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::sender::Sender::SenderInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::state_test::StateTest::StateTestInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::strings::Strings::StringsInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::testable_vm::TestableVM::TestableVMInstance<P, N>);
+impl_has_address_for_instance!(crate::bindings::vm::VM::VMInstance<P, N>);
 
 
 impl<'a> Planner<'a> {
@@ -139,14 +142,14 @@ impl<'a> Planner<'a> {
 
     pub fn call_contract<C, A>(
         &mut self,
-        contract: &impl ContractAddress,
+        contract: &impl HasAddress,
         args: A,
     ) -> Result<ReturnValue, WeirollError>
     where
         C: SolCall,
         A: IntoValues<'a>,
     {
-        let address = contract.contract_address();
+        let address = contract.address();
 
         let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
         let return_type = match return_type {
