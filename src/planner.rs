@@ -600,7 +600,7 @@ impl<'a> Planner<'a> {
             seen.insert(cmd_key);
         }
 
-        dbg!(&command_visibility, &literal_visibility);
+        // dbg!(&command_visibility, &literal_visibility);
 
         Ok(())
     }
