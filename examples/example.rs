@@ -37,12 +37,23 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Planner..");
     let mut planner = Planner::default();
-    planner.call_contract::<Events::logStringCall, _>(
+    weiroll::call_contract!(
+        &mut planner,
         &events,
-        (String::from("Checking balance.."),),
+        Events::logStringCall {
+            message: String::from("Checking balance.."),
+        }
     )?;
-    let balance = planner.call_contract::<ERC20::balanceOfCall, _>(&weth, (VIT_ADDR,))?;
-    planner.call_contract::<Events::logUintCall, _>(&events, (balance,))?;
+    let balance = weiroll::call_contract!(
+        &mut planner,
+        &weth,
+        ERC20::balanceOfCall { account: VIT_ADDR }
+    )?;
+    weiroll::call_contract!(
+        &mut planner,
+        &events,
+        Events::logUintCall { message: balance }
+    )?;
     let (commands, state) = planner.plan()?;
     let commands: Vec<FixedBytes<32>> = commands.into_iter().map(Into::into).collect();
 

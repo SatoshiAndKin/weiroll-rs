@@ -29,96 +29,24 @@ pub struct PlannerState {
     state: Vec<Bytes>,
 }
 
-pub trait IntoValues<'a> {
-    fn into_values(self) -> Vec<Value<'a>>;
-}
-
-impl<'a> IntoValues<'a> for Vec<Value<'a>> {
-    fn into_values(self) -> Vec<Value<'a>> {
-        self
-    }
-}
-
-impl<'a> IntoValues<'a> for () {
-    fn into_values(self) -> Vec<Value<'a>> {
-        vec![]
-    }
-}
-
-impl<'a, A> IntoValues<'a> for (A,)
-where
-    A: Into<Value<'a>>,
-{
-    fn into_values(self) -> Vec<Value<'a>> {
-        vec![self.0.into()]
-    }
-}
-
-macro_rules! impl_into_values_tuple {
-    ($($name:ident),+ $(,)?) => {
-        impl<'a, $($name),+> IntoValues<'a> for ($($name,)+)
-        where
-            $($name: Into<Value<'a>>,)+
-        {
-            fn into_values(self) -> Vec<Value<'a>> {
-                #[allow(non_snake_case)]
-                let ($($name,)+) = self;
-                vec![$($name.into(),)+]
-            }
-        }
-    };
-}
-
-impl_into_values_tuple!(A, B);
-impl_into_values_tuple!(A, B, C);
-impl_into_values_tuple!(A, B, C, D);
-impl_into_values_tuple!(A, B, C, D, E);
-impl_into_values_tuple!(A, B, C, D, E, F);
-impl_into_values_tuple!(A, B, C, D, E, F, G);
-impl_into_values_tuple!(A, B, C, D, E, F, G, H);
-impl_into_values_tuple!(A, B, C, D, E, F, G, H, I);
-impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J);
-impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J, K);
-impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J, K, L);
-
-pub trait HasAddress {
-    fn address(&self) -> Address;
-}
-
-macro_rules! impl_has_address_for_instance {
-    ($path:path) => {
-        impl<P, N> HasAddress for $path
-        where
-            P: alloy::contract::private::Provider<N>,
-            N: alloy::contract::private::Network,
-        {
-            fn address(&self) -> Address {
-                *self.address()
-            }
-        }
-    };
-}
-
-impl_has_address_for_instance!(crate::bindings::command_builder::CommandBuilder::CommandBuilderInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::command_builder_harness::CommandBuilderHarness::CommandBuilderHarnessInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::context::Context::ContextInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::erc20::ERC20::ERC20Instance<P, N>);
-impl_has_address_for_instance!(crate::bindings::events::Events::EventsInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::executor_token::ExecutorToken::ExecutorTokenInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::ierc20::IERC20::IERC20Instance<P, N>);
-impl_has_address_for_instance!(crate::bindings::ierc20_metadata::IERC20Metadata::IERC20MetadataInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::lib_tupler::LibTupler::LibTuplerInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::math::Math::MathInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::multi_return::MultiReturn::MultiReturnInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::payable::Payable::PayableInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::revert::Revert::RevertInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::sender::Sender::SenderInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::state_test::StateTest::StateTestInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::strings::Strings::StringsInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::testable_vm::TestableVM::TestableVMInstance<P, N>);
-impl_has_address_for_instance!(crate::bindings::vm::VM::VMInstance<P, N>);
-
 impl<'a> Planner<'a> {
+    pub fn call_address<C>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call::<C>(address, args, return_type)
+    }
+
     pub fn call<C: SolCall>(
         &mut self,
         address: Address,
@@ -143,24 +71,15 @@ impl<'a> Planner<'a> {
         Ok(ReturnValue { command, dynamic })
     }
 
-    pub fn call_contract<C, A>(
+    pub fn call_contract<C>(
         &mut self,
-        contract: &impl HasAddress,
-        args: A,
+        address: Address,
+        args: Vec<Value<'a>>,
     ) -> Result<ReturnValue, WeirollError>
     where
         C: SolCall,
-        A: IntoValues<'a>,
     {
-        let address = contract.address();
-
-        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
-        let return_type = match return_type {
-            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
-            other => other,
-        };
-
-        self.call::<C>(address, args.into_values(), return_type)
+        self.call_address::<C>(address, args)
     }
 
     pub fn add_subplan<C: SolCall>(

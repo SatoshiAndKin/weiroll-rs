@@ -13,7 +13,6 @@ pub struct FunctionCall<'a> {
     pub(crate) flags: CommandFlags,
     pub(crate) value: Option<U256>,
     pub(crate) args: Vec<Value<'a>>,
-    /// TODO: I'm not sure about the typing here
     pub(crate) return_type: DynSolType,
 }
 
