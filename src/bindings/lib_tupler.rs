@@ -66,12 +66,11 @@ pub mod LibTupler {
     pub static DEPLOYED_BYTECODE: alloy_sol_types::private::Bytes = alloy_sol_types::private::Bytes::from_static(
         b"`\x80`@R4\x80\x15a\0\x0FW__\xFD[P`\x046\x10a\0)W_5`\xE0\x1C\x80c\x9B\xD3\xB2'\x14a\0-W[__\xFD[a\0G`\x04\x806\x03\x81\x01\x90a\0B\x91\x90a\x01\xEAV[a\0]V[`@Qa\0T\x91\x90a\x02\\V[`@Q\x80\x91\x03\x90\xF3[_` \x80`\x01\x84\x01\x02\x84\x01\xF3[_`@Q\x90P\x90V[__\xFD[__\xFD[__\xFD[__\xFD[_`\x1F\x19`\x1F\x83\x01\x16\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`A`\x04R`$_\xFD[a\0\xC9\x82a\0\x83V[\x81\x01\x81\x81\x10g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x17\x15a\0\xE8Wa\0\xE7a\0\x93V[[\x80`@RPPPV[_a\0\xFAa\0jV[\x90Pa\x01\x06\x82\x82a\0\xC0V[\x91\x90PV[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x01%Wa\x01$a\0\x93V[[a\x01.\x82a\0\x83V[\x90P` \x81\x01\x90P\x91\x90PV[\x82\x81\x837_\x83\x83\x01RPPPV[_a\x01[a\x01V\x84a\x01\x0BV[a\0\xF1V[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x01wWa\x01va\0\x7FV[[a\x01\x82\x84\x82\x85a\x01;V[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x01\x9EWa\x01\x9Da\0{V[[\x815a\x01\xAE\x84\x82` \x86\x01a\x01IV[\x91PP\x92\x91PPV[_\x81\x90P\x91\x90PV[a\x01\xC9\x81a\x01\xB7V[\x81\x14a\x01\xD3W__\xFD[PV[_\x815\x90Pa\x01\xE4\x81a\x01\xC0V[\x92\x91PPV[__`@\x83\x85\x03\x12\x15a\x02\0Wa\x01\xFFa\0sV[[_\x83\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x02\x1DWa\x02\x1Ca\0wV[[a\x02)\x85\x82\x86\x01a\x01\x8AV[\x92PP` a\x02:\x85\x82\x86\x01a\x01\xD6V[\x91PP\x92P\x92\x90PV[_\x81\x90P\x91\x90PV[a\x02V\x81a\x02DV[\x82RPPV[_` \x82\x01\x90Pa\x02o_\x83\x01\x84a\x02MV[\x92\x91PPV\xFE\xA2dipfsX\"\x12 x|2\"\x10\xAD\xA5\xEA\xF0'\x06\xBD\x9A\xFD\xC1&\xE7\xD7\xE9S1xE\xF6\x81\xB9_\x9C\xE9m\xADtdsolcC\0\x08\x1E\x003",
     );
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `extractElement(bytes,uint256)` and selector `0x9bd3b227`.
-```solidity
-function extractElement(bytes memory tuple, uint256 index) external pure returns (bytes32);
-```*/
+    ```solidity
+    function extractElement(bytes memory tuple, uint256 index) external pure returns (bytes32);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct extractElementCall {
@@ -80,8 +79,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         #[allow(missing_docs)]
         pub index: alloy::sol_types::private::primitives::aliases::U256,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`extractElement(bytes,uint256)`](extractElementCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -111,9 +109,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -146,9 +142,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
             type UnderlyingRustTuple<'a> = (alloy::sol_types::private::FixedBytes<32>,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -157,16 +151,14 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<extractElementReturn>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<extractElementReturn> for UnderlyingRustTuple<'_> {
                 fn from(value: extractElementReturn) -> Self {
                     (value._0,)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for extractElementReturn {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for extractElementReturn {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self { _0: tuple.0 }
                 }
@@ -178,14 +170,10 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
                 alloy::sol_types::sol_data::Bytes,
                 alloy::sol_types::sol_data::Uint<256>,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = alloy::sol_types::private::FixedBytes<32>;
             type ReturnTuple<'a> = (alloy::sol_types::sol_data::FixedBytes<32>,);
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "extractElement(bytes,uint256)";
             const SELECTOR: [u8; 4] = [155u8, 211u8, 178u8, 39u8];
             #[inline]
@@ -200,9 +188,9 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
                     <alloy::sol_types::sol_data::Bytes as alloy_sol_types::SolType>::tokenize(
                         &self.tuple,
                     ),
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self.index),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self.index,
+                    ),
                 )
             }
             #[inline]
@@ -215,32 +203,27 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
-                    .map(|r| {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data).map(
+                    |r| {
                         let r: extractElementReturn = r.into();
                         r._0
-                    })
+                    },
+                )
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(|r| {
-                        let r: extractElementReturn = r.into();
-                        r._0
-                    })
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(|r| {
+                    let r: extractElementReturn = r.into();
+                    r._0
+                })
             }
         }
     };
     ///Container for all the [`LibTupler`](self) function calls.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive()]
+    #[derive(Clone, serde::Serialize, serde::Deserialize)]
     pub enum LibTuplerCalls {
         #[allow(missing_docs)]
         extractElement(extractElementCall),
@@ -254,13 +237,10 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         /// Prefer using `SolInterface` methods instead.
         pub const SELECTORS: &'static [[u8; 4usize]] = &[[155u8, 211u8, 178u8, 39u8]];
         /// The names of the variants in the same order as `SELECTORS`.
-        pub const VARIANT_NAMES: &'static [&'static str] = &[
-            ::core::stringify!(extractElement),
-        ];
+        pub const VARIANT_NAMES: &'static [&'static str] = &[::core::stringify!(extractElement)];
         /// The signatures in the same order as `SELECTORS`.
-        pub const SIGNATURES: &'static [&'static str] = &[
-            <extractElementCall as alloy_sol_types::SolCall>::SIGNATURE,
-        ];
+        pub const SIGNATURES: &'static [&'static str] =
+            &[<extractElementCall as alloy_sol_types::SolCall>::SIGNATURE];
         /// Returns the signature for the given selector, if known.
         #[inline]
         pub fn signature_by_selector(
@@ -275,9 +255,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -305,32 +283,19 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
-            static DECODE_SHIMS: &[fn(
-                &[u8],
-            ) -> alloy_sol_types::Result<LibTuplerCalls>] = &[
-                {
-                    fn extractElement(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<LibTuplerCalls> {
-                        <extractElementCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
-                            .map(LibTuplerCalls::extractElement)
-                    }
-                    extractElement
-                },
-            ];
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
+            static DECODE_SHIMS: &[fn(&[u8]) -> alloy_sol_types::Result<LibTuplerCalls>] = &[{
+                fn extractElement(data: &[u8]) -> alloy_sol_types::Result<LibTuplerCalls> {
+                    <extractElementCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
+                        .map(LibTuplerCalls::extractElement)
+                }
+                extractElement
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -342,26 +307,19 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<LibTuplerCalls>] = &[
-                {
-                    fn extractElement(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<LibTuplerCalls> {
-                        <extractElementCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(LibTuplerCalls::extractElement)
-                    }
-                    extractElement
-                },
-            ];
+            )
+                -> alloy_sol_types::Result<LibTuplerCalls>] = &[{
+                fn extractElement(data: &[u8]) -> alloy_sol_types::Result<LibTuplerCalls> {
+                    <extractElementCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(data)
+                        .map(LibTuplerCalls::extractElement)
+                }
+                extractElement
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -369,9 +327,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         fn abi_encoded_size(&self) -> usize {
             match self {
                 Self::extractElement(inner) => {
-                    <extractElementCall as alloy_sol_types::SolCall>::abi_encoded_size(
-                        inner,
-                    )
+                    <extractElementCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
             }
         }
@@ -379,10 +335,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
         fn abi_encode_raw(&self, out: &mut alloy_sol_types::private::Vec<u8>) {
             match self {
                 Self::extractElement(inner) => {
-                    <extractElementCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <extractElementCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
             }
         }
@@ -390,7 +343,7 @@ function extractElement(bytes memory tuple, uint256 index) external pure returns
     use alloy::contract as alloy_contract;
     /**Creates a new wrapper around an on-chain [`LibTupler`](self) contract instance.
 
-See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
+    See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
     #[inline]
     pub const fn new<
         P: alloy_contract::private::Provider<N>,
@@ -403,43 +356,40 @@ See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
     }
     /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+    Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+    For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
     #[inline]
-    pub fn deploy<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    >(
+    pub fn deploy<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>(
         __provider: P,
-    ) -> impl ::core::future::Future<
-        Output = alloy_contract::Result<LibTuplerInstance<P, N>>,
-    > {
+    ) -> impl ::core::future::Future<Output = alloy_contract::Result<LibTuplerInstance<P, N>>> {
         LibTuplerInstance::<P, N>::deploy(__provider)
     }
     /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+    and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+    This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+    the bytecode concatenated with the constructor's ABI-encoded arguments.*/
     #[inline]
     pub fn deploy_builder<
         P: alloy_contract::private::Provider<N>,
         N: alloy_contract::private::Network,
-    >(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
+    >(
+        __provider: P,
+    ) -> alloy_contract::RawCallBuilder<P, N> {
         LibTuplerInstance::<P, N>::deploy_builder(__provider)
     }
     /**A [`LibTupler`](self) instance.
 
-Contains type-safe methods for interacting with an on-chain instance of the
-[`LibTupler`](self) contract located at a given `address`, using a given
-provider `P`.
+    Contains type-safe methods for interacting with an on-chain instance of the
+    [`LibTupler`](self) contract located at a given `address`, using a given
+    provider `P`.
 
-If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
-documentation on how to provide it), the `deploy` and `deploy_builder` methods can
-be used to deploy a new instance of the contract.
+    If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
+    documentation on how to provide it), the `deploy` and `deploy_builder` methods can
+    be used to deploy a new instance of the contract.
 
-See the [module-level documentation](self) for all the available methods.*/
+    See the [module-level documentation](self) for all the available methods.*/
     #[derive(Clone)]
     pub struct LibTuplerInstance<P, N = alloy_contract::private::Ethereum> {
         address: alloy_sol_types::private::Address,
@@ -450,22 +400,20 @@ See the [module-level documentation](self) for all the available methods.*/
     impl<P, N> ::core::fmt::Debug for LibTuplerInstance<P, N> {
         #[inline]
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple("LibTuplerInstance").field(&self.address).finish()
+            f.debug_tuple("LibTuplerInstance")
+                .field(&self.address)
+                .finish()
         }
     }
     /// Instantiation and getters/setters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > LibTuplerInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        LibTuplerInstance<P, N>
+    {
         /**Creates a new wrapper around an on-chain [`LibTupler`](self) contract instance.
 
-See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
+        See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
         #[inline]
-        pub const fn new(
-            address: alloy_sol_types::private::Address,
-            __provider: P,
-        ) -> Self {
+        pub const fn new(address: alloy_sol_types::private::Address, __provider: P) -> Self {
             Self {
                 address,
                 provider: __provider,
@@ -474,22 +422,20 @@ See the [wrapper's documentation](`LibTuplerInstance`) for more details.*/
         }
         /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+        Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+        For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
         #[inline]
-        pub async fn deploy(
-            __provider: P,
-        ) -> alloy_contract::Result<LibTuplerInstance<P, N>> {
+        pub async fn deploy(__provider: P) -> alloy_contract::Result<LibTuplerInstance<P, N>> {
             let call_builder = Self::deploy_builder(__provider);
             let contract_address = call_builder.deploy().await?;
             Ok(Self::new(contract_address, call_builder.provider))
         }
         /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+        and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+        This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+        the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         #[inline]
         pub fn deploy_builder(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
             alloy_contract::RawCallBuilder::new_raw_deploy(
@@ -530,10 +476,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Function calls.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > LibTuplerInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        LibTuplerInstance<P, N>
+    {
         /// Creates a new call builder using this contract instance's provider and address.
         ///
         /// Note that the call can be any function call, not just those defined in this
@@ -554,10 +499,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Event filters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > LibTuplerInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        LibTuplerInstance<P, N>
+    {
         /// Creates a new event filter using this contract instance's provider and address.
         ///
         /// Note that the type can be any event, not just those defined in this contract.

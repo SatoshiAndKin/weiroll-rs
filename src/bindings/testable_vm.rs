@@ -89,12 +89,11 @@ pub mod TestableVM {
     pub static DEPLOYED_BYTECODE: alloy_sol_types::private::Bytes = alloy_sol_types::private::Bytes::from_static(
         b"`\x80`@R`\x046\x10a\0\x1DW_5`\xE0\x1C\x80c\xDEy-_\x14a\0!W[__\xFD[a\0;`\x04\x806\x03\x81\x01\x90a\x006\x91\x90a\x0C\xDBV[a\0QV[`@Qa\0H\x91\x90a\x0EoV[`@Q\x80\x91\x03\x90\xF3[``a\0^\x84\x84\x84a\0gV[\x90P\x93\x92PPPV[``____``_\x89\x89\x90P\x90P_[\x81\x81\x10\x15a\x04\xF4W\x8A\x8A\x82\x81\x81\x10a\0\x93Wa\0\x92a\x0E\x8FV[[\x90P` \x02\x015\x96P` \x87\x90\x1B`\xF8\x1C`\xFF\x16\x95P_`\x80\x87\x16\x14a\0\xE0W\x8A\x8A\x82\x80a\0\xC0\x90a\x0E\xF2V[\x93P\x81\x81\x10a\0\xD2Wa\0\xD1a\x0E\x8FV[[\x90P` \x02\x015\x94Pa\x01\x08V[y\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF`(\x88\x90\x1B_\x1C\x17_\x1B\x94P[_`\x03\x87\x16\x03a\x01\x98W\x86_\x1Cs\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x16a\x01@\x88\x87\x8Ca\x05\x05\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[`@Qa\x01M\x91\x90a\x0FsV[_`@Q\x80\x83\x03\x81\x85Z\xF4\x91PP=\x80_\x81\x14a\x01\x85W`@Q\x91P`\x1F\x19`?=\x01\x16\x82\x01`@R=\x82R=_` \x84\x01>a\x01\x8AV[``\x91P[P\x80\x94P\x81\x95PPPa\x04\tV[`\x01`\x03\x87\x16\x03a\x02*W\x86_\x1Cs\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x16a\x01\xD1\x88\x87\x8Ca\x05\x05\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[`@Qa\x01\xDE\x91\x90a\x0FsV[_`@Q\x80\x83\x03\x81_\x86Z\xF1\x91PP=\x80_\x81\x14a\x02\x17W`@Q\x91P`\x1F\x19`?=\x01\x16\x82\x01`@R=\x82R=_` \x84\x01>a\x02\x1CV[``\x91P[P\x80\x94P\x81\x95PPPa\x04\x08V[`\x02`\x03\x87\x16\x03a\x02\xBBW\x86_\x1Cs\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x16a\x02c\x88\x87\x8Ca\x05\x05\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[`@Qa\x02p\x91\x90a\x0FsV[_`@Q\x80\x83\x03\x81\x85Z\xFA\x91PP=\x80_\x81\x14a\x02\xA8W`@Q\x91P`\x1F\x19`?=\x01\x16\x82\x01`@R=\x82R=_` \x84\x01>a\x02\xADV[``\x91P[P\x80\x94P\x81\x95PPPa\x04\x07V[`\x03\x80\x87\x16\x03a\x03\xCBW__\x8A\x87`\xF8\x1C`\xFF\x16\x81Q\x81\x10a\x02\xE0Wa\x02\xDFa\x0E\x8FV[[` \x02` \x01\x01Q\x90P` \x81Q\x14a\x03.W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x03%\x90a\x10\tV[`@Q\x80\x91\x03\x90\xFD[` \x81\x01Q\x91P\x88_\x1Cs\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x16\x82a\x03o\x8B`\xFF`\x08\x8C\x90\x1B_\x1C\x17_\x1B\x8Fa\x05\x05\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[`@Qa\x03|\x91\x90a\x0FsV[_`@Q\x80\x83\x03\x81\x85\x87Z\xF1\x92PPP=\x80_\x81\x14a\x03\xB6W`@Q\x91P`\x1F\x19`?=\x01\x16\x82\x01`@R=\x82R=_` \x84\x01>a\x03\xBBV[``\x91P[P\x80\x96P\x81\x97PPPPPa\x04\x06V[`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x03\xFD\x90a\x10qV[`@Q\x80\x91\x03\x90\xFD[[[[\x83a\x04\xA5W_\x83Q\x11\x15a\x04\x1EW`D\x83\x01\x92P[_\x87_\x1C_\x85Q\x11a\x04eW`@Q\x80`@\x01`@R\x80`\x07\x81R` \x01\x7FUnknown\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81RPa\x04gV[\x84[`@Q\x7F\xEF=\xCB/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x04\x9C\x93\x92\x91\x90a\x11RV[`@Q\x80\x91\x03\x90\xFD[_`@\x87\x16\x14a\x04\xCDWa\x04\xC8`X\x88\x90\x1B\x84\x8Ba\x08]\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[a\x04\xE9V[a\x04\xE6`X\x88\x90\x1B\x84\x8Ba\t\x0F\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[\x98P[\x80`\x01\x01\x90Pa\0xV[P\x87\x96PPPPPPP\x93\x92PPPV[``__``__[` \x81\x10\x15a\x06\xA3W\x86\x81` \x81\x10a\x05*Wa\x05)a\x0E\x8FV[[\x1A`\xF8\x1B`\xF8\x1C`\xFF\x16\x91P`\xFF\x82\x03\x15a\x06\xA3W_`\x80\x83\x16\x14a\x06!W`\xFE\x82\x03a\x05\x90W_\x83Q\x03a\x05|W\x88`@Q` \x01a\x05j\x91\x90a\x0EoV[`@Q` \x81\x83\x03\x03\x81R\x90`@R\x92P[\x82Q\x85a\x05\x89\x91\x90a\x11\x8EV[\x94Pa\x06\x1CV[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x05\xA7Wa\x05\xA6a\x0E\x8FV[[` \x02` \x01\x01QQ\x90P_` \x82a\x05\xC0\x91\x90a\x11\xEEV[\x14a\x06\0W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x05\xF7\x90a\x12\x8EV[`@Q\x80\x91\x03\x90\xFD[` \x81a\x06\r\x91\x90a\x11\x8EV[\x86a\x06\x18\x91\x90a\x11\x8EV[\x95PP[a\x06\x92V[` \x89`\x7F\x84\x16\x81Q\x81\x10a\x069Wa\x068a\x0E\x8FV[[` \x02` \x01\x01QQ\x14a\x06\x82W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x06y\x90a\x13\x1CV[`@Q\x80\x91\x03\x90\xFD[` \x85a\x06\x8F\x91\x90a\x11\x8EV[\x94P[` \x84\x01\x93P\x80`\x01\x01\x90Pa\x05\x0EV[P`\x04\x84a\x06\xB1\x91\x90a\x11\x8EV[g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x06\xCAWa\x06\xC9a\n\xD5V[[`@Q\x90\x80\x82R\x80`\x1F\x01`\x1F\x19\x16` \x01\x82\x01`@R\x80\x15a\x06\xFCW\x81` \x01`\x01\x82\x02\x806\x837\x80\x82\x01\x91PP\x90P[P\x94P\x86` \x86\x01R_\x93P_[` \x81\x10\x15a\x08QW\x86\x81` \x81\x10a\x07&Wa\x07%a\x0E\x8FV[[\x1A`\xF8\x1B`\xF8\x1C`\xFF\x16\x91P`\xFF\x82\x03\x15a\x08QW_`\x80\x83\x16\x14a\x08\x11W`\xFE\x82\x03a\x07\x9CW\x83\x85`$\x88\x01\x01Ra\x07|\x83` \x88`\x04\x88a\x07i\x91\x90a\x11\x8EV[` \x88Qa\x07w\x91\x90a\x13:V[a\n9V[` \x83Qa\x07\x8A\x91\x90a\x13:V[\x84a\x07\x95\x91\x90a\x11\x8EV[\x93Pa\x08\x0CV[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x07\xB3Wa\x07\xB2a\x0E\x8FV[[` \x02` \x01\x01QQ\x90P\x84\x86`$\x89\x01\x01Ra\x07\xFC\x8A`\x7F\x85\x16\x81Q\x81\x10a\x07\xDFWa\x07\xDEa\x0E\x8FV[[` \x02` \x01\x01Q_\x89`\x04\x89a\x07\xF6\x91\x90a\x11\x8EV[\x85a\n9V[\x80\x85a\x08\x08\x91\x90a\x11\x8EV[\x94PP[a\x08@V[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x08(Wa\x08'a\x0E\x8FV[[` \x02` \x01\x01Q\x90P` \x81\x01Q\x86`$\x89\x01\x01RP[` \x85\x01\x94P\x80`\x01\x01\x90Pa\x07\nV[PPPPP\x93\x92PPPV[_\x82`\xF8\x1C`\xFF\x16\x90P`\xFF\x81\x03a\x08uWPa\t\nV[_` \x83Qa\x08\x84\x91\x90a\x11\x8EV[g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x08\x9DWa\x08\x9Ca\n\xD5V[[`@Q\x90\x80\x82R\x80`\x1F\x01`\x1F\x19\x16` \x01\x82\x01`@R\x80\x15a\x08\xCFW\x81` \x01`\x01\x82\x02\x806\x837\x80\x82\x01\x91PP\x90P[P\x85\x83\x81Q\x81\x10a\x08\xE3Wa\x08\xE2a\x0E\x8FV[[` \x02` \x01\x01\x81\x90R\x90Pa\x08\xFE\x83_\x83` \x87Qa\n9V[\x82Q\x80` \x83\x01RPPP[PPPV[``_\x83`\xF8\x1C`\xFF\x16\x90P`\xFF\x81\x03a\t,W\x84\x91PPa\n2V[_`\x80\x82\x16\x14a\t\xC6W`\xFE\x81\x03a\tYW\x82\x80` \x01\x90Q\x81\x01\x90a\tR\x91\x90a\x14\x8EV[\x94Pa\t\xC1V[_` \x84\x01Q\x90P` \x81\x14a\t\xA4W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\t\x9B\x90a\x15EV[`@Q\x80\x91\x03\x90\xFD[` \x84Q\x03` \x85\x01R` \x84\x01` `\x7F\x84\x16\x02` \x88\x01\x01RP[a\n-V[` \x83Q\x14a\n\nW`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\n\x01\x90a\x15\xD3V[`@Q\x80\x91\x03\x90\xFD[\x82\x85`\x7F\x83\x16\x81Q\x81\x10a\n!Wa\n a\x0E\x8FV[[` \x02` \x01\x01\x81\x90RP[\x84\x91PP[\x93\x92PPPV[\x80\x82` \x85\x01\x01\x82\x86` \x89\x01\x01`\x04Z\xFAPPPPPPV[_`@Q\x90P\x90V[__\xFD[__\xFD[__\xFD[__\xFD[__\xFD[__\x83`\x1F\x84\x01\x12a\n\x85Wa\n\x84a\ndV[[\x825\x90Pg\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\n\xA2Wa\n\xA1a\nhV[[` \x83\x01\x91P\x83` \x82\x02\x83\x01\x11\x15a\n\xBEWa\n\xBDa\nlV[[\x92P\x92\x90PV[_`\x1F\x19`\x1F\x83\x01\x16\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`A`\x04R`$_\xFD[a\x0B\x0B\x82a\n\xC5V[\x81\x01\x81\x81\x10g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x17\x15a\x0B*Wa\x0B)a\n\xD5V[[\x80`@RPPPV[_a\x0B<a\nSV[\x90Pa\x0BH\x82\x82a\x0B\x02V[\x91\x90PV[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x0BgWa\x0Bfa\n\xD5V[[` \x82\x02\x90P` \x81\x01\x90P\x91\x90PV[__\xFD[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x0B\x96Wa\x0B\x95a\n\xD5V[[a\x0B\x9F\x82a\n\xC5V[\x90P` \x81\x01\x90P\x91\x90PV[\x82\x81\x837_\x83\x83\x01RPPPV[_a\x0B\xCCa\x0B\xC7\x84a\x0B|V[a\x0B3V[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x0B\xE8Wa\x0B\xE7a\x0BxV[[a\x0B\xF3\x84\x82\x85a\x0B\xACV[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x0C\x0FWa\x0C\x0Ea\ndV[[\x815a\x0C\x1F\x84\x82` \x86\x01a\x0B\xBAV[\x91PP\x92\x91PPV[_a\x0C:a\x0C5\x84a\x0BMV[a\x0B3V[\x90P\x80\x83\x82R` \x82\x01\x90P` \x84\x02\x83\x01\x85\x81\x11\x15a\x0C]Wa\x0C\\a\nlV[[\x83[\x81\x81\x10\x15a\x0C\xA4W\x805g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x0C\x82Wa\x0C\x81a\ndV[[\x80\x86\x01a\x0C\x8F\x89\x82a\x0B\xFBV[\x85R` \x85\x01\x94PPP` \x81\x01\x90Pa\x0C_V[PPP\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x0C\xC2Wa\x0C\xC1a\ndV[[\x815a\x0C\xD2\x84\x82` \x86\x01a\x0C(V[\x91PP\x92\x91PPV[___`@\x84\x86\x03\x12\x15a\x0C\xF2Wa\x0C\xF1a\n\\V[[_\x84\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\r\x0FWa\r\x0Ea\n`V[[a\r\x1B\x86\x82\x87\x01a\npV[\x93P\x93PP` \x84\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\r>Wa\r=a\n`V[[a\rJ\x86\x82\x87\x01a\x0C\xAEV[\x91PP\x92P\x92P\x92V[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[_\x81\x90P` \x82\x01\x90P\x91\x90PV[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[\x82\x81\x83^_\x83\x83\x01RPPPV[_a\r\xAF\x82a\r}V[a\r\xB9\x81\x85a\r\x87V[\x93Pa\r\xC9\x81\x85` \x86\x01a\r\x97V[a\r\xD2\x81a\n\xC5V[\x84\x01\x91PP\x92\x91PPV[_a\r\xE8\x83\x83a\r\xA5V[\x90P\x92\x91PPV[_` \x82\x01\x90P\x91\x90PV[_a\x0E\x06\x82a\rTV[a\x0E\x10\x81\x85a\r^V[\x93P\x83` \x82\x02\x85\x01a\x0E\"\x85a\rnV[\x80_[\x85\x81\x10\x15a\x0E]W\x84\x84\x03\x89R\x81Qa\x0E>\x85\x82a\r\xDDV[\x94Pa\x0EI\x83a\r\xF0V[\x92P` \x8A\x01\x99PP`\x01\x81\x01\x90Pa\x0E%V[P\x82\x97P\x87\x95PPPPPP\x92\x91PPV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x0E\x87\x81\x84a\r\xFCV[\x90P\x92\x91PPV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`2`\x04R`$_\xFD[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`\x11`\x04R`$_\xFD[_\x81\x90P\x91\x90PV[_a\x0E\xFC\x82a\x0E\xE9V[\x91P\x7F\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x03a\x0F.Wa\x0F-a\x0E\xBCV[[`\x01\x82\x01\x90P\x91\x90PV[_\x81\x90P\x92\x91PPV[_a\x0FM\x82a\r}V[a\x0FW\x81\x85a\x0F9V[\x93Pa\x0Fg\x81\x85` \x86\x01a\r\x97V[\x80\x84\x01\x91PP\x92\x91PPV[_a\x0F~\x82\x84a\x0FCV[\x91P\x81\x90P\x92\x91PPV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[\x7F_execute: value call has no valu_\x82\x01R\x7Fe indicated.\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x0F\xF3`,\x83a\x0F\x89V[\x91Pa\x0F\xFE\x82a\x0F\x99V[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x10 \x81a\x0F\xE7V[\x90P\x91\x90PV[\x7FInvalid calltype\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_\x82\x01RPV[_a\x10[`\x10\x83a\x0F\x89V[\x91Pa\x10f\x82a\x10'V[` \x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x10\x88\x81a\x10OV[\x90P\x91\x90PV[_\x81\x90P\x91\x90PV[_\x81\x90P\x91\x90PV[_a\x10\xBBa\x10\xB6a\x10\xB1\x84a\x10\x8FV[a\x10\x98V[a\x0E\xE9V[\x90P\x91\x90PV[a\x10\xCB\x81a\x10\xA1V[\x82RPPV[_s\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x16\x90P\x91\x90PV[_a\x10\xFA\x82a\x10\xD1V[\x90P\x91\x90PV[a\x11\n\x81a\x10\xF0V[\x82RPPV[_\x81Q\x90P\x91\x90PV[_a\x11$\x82a\x11\x10V[a\x11.\x81\x85a\x0F\x89V[\x93Pa\x11>\x81\x85` \x86\x01a\r\x97V[a\x11G\x81a\n\xC5V[\x84\x01\x91PP\x92\x91PPV[_``\x82\x01\x90Pa\x11e_\x83\x01\x86a\x10\xC2V[a\x11r` \x83\x01\x85a\x11\x01V[\x81\x81\x03`@\x83\x01Ra\x11\x84\x81\x84a\x11\x1AV[\x90P\x94\x93PPPPV[_a\x11\x98\x82a\x0E\xE9V[\x91Pa\x11\xA3\x83a\x0E\xE9V[\x92P\x82\x82\x01\x90P\x80\x82\x11\x15a\x11\xBBWa\x11\xBAa\x0E\xBCV[[\x92\x91PPV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`\x12`\x04R`$_\xFD[_a\x11\xF8\x82a\x0E\xE9V[\x91Pa\x12\x03\x83a\x0E\xE9V[\x92P\x82a\x12\x13Wa\x12\x12a\x11\xC1V[[\x82\x82\x06\x90P\x92\x91PPV[\x7FDynamic state variables must be _\x82\x01R\x7Fa multiple of 32 bytes\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x12x`6\x83a\x0F\x89V[\x91Pa\x12\x83\x82a\x12\x1EV[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x12\xA5\x81a\x12lV[\x90P\x91\x90PV[\x7FStatic state variables must be 3_\x82\x01R\x7F2 bytes\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x13\x06`'\x83a\x0F\x89V[\x91Pa\x13\x11\x82a\x12\xACV[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x133\x81a\x12\xFAV[\x90P\x91\x90PV[_a\x13D\x82a\x0E\xE9V[\x91Pa\x13O\x83a\x0E\xE9V[\x92P\x82\x82\x03\x90P\x81\x81\x11\x15a\x13gWa\x13fa\x0E\xBCV[[\x92\x91PPV[_a\x13\x7Fa\x13z\x84a\x0B|V[a\x0B3V[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x13\x9BWa\x13\x9Aa\x0BxV[[a\x13\xA6\x84\x82\x85a\r\x97V[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x13\xC2Wa\x13\xC1a\ndV[[\x81Qa\x13\xD2\x84\x82` \x86\x01a\x13mV[\x91PP\x92\x91PPV[_a\x13\xEDa\x13\xE8\x84a\x0BMV[a\x0B3V[\x90P\x80\x83\x82R` \x82\x01\x90P` \x84\x02\x83\x01\x85\x81\x11\x15a\x14\x10Wa\x14\x0Fa\nlV[[\x83[\x81\x81\x10\x15a\x14WW\x80Qg\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x145Wa\x144a\ndV[[\x80\x86\x01a\x14B\x89\x82a\x13\xAEV[\x85R` \x85\x01\x94PPP` \x81\x01\x90Pa\x14\x12V[PPP\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x14uWa\x14ta\ndV[[\x81Qa\x14\x85\x84\x82` \x86\x01a\x13\xDBV[\x91PP\x92\x91PPV[_` \x82\x84\x03\x12\x15a\x14\xA3Wa\x14\xA2a\n\\V[[_\x82\x01Qg\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x14\xC0Wa\x14\xBFa\n`V[[a\x14\xCC\x84\x82\x85\x01a\x14aV[\x91PP\x92\x91PPV[\x7FOnly one return value permitted _\x82\x01R\x7F(variable)\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x15/`*\x83a\x0F\x89V[\x91Pa\x15:\x82a\x14\xD5V[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x15\\\x81a\x15#V[\x90P\x91\x90PV[\x7FOnly one return value permitted _\x82\x01R\x7F(static)\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x15\xBD`(\x83a\x0F\x89V[\x91Pa\x15\xC8\x82a\x15cV[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x15\xEA\x81a\x15\xB1V[\x90P\x91\x90PV\xFE\xA2dipfsX\"\x12 \xB5\xCD\xCF3\x9D\xA1\x8C\x91\x98}\xADv\xB4\xB4z=\xA1\xCE\xC4\xE5\tt\x9E&\x81\"^\xBF\xBD\x04\x04odsolcC\0\x08\x1E\x003",
     );
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Custom error with signature `ExecutionFailed(uint256,address,string)` and selector `0xef3dcb2f`.
-```solidity
-error ExecutionFailed(uint256 command_index, address target, string message);
-```*/
+    ```solidity
+    error ExecutionFailed(uint256 command_index, address target, string message);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct ExecutionFailed {
@@ -128,9 +127,7 @@ error ExecutionFailed(uint256 command_index, address target, string message);
         );
         #[cfg(test)]
         #[allow(dead_code, unreachable_patterns)]
-        fn _type_assertion(
-            _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-        ) {
+        fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
             match _t {
                 alloy_sol_types::private::AssertTypeEq::<
                     <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -158,9 +155,7 @@ error ExecutionFailed(uint256 command_index, address target, string message);
         #[automatically_derived]
         impl alloy_sol_types::SolError for ExecutionFailed {
             type Parameters<'a> = UnderlyingSolTuple<'a>;
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "ExecutionFailed(uint256,address,string)";
             const SELECTOR: [u8; 4] = [239u8, 61u8, 203u8, 47u8];
             #[inline]
@@ -172,9 +167,9 @@ error ExecutionFailed(uint256 command_index, address target, string message);
             #[inline]
             fn tokenize(&self) -> Self::Token<'_> {
                 (
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self.command_index),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self.command_index,
+                    ),
                     <alloy::sol_types::sol_data::Address as alloy_sol_types::SolType>::tokenize(
                         &self.target,
                     ),
@@ -185,31 +180,27 @@ error ExecutionFailed(uint256 command_index, address target, string message);
             }
             #[inline]
             fn abi_decode_raw_validate(data: &[u8]) -> alloy_sol_types::Result<Self> {
-                <Self::Parameters<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Self::new)
+                <Self::Parameters<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Self::new)
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `execute(bytes32[],bytes[])` and selector `0xde792d5f`.
-```solidity
-function execute(bytes32[] memory commands, bytes[] memory state) external payable returns (bytes[] memory);
-```*/
+    ```solidity
+    function execute(bytes32[] memory commands, bytes[] memory state) external payable returns (bytes[] memory);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct executeCall {
         #[allow(missing_docs)]
-        pub commands: alloy::sol_types::private::Vec<
-            alloy::sol_types::private::FixedBytes<32>,
-        >,
+        pub commands: alloy::sol_types::private::Vec<alloy::sol_types::private::FixedBytes<32>>,
         #[allow(missing_docs)]
         pub state: alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`execute(bytes32[],bytes[])`](executeCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -229,23 +220,17 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
             #[doc(hidden)]
             #[allow(dead_code)]
             type UnderlyingSolTuple<'a> = (
-                alloy::sol_types::sol_data::Array<
-                    alloy::sol_types::sol_data::FixedBytes<32>,
-                >,
+                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::FixedBytes<32>>,
                 alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
             );
             #[doc(hidden)]
             type UnderlyingRustTuple<'a> = (
-                alloy::sol_types::private::Vec<
-                    alloy::sol_types::private::FixedBytes<32>,
-                >,
+                alloy::sol_types::private::Vec<alloy::sol_types::private::FixedBytes<32>>,
                 alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -273,18 +258,14 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         {
             #[doc(hidden)]
             #[allow(dead_code)]
-            type UnderlyingSolTuple<'a> = (
-                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
-            );
+            type UnderlyingSolTuple<'a> =
+                (alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,);
             #[doc(hidden)]
-            type UnderlyingRustTuple<'a> = (
-                alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
-            );
+            type UnderlyingRustTuple<'a> =
+                (alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -309,23 +290,14 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         #[automatically_derived]
         impl alloy_sol_types::SolCall for executeCall {
             type Parameters<'a> = (
-                alloy::sol_types::sol_data::Array<
-                    alloy::sol_types::sol_data::FixedBytes<32>,
-                >,
+                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::FixedBytes<32>>,
                 alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
-            type Return = alloy::sol_types::private::Vec<
-                alloy::sol_types::private::Bytes,
-            >;
-            type ReturnTuple<'a> = (
-                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
-            );
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
+            type Return = alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>;
+            type ReturnTuple<'a> =
+                (alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,);
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "execute(bytes32[],bytes[])";
             const SELECTOR: [u8; 4] = [222u8, 121u8, 45u8, 95u8];
             #[inline]
@@ -347,40 +319,33 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
             }
             #[inline]
             fn tokenize_returns(ret: &Self::Return) -> Self::ReturnToken<'_> {
-                (
-                    <alloy::sol_types::sol_data::Array<
-                        alloy::sol_types::sol_data::Bytes,
-                    > as alloy_sol_types::SolType>::tokenize(ret),
-                )
+                (<alloy::sol_types::sol_data::Array<
+                    alloy::sol_types::sol_data::Bytes,
+                > as alloy_sol_types::SolType>::tokenize(ret),)
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
-                    .map(|r| {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data).map(
+                    |r| {
                         let r: executeReturn = r.into();
                         r._0
-                    })
+                    },
+                )
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(|r| {
-                        let r: executeReturn = r.into();
-                        r._0
-                    })
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(|r| {
+                    let r: executeReturn = r.into();
+                    r._0
+                })
             }
         }
     };
     ///Container for all the [`TestableVM`](self) function calls.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive()]
+    #[derive(Clone, serde::Serialize, serde::Deserialize)]
     pub enum TestableVMCalls {
         #[allow(missing_docs)]
         execute(executeCall),
@@ -394,13 +359,10 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         /// Prefer using `SolInterface` methods instead.
         pub const SELECTORS: &'static [[u8; 4usize]] = &[[222u8, 121u8, 45u8, 95u8]];
         /// The names of the variants in the same order as `SELECTORS`.
-        pub const VARIANT_NAMES: &'static [&'static str] = &[
-            ::core::stringify!(execute),
-        ];
+        pub const VARIANT_NAMES: &'static [&'static str] = &[::core::stringify!(execute)];
         /// The signatures in the same order as `SELECTORS`.
-        pub const SIGNATURES: &'static [&'static str] = &[
-            <executeCall as alloy_sol_types::SolCall>::SIGNATURE,
-        ];
+        pub const SIGNATURES: &'static [&'static str] =
+            &[<executeCall as alloy_sol_types::SolCall>::SIGNATURE];
         /// Returns the signature for the given selector, if known.
         #[inline]
         pub fn signature_by_selector(
@@ -415,9 +377,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -443,28 +403,19 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
-            static DECODE_SHIMS: &[fn(
-                &[u8],
-            ) -> alloy_sol_types::Result<TestableVMCalls>] = &[
-                {
-                    fn execute(data: &[u8]) -> alloy_sol_types::Result<TestableVMCalls> {
-                        <executeCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
-                            .map(TestableVMCalls::execute)
-                    }
-                    execute
-                },
-            ];
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
+            static DECODE_SHIMS: &[fn(&[u8]) -> alloy_sol_types::Result<TestableVMCalls>] = &[{
+                fn execute(data: &[u8]) -> alloy_sol_types::Result<TestableVMCalls> {
+                    <executeCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
+                        .map(TestableVMCalls::execute)
+                }
+                execute
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -476,24 +427,19 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<TestableVMCalls>] = &[
-                {
-                    fn execute(data: &[u8]) -> alloy_sol_types::Result<TestableVMCalls> {
-                        <executeCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(TestableVMCalls::execute)
-                    }
-                    execute
-                },
-            ];
+            )
+                -> alloy_sol_types::Result<TestableVMCalls>] = &[{
+                fn execute(data: &[u8]) -> alloy_sol_types::Result<TestableVMCalls> {
+                    <executeCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(data)
+                        .map(TestableVMCalls::execute)
+                }
+                execute
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -515,9 +461,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         }
     }
     ///Container for all the [`TestableVM`](self) custom errors.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Debug, PartialEq, Eq, Hash)]
+    #[derive(Clone, serde::Serialize, serde::Deserialize, Debug, PartialEq, Eq, Hash)]
     pub enum TestableVMErrors {
         #[allow(missing_docs)]
         ExecutionFailed(ExecutionFailed),
@@ -531,13 +475,10 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         /// Prefer using `SolInterface` methods instead.
         pub const SELECTORS: &'static [[u8; 4usize]] = &[[239u8, 61u8, 203u8, 47u8]];
         /// The names of the variants in the same order as `SELECTORS`.
-        pub const VARIANT_NAMES: &'static [&'static str] = &[
-            ::core::stringify!(ExecutionFailed),
-        ];
+        pub const VARIANT_NAMES: &'static [&'static str] = &[::core::stringify!(ExecutionFailed)];
         /// The signatures in the same order as `SELECTORS`.
-        pub const SIGNATURES: &'static [&'static str] = &[
-            <ExecutionFailed as alloy_sol_types::SolError>::SIGNATURE,
-        ];
+        pub const SIGNATURES: &'static [&'static str] =
+            &[<ExecutionFailed as alloy_sol_types::SolError>::SIGNATURE];
         /// Returns the signature for the given selector, if known.
         #[inline]
         pub fn signature_by_selector(
@@ -552,9 +493,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -582,32 +521,19 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
-            static DECODE_SHIMS: &[fn(
-                &[u8],
-            ) -> alloy_sol_types::Result<TestableVMErrors>] = &[
-                {
-                    fn ExecutionFailed(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<TestableVMErrors> {
-                        <ExecutionFailed as alloy_sol_types::SolError>::abi_decode_raw(
-                                data,
-                            )
-                            .map(TestableVMErrors::ExecutionFailed)
-                    }
-                    ExecutionFailed
-                },
-            ];
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
+            static DECODE_SHIMS: &[fn(&[u8]) -> alloy_sol_types::Result<TestableVMErrors>] = &[{
+                fn ExecutionFailed(data: &[u8]) -> alloy_sol_types::Result<TestableVMErrors> {
+                    <ExecutionFailed as alloy_sol_types::SolError>::abi_decode_raw(data)
+                        .map(TestableVMErrors::ExecutionFailed)
+                }
+                ExecutionFailed
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -619,26 +545,19 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<TestableVMErrors>] = &[
-                {
-                    fn ExecutionFailed(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<TestableVMErrors> {
-                        <ExecutionFailed as alloy_sol_types::SolError>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(TestableVMErrors::ExecutionFailed)
-                    }
-                    ExecutionFailed
-                },
-            ];
+            )
+                -> alloy_sol_types::Result<TestableVMErrors>] = &[{
+                fn ExecutionFailed(data: &[u8]) -> alloy_sol_types::Result<TestableVMErrors> {
+                    <ExecutionFailed as alloy_sol_types::SolError>::abi_decode_raw_validate(data)
+                        .map(TestableVMErrors::ExecutionFailed)
+                }
+                ExecutionFailed
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -646,9 +565,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         fn abi_encoded_size(&self) -> usize {
             match self {
                 Self::ExecutionFailed(inner) => {
-                    <ExecutionFailed as alloy_sol_types::SolError>::abi_encoded_size(
-                        inner,
-                    )
+                    <ExecutionFailed as alloy_sol_types::SolError>::abi_encoded_size(inner)
                 }
             }
         }
@@ -656,10 +573,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
         fn abi_encode_raw(&self, out: &mut alloy_sol_types::private::Vec<u8>) {
             match self {
                 Self::ExecutionFailed(inner) => {
-                    <ExecutionFailed as alloy_sol_types::SolError>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <ExecutionFailed as alloy_sol_types::SolError>::abi_encode_raw(inner, out)
                 }
             }
         }
@@ -667,7 +581,7 @@ function execute(bytes32[] memory commands, bytes[] memory state) external payab
     use alloy::contract as alloy_contract;
     /**Creates a new wrapper around an on-chain [`TestableVM`](self) contract instance.
 
-See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
+    See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
     #[inline]
     pub const fn new<
         P: alloy_contract::private::Provider<N>,
@@ -680,43 +594,41 @@ See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
     }
     /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+    Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+    For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
     #[inline]
-    pub fn deploy<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    >(
+    pub fn deploy<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>(
         __provider: P,
-    ) -> impl ::core::future::Future<
-        Output = alloy_contract::Result<TestableVMInstance<P, N>>,
-    > {
+    ) -> impl ::core::future::Future<Output = alloy_contract::Result<TestableVMInstance<P, N>>>
+    {
         TestableVMInstance::<P, N>::deploy(__provider)
     }
     /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+    and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+    This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+    the bytecode concatenated with the constructor's ABI-encoded arguments.*/
     #[inline]
     pub fn deploy_builder<
         P: alloy_contract::private::Provider<N>,
         N: alloy_contract::private::Network,
-    >(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
+    >(
+        __provider: P,
+    ) -> alloy_contract::RawCallBuilder<P, N> {
         TestableVMInstance::<P, N>::deploy_builder(__provider)
     }
     /**A [`TestableVM`](self) instance.
 
-Contains type-safe methods for interacting with an on-chain instance of the
-[`TestableVM`](self) contract located at a given `address`, using a given
-provider `P`.
+    Contains type-safe methods for interacting with an on-chain instance of the
+    [`TestableVM`](self) contract located at a given `address`, using a given
+    provider `P`.
 
-If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
-documentation on how to provide it), the `deploy` and `deploy_builder` methods can
-be used to deploy a new instance of the contract.
+    If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
+    documentation on how to provide it), the `deploy` and `deploy_builder` methods can
+    be used to deploy a new instance of the contract.
 
-See the [module-level documentation](self) for all the available methods.*/
+    See the [module-level documentation](self) for all the available methods.*/
     #[derive(Clone)]
     pub struct TestableVMInstance<P, N = alloy_contract::private::Ethereum> {
         address: alloy_sol_types::private::Address,
@@ -727,22 +639,20 @@ See the [module-level documentation](self) for all the available methods.*/
     impl<P, N> ::core::fmt::Debug for TestableVMInstance<P, N> {
         #[inline]
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple("TestableVMInstance").field(&self.address).finish()
+            f.debug_tuple("TestableVMInstance")
+                .field(&self.address)
+                .finish()
         }
     }
     /// Instantiation and getters/setters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > TestableVMInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        TestableVMInstance<P, N>
+    {
         /**Creates a new wrapper around an on-chain [`TestableVM`](self) contract instance.
 
-See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
+        See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
         #[inline]
-        pub const fn new(
-            address: alloy_sol_types::private::Address,
-            __provider: P,
-        ) -> Self {
+        pub const fn new(address: alloy_sol_types::private::Address, __provider: P) -> Self {
             Self {
                 address,
                 provider: __provider,
@@ -751,22 +661,20 @@ See the [wrapper's documentation](`TestableVMInstance`) for more details.*/
         }
         /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+        Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+        For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
         #[inline]
-        pub async fn deploy(
-            __provider: P,
-        ) -> alloy_contract::Result<TestableVMInstance<P, N>> {
+        pub async fn deploy(__provider: P) -> alloy_contract::Result<TestableVMInstance<P, N>> {
             let call_builder = Self::deploy_builder(__provider);
             let contract_address = call_builder.deploy().await?;
             Ok(Self::new(contract_address, call_builder.provider))
         }
         /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+        and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+        This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+        the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         #[inline]
         pub fn deploy_builder(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
             alloy_contract::RawCallBuilder::new_raw_deploy(
@@ -807,10 +715,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Function calls.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > TestableVMInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        TestableVMInstance<P, N>
+    {
         /// Creates a new call builder using this contract instance's provider and address.
         ///
         /// Note that the call can be any function call, not just those defined in this
@@ -824,19 +731,16 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         ///Creates a new call builder for the [`execute`] function.
         pub fn execute(
             &self,
-            commands: alloy::sol_types::private::Vec<
-                alloy::sol_types::private::FixedBytes<32>,
-            >,
+            commands: alloy::sol_types::private::Vec<alloy::sol_types::private::FixedBytes<32>>,
             state: alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
         ) -> alloy_contract::SolCallBuilder<&P, executeCall, N> {
             self.call_builder(&executeCall { commands, state })
         }
     }
     /// Event filters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > TestableVMInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        TestableVMInstance<P, N>
+    {
         /// Creates a new event filter using this contract instance's provider and address.
         ///
         /// Note that the type can be any event, not just those defined in this contract.

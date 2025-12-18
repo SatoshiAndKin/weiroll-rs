@@ -94,12 +94,11 @@ pub mod MultiReturn {
     pub static DEPLOYED_BYTECODE: alloy_sol_types::private::Bytes = alloy_sol_types::private::Bytes::from_static(
         b"`\x80`@R4\x80\x15a\0\x0FW__\xFD[P`\x046\x10a\x004W_5`\xE0\x1C\x80c8'\x1F\xBF\x14a\08W\x80c[\xD5NB\x14a\0TW[__\xFD[a\0R`\x04\x806\x03\x81\x01\x90a\0M\x91\x90a\0\xFCV[a\0tV[\0[a\0\\a\0\xAEV[`@Qa\0k\x93\x92\x91\x90a\x016V[`@Q\x80\x91\x03\x90\xF3[\x7F,%}Clr\xDD\xFC\xF6\x86\x0B\xAF\x0B\xDEn}\xEC\xA25X_<\xD5\xA7\xE1\xDAW\x9A\x04\xC9\x8A\xB1\x81`@Qa\0\xA3\x91\x90a\x01kV[`@Q\x80\x91\x03\x90\xA1PV[___a\x0B\xADa\xDE\xEDa\xCA\xFE\x92P\x92P\x92P\x90\x91\x92V[__\xFD[_\x81\x90P\x91\x90PV[a\0\xDB\x81a\0\xC9V[\x81\x14a\0\xE5W__\xFD[PV[_\x815\x90Pa\0\xF6\x81a\0\xD2V[\x92\x91PPV[_` \x82\x84\x03\x12\x15a\x01\x11Wa\x01\x10a\0\xC5V[[_a\x01\x1E\x84\x82\x85\x01a\0\xE8V[\x91PP\x92\x91PPV[a\x010\x81a\0\xC9V[\x82RPPV[_``\x82\x01\x90Pa\x01I_\x83\x01\x86a\x01'V[a\x01V` \x83\x01\x85a\x01'V[a\x01c`@\x83\x01\x84a\x01'V[\x94\x93PPPPV[_` \x82\x01\x90Pa\x01~_\x83\x01\x84a\x01'V[\x92\x91PPV\xFE\xA2dipfsX\"\x12 \x1AZ\x80K\x90r\xA7\x95b\xAF=BU4&\xE2*\x7F\xD5\xF6M\xB1\xF2\x91$\xE9j\xE7A\xA7K\x14dsolcC\0\x08\x1E\x003",
     );
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Event with signature `Calculated(uint256)` and selector `0x2c257d436c72ddfcf6860baf0bde6e7deca235585f3cd5a7e1da579a04c98ab1`.
-```solidity
-event Calculated(uint256 j);
-```*/
+    ```solidity
+    event Calculated(uint256 j);
+    ```*/
     #[allow(
         non_camel_case_types,
         non_snake_case,
@@ -122,16 +121,15 @@ event Calculated(uint256 j);
         #[automatically_derived]
         impl alloy_sol_types::SolEvent for Calculated {
             type DataTuple<'a> = (alloy::sol_types::sol_data::Uint<256>,);
-            type DataToken<'a> = <Self::DataTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type DataToken<'a> = <Self::DataTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             type TopicList = (alloy_sol_types::sol_data::FixedBytes<32>,);
             const SIGNATURE: &'static str = "Calculated(uint256)";
-            const SIGNATURE_HASH: alloy_sol_types::private::B256 = alloy_sol_types::private::B256::new([
-                44u8, 37u8, 125u8, 67u8, 108u8, 114u8, 221u8, 252u8, 246u8, 134u8, 11u8,
-                175u8, 11u8, 222u8, 110u8, 125u8, 236u8, 162u8, 53u8, 88u8, 95u8, 60u8,
-                213u8, 167u8, 225u8, 218u8, 87u8, 154u8, 4u8, 201u8, 138u8, 177u8,
-            ]);
+            const SIGNATURE_HASH: alloy_sol_types::private::B256 =
+                alloy_sol_types::private::B256::new([
+                    44u8, 37u8, 125u8, 67u8, 108u8, 114u8, 221u8, 252u8, 246u8, 134u8, 11u8, 175u8,
+                    11u8, 222u8, 110u8, 125u8, 236u8, 162u8, 53u8, 88u8, 95u8, 60u8, 213u8, 167u8,
+                    225u8, 218u8, 87u8, 154u8, 4u8, 201u8, 138u8, 177u8,
+                ]);
             const ANONYMOUS: bool = false;
             #[allow(unused_variables)]
             #[inline]
@@ -146,22 +144,20 @@ event Calculated(uint256 j);
                 topics: &<Self::TopicList as alloy_sol_types::SolType>::RustType,
             ) -> alloy_sol_types::Result<()> {
                 if topics.0 != Self::SIGNATURE_HASH {
-                    return Err(
-                        alloy_sol_types::Error::invalid_event_signature_hash(
-                            Self::SIGNATURE,
-                            topics.0,
-                            Self::SIGNATURE_HASH,
-                        ),
-                    );
+                    return Err(alloy_sol_types::Error::invalid_event_signature_hash(
+                        Self::SIGNATURE,
+                        topics.0,
+                        Self::SIGNATURE_HASH,
+                    ));
                 }
                 Ok(())
             }
             #[inline]
             fn tokenize_body(&self) -> Self::DataToken<'_> {
                 (
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self.j),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self.j,
+                    ),
                 )
             }
             #[inline]
@@ -176,9 +172,7 @@ event Calculated(uint256 j);
                 if out.len() < <Self::TopicList as alloy_sol_types::TopicList>::COUNT {
                     return Err(alloy_sol_types::Error::Overrun);
                 }
-                out[0usize] = alloy_sol_types::abi::token::WordToken(
-                    Self::SIGNATURE_HASH,
-                );
+                out[0usize] = alloy_sol_types::abi::token::WordToken(Self::SIGNATURE_HASH);
                 Ok(())
             }
         }
@@ -199,17 +193,15 @@ event Calculated(uint256 j);
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `intTuple()` and selector `0x5bd54e42`.
-```solidity
-function intTuple() external pure returns (uint256, uint256, uint256);
-```*/
+    ```solidity
+    function intTuple() external pure returns (uint256, uint256, uint256);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct intTupleCall;
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`intTuple()`](intTupleCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -237,9 +229,7 @@ function intTuple() external pure returns (uint256, uint256, uint256);
             type UnderlyingRustTuple<'a> = ();
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -277,9 +267,7 @@ function intTuple() external pure returns (uint256, uint256, uint256);
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -306,37 +294,31 @@ function intTuple() external pure returns (uint256, uint256, uint256);
             }
         }
         impl intTupleReturn {
-            fn _tokenize(
-                &self,
-            ) -> <intTupleCall as alloy_sol_types::SolCall>::ReturnToken<'_> {
+            fn _tokenize(&self) -> <intTupleCall as alloy_sol_types::SolCall>::ReturnToken<'_> {
                 (
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self._0),
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self._1),
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self._2),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self._0,
+                    ),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self._1,
+                    ),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self._2,
+                    ),
                 )
             }
         }
         #[automatically_derived]
         impl alloy_sol_types::SolCall for intTupleCall {
             type Parameters<'a> = ();
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = intTupleReturn;
             type ReturnTuple<'a> = (
                 alloy::sol_types::sol_data::Uint<256>,
                 alloy::sol_types::sol_data::Uint<256>,
                 alloy::sol_types::sol_data::Uint<256>,
             );
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "intTuple()";
             const SELECTOR: [u8; 4] = [91u8, 213u8, 78u8, 66u8];
             #[inline]
@@ -355,28 +337,23 @@ function intTuple() external pure returns (uint256, uint256, uint256);
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data)
                     .map(Into::into)
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Into::into)
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Into::into)
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `tupleConsumer(uint256)` and selector `0x38271fbf`.
-```solidity
-function tupleConsumer(uint256 arg) external;
-```*/
+    ```solidity
+    function tupleConsumer(uint256 arg) external;
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct tupleConsumerCall {
@@ -400,14 +377,10 @@ function tupleConsumer(uint256 arg) external;
             #[allow(dead_code)]
             type UnderlyingSolTuple<'a> = (alloy::sol_types::sol_data::Uint<256>,);
             #[doc(hidden)]
-            type UnderlyingRustTuple<'a> = (
-                alloy::sol_types::private::primitives::aliases::U256,
-            );
+            type UnderlyingRustTuple<'a> = (alloy::sol_types::private::primitives::aliases::U256,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -437,9 +410,7 @@ function tupleConsumer(uint256 arg) external;
             type UnderlyingRustTuple<'a> = ();
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -471,14 +442,10 @@ function tupleConsumer(uint256 arg) external;
         #[automatically_derived]
         impl alloy_sol_types::SolCall for tupleConsumerCall {
             type Parameters<'a> = (alloy::sol_types::sol_data::Uint<256>,);
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = tupleConsumerReturn;
             type ReturnTuple<'a> = ();
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "tupleConsumer(uint256)";
             const SELECTOR: [u8; 4] = [56u8, 39u8, 31u8, 191u8];
             #[inline]
@@ -490,9 +457,9 @@ function tupleConsumer(uint256 arg) external;
             #[inline]
             fn tokenize(&self) -> Self::Token<'_> {
                 (
-                    <alloy::sol_types::sol_data::Uint<
-                        256,
-                    > as alloy_sol_types::SolType>::tokenize(&self.arg),
+                    <alloy::sol_types::sol_data::Uint<256> as alloy_sol_types::SolType>::tokenize(
+                        &self.arg,
+                    ),
                 )
             }
             #[inline]
@@ -501,26 +468,20 @@ function tupleConsumer(uint256 arg) external;
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data)
                     .map(Into::into)
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Into::into)
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Into::into)
             }
         }
     };
     ///Container for all the [`MultiReturn`](self) function calls.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive()]
+    #[derive(Clone, serde::Serialize, serde::Deserialize)]
     pub enum MultiReturnCalls {
         #[allow(missing_docs)]
         intTuple(intTupleCall),
@@ -534,10 +495,8 @@ function tupleConsumer(uint256 arg) external;
         /// No guarantees are made about the order of the selectors.
         ///
         /// Prefer using `SolInterface` methods instead.
-        pub const SELECTORS: &'static [[u8; 4usize]] = &[
-            [56u8, 39u8, 31u8, 191u8],
-            [91u8, 213u8, 78u8, 66u8],
-        ];
+        pub const SELECTORS: &'static [[u8; 4usize]] =
+            &[[56u8, 39u8, 31u8, 191u8], [91u8, 213u8, 78u8, 66u8]];
         /// The names of the variants in the same order as `SELECTORS`.
         pub const VARIANT_NAMES: &'static [&'static str] = &[
             ::core::stringify!(tupleConsumer),
@@ -562,9 +521,7 @@ function tupleConsumer(uint256 arg) external;
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -578,9 +535,7 @@ function tupleConsumer(uint256 arg) external;
         fn selector(&self) -> [u8; 4] {
             match self {
                 Self::intTuple(_) => <intTupleCall as alloy_sol_types::SolCall>::SELECTOR,
-                Self::tupleConsumer(_) => {
-                    <tupleConsumerCall as alloy_sol_types::SolCall>::SELECTOR
-                }
+                Self::tupleConsumer(_) => <tupleConsumerCall as alloy_sol_types::SolCall>::SELECTOR,
             }
         }
         #[inline]
@@ -593,28 +548,17 @@ function tupleConsumer(uint256 arg) external;
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
-            static DECODE_SHIMS: &[fn(
-                &[u8],
-            ) -> alloy_sol_types::Result<MultiReturnCalls>] = &[
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
+            static DECODE_SHIMS: &[fn(&[u8]) -> alloy_sol_types::Result<MultiReturnCalls>] = &[
                 {
-                    fn tupleConsumer(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<MultiReturnCalls> {
-                        <tupleConsumerCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
+                    fn tupleConsumer(data: &[u8]) -> alloy_sol_types::Result<MultiReturnCalls> {
+                        <tupleConsumerCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
                             .map(MultiReturnCalls::tupleConsumer)
                     }
                     tupleConsumer
                 },
                 {
-                    fn intTuple(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<MultiReturnCalls> {
+                    fn intTuple(data: &[u8]) -> alloy_sol_types::Result<MultiReturnCalls> {
                         <intTupleCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
                             .map(MultiReturnCalls::intTuple)
                     }
@@ -622,12 +566,10 @@ function tupleConsumer(uint256 arg) external;
                 },
             ];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -639,37 +581,30 @@ function tupleConsumer(uint256 arg) external;
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<MultiReturnCalls>] = &[
+            )
+                -> alloy_sol_types::Result<MultiReturnCalls>] = &[
                 {
-                    fn tupleConsumer(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<MultiReturnCalls> {
+                    fn tupleConsumer(data: &[u8]) -> alloy_sol_types::Result<MultiReturnCalls> {
                         <tupleConsumerCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(MultiReturnCalls::tupleConsumer)
+                            data,
+                        )
+                        .map(MultiReturnCalls::tupleConsumer)
                     }
                     tupleConsumer
                 },
                 {
-                    fn intTuple(
-                        data: &[u8],
-                    ) -> alloy_sol_types::Result<MultiReturnCalls> {
-                        <intTupleCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
+                    fn intTuple(data: &[u8]) -> alloy_sol_types::Result<MultiReturnCalls> {
+                        <intTupleCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(data)
                             .map(MultiReturnCalls::intTuple)
                     }
                     intTuple
                 },
             ];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -680,9 +615,7 @@ function tupleConsumer(uint256 arg) external;
                     <intTupleCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
                 Self::tupleConsumer(inner) => {
-                    <tupleConsumerCall as alloy_sol_types::SolCall>::abi_encoded_size(
-                        inner,
-                    )
+                    <tupleConsumerCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
             }
         }
@@ -690,24 +623,16 @@ function tupleConsumer(uint256 arg) external;
         fn abi_encode_raw(&self, out: &mut alloy_sol_types::private::Vec<u8>) {
             match self {
                 Self::intTuple(inner) => {
-                    <intTupleCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <intTupleCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
                 Self::tupleConsumer(inner) => {
-                    <tupleConsumerCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <tupleConsumerCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
             }
         }
     }
     ///Container for all the [`MultiReturn`](self) events.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Debug, PartialEq, Eq, Hash)]
+    #[derive(Clone, serde::Serialize, serde::Deserialize, Debug, PartialEq, Eq, Hash)]
     pub enum MultiReturnEvents {
         #[allow(missing_docs)]
         Calculated(Calculated),
@@ -719,21 +644,16 @@ function tupleConsumer(uint256 arg) external;
         /// No guarantees are made about the order of the selectors.
         ///
         /// Prefer using `SolInterface` methods instead.
-        pub const SELECTORS: &'static [[u8; 32usize]] = &[
-            [
-                44u8, 37u8, 125u8, 67u8, 108u8, 114u8, 221u8, 252u8, 246u8, 134u8, 11u8,
-                175u8, 11u8, 222u8, 110u8, 125u8, 236u8, 162u8, 53u8, 88u8, 95u8, 60u8,
-                213u8, 167u8, 225u8, 218u8, 87u8, 154u8, 4u8, 201u8, 138u8, 177u8,
-            ],
-        ];
+        pub const SELECTORS: &'static [[u8; 32usize]] = &[[
+            44u8, 37u8, 125u8, 67u8, 108u8, 114u8, 221u8, 252u8, 246u8, 134u8, 11u8, 175u8, 11u8,
+            222u8, 110u8, 125u8, 236u8, 162u8, 53u8, 88u8, 95u8, 60u8, 213u8, 167u8, 225u8, 218u8,
+            87u8, 154u8, 4u8, 201u8, 138u8, 177u8,
+        ]];
         /// The names of the variants in the same order as `SELECTORS`.
-        pub const VARIANT_NAMES: &'static [&'static str] = &[
-            ::core::stringify!(Calculated),
-        ];
+        pub const VARIANT_NAMES: &'static [&'static str] = &[::core::stringify!(Calculated)];
         /// The signatures in the same order as `SELECTORS`.
-        pub const SIGNATURES: &'static [&'static str] = &[
-            <Calculated as alloy_sol_types::SolEvent>::SIGNATURE,
-        ];
+        pub const SIGNATURES: &'static [&'static str] =
+            &[<Calculated as alloy_sol_types::SolEvent>::SIGNATURE];
         /// Returns the signature for the given selector, if known.
         #[inline]
         pub fn signature_by_selector(
@@ -748,9 +668,7 @@ function tupleConsumer(uint256 arg) external;
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 32usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 32usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -765,23 +683,18 @@ function tupleConsumer(uint256 arg) external;
         ) -> alloy_sol_types::Result<Self> {
             match topics.first().copied() {
                 Some(<Calculated as alloy_sol_types::SolEvent>::SIGNATURE_HASH) => {
-                    <Calculated as alloy_sol_types::SolEvent>::decode_raw_log(
-                            topics,
-                            data,
-                        )
+                    <Calculated as alloy_sol_types::SolEvent>::decode_raw_log(topics, data)
                         .map(Self::Calculated)
                 }
-                _ => {
-                    alloy_sol_types::private::Err(alloy_sol_types::Error::InvalidLog {
-                        name: <Self as alloy_sol_types::SolEventInterface>::NAME,
-                        log: alloy_sol_types::private::Box::new(
-                            alloy_sol_types::private::LogData::new_unchecked(
-                                topics.to_vec(),
-                                data.to_vec().into(),
-                            ),
+                _ => alloy_sol_types::private::Err(alloy_sol_types::Error::InvalidLog {
+                    name: <Self as alloy_sol_types::SolEventInterface>::NAME,
+                    log: alloy_sol_types::private::Box::new(
+                        alloy_sol_types::private::LogData::new_unchecked(
+                            topics.to_vec(),
+                            data.to_vec().into(),
                         ),
-                    })
-                }
+                    ),
+                }),
             }
         }
     }
@@ -805,7 +718,7 @@ function tupleConsumer(uint256 arg) external;
     use alloy::contract as alloy_contract;
     /**Creates a new wrapper around an on-chain [`MultiReturn`](self) contract instance.
 
-See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
+    See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
     #[inline]
     pub const fn new<
         P: alloy_contract::private::Provider<N>,
@@ -818,43 +731,41 @@ See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
     }
     /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+    Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+    For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
     #[inline]
-    pub fn deploy<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    >(
+    pub fn deploy<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>(
         __provider: P,
-    ) -> impl ::core::future::Future<
-        Output = alloy_contract::Result<MultiReturnInstance<P, N>>,
-    > {
+    ) -> impl ::core::future::Future<Output = alloy_contract::Result<MultiReturnInstance<P, N>>>
+    {
         MultiReturnInstance::<P, N>::deploy(__provider)
     }
     /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+    and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+    This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+    the bytecode concatenated with the constructor's ABI-encoded arguments.*/
     #[inline]
     pub fn deploy_builder<
         P: alloy_contract::private::Provider<N>,
         N: alloy_contract::private::Network,
-    >(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
+    >(
+        __provider: P,
+    ) -> alloy_contract::RawCallBuilder<P, N> {
         MultiReturnInstance::<P, N>::deploy_builder(__provider)
     }
     /**A [`MultiReturn`](self) instance.
 
-Contains type-safe methods for interacting with an on-chain instance of the
-[`MultiReturn`](self) contract located at a given `address`, using a given
-provider `P`.
+    Contains type-safe methods for interacting with an on-chain instance of the
+    [`MultiReturn`](self) contract located at a given `address`, using a given
+    provider `P`.
 
-If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
-documentation on how to provide it), the `deploy` and `deploy_builder` methods can
-be used to deploy a new instance of the contract.
+    If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
+    documentation on how to provide it), the `deploy` and `deploy_builder` methods can
+    be used to deploy a new instance of the contract.
 
-See the [module-level documentation](self) for all the available methods.*/
+    See the [module-level documentation](self) for all the available methods.*/
     #[derive(Clone)]
     pub struct MultiReturnInstance<P, N = alloy_contract::private::Ethereum> {
         address: alloy_sol_types::private::Address,
@@ -865,22 +776,20 @@ See the [module-level documentation](self) for all the available methods.*/
     impl<P, N> ::core::fmt::Debug for MultiReturnInstance<P, N> {
         #[inline]
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple("MultiReturnInstance").field(&self.address).finish()
+            f.debug_tuple("MultiReturnInstance")
+                .field(&self.address)
+                .finish()
         }
     }
     /// Instantiation and getters/setters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > MultiReturnInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        MultiReturnInstance<P, N>
+    {
         /**Creates a new wrapper around an on-chain [`MultiReturn`](self) contract instance.
 
-See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
+        See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
         #[inline]
-        pub const fn new(
-            address: alloy_sol_types::private::Address,
-            __provider: P,
-        ) -> Self {
+        pub const fn new(address: alloy_sol_types::private::Address, __provider: P) -> Self {
             Self {
                 address,
                 provider: __provider,
@@ -889,22 +798,20 @@ See the [wrapper's documentation](`MultiReturnInstance`) for more details.*/
         }
         /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+        Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+        For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
         #[inline]
-        pub async fn deploy(
-            __provider: P,
-        ) -> alloy_contract::Result<MultiReturnInstance<P, N>> {
+        pub async fn deploy(__provider: P) -> alloy_contract::Result<MultiReturnInstance<P, N>> {
             let call_builder = Self::deploy_builder(__provider);
             let contract_address = call_builder.deploy().await?;
             Ok(Self::new(contract_address, call_builder.provider))
         }
         /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+        and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+        This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+        the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         #[inline]
         pub fn deploy_builder(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
             alloy_contract::RawCallBuilder::new_raw_deploy(
@@ -945,10 +852,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Function calls.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > MultiReturnInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        MultiReturnInstance<P, N>
+    {
         /// Creates a new call builder using this contract instance's provider and address.
         ///
         /// Note that the call can be any function call, not just those defined in this
@@ -972,10 +878,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Event filters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > MultiReturnInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        MultiReturnInstance<P, N>
+    {
         /// Creates a new event filter using this contract instance's provider and address.
         ///
         /// Note that the type can be any event, not just those defined in this contract.

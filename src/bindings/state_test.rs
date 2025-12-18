@@ -76,12 +76,11 @@ pub mod StateTest {
     pub static DEPLOYED_BYTECODE: alloy_sol_types::private::Bytes = alloy_sol_types::private::Bytes::from_static(
         b"`\x80`@R4\x80\x15a\0\x0FW__\xFD[P`\x046\x10a\0)W_5`\xE0\x1C\x80c\xD2\xF7\xDE\x80\x14a\0-W[__\xFD[a\0G`\x04\x806\x03\x81\x01\x90a\0B\x91\x90a\x03oV[a\0]V[`@Qa\0T\x91\x90a\x05\nV[`@Q\x80\x91\x03\x90\xF3[``\x81\x83\x81Q\x81\x10a\0rWa\0qa\x05*V[[` \x02` \x01\x01Q\x80` \x01\x90Q\x81\x01\x90a\0\x8D\x91\x90a\x05kV[\x82\x85\x81Q\x81\x10a\0\xA0Wa\0\x9Fa\x05*V[[` \x02` \x01\x01Q\x80` \x01\x90Q\x81\x01\x90a\0\xBB\x91\x90a\x05kV[a\0\xC5\x91\x90a\x05\xC3V[`@Q` \x01a\0\xD5\x91\x90a\x06\x05V[`@Q` \x81\x83\x03\x03\x81R\x90`@R\x82\x86\x81Q\x81\x10a\0\xF7Wa\0\xF6a\x05*V[[` \x02` \x01\x01\x81\x90RP\x81\x90P\x94\x93PPPPV[_`@Q\x90P\x90V[__\xFD[__\xFD[_\x81\x90P\x91\x90PV[a\x010\x81a\x01\x1EV[\x81\x14a\x01:W__\xFD[PV[_\x815\x90Pa\x01K\x81a\x01'V[\x92\x91PPV[__\xFD[_`\x1F\x19`\x1F\x83\x01\x16\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`A`\x04R`$_\xFD[a\x01\x9B\x82a\x01UV[\x81\x01\x81\x81\x10g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x17\x15a\x01\xBAWa\x01\xB9a\x01eV[[\x80`@RPPPV[_a\x01\xCCa\x01\rV[\x90Pa\x01\xD8\x82\x82a\x01\x92V[\x91\x90PV[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x01\xF7Wa\x01\xF6a\x01eV[[` \x82\x02\x90P` \x81\x01\x90P\x91\x90PV[__\xFD[__\xFD[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x02*Wa\x02)a\x01eV[[a\x023\x82a\x01UV[\x90P` \x81\x01\x90P\x91\x90PV[\x82\x81\x837_\x83\x83\x01RPPPV[_a\x02`a\x02[\x84a\x02\x10V[a\x01\xC3V[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x02|Wa\x02{a\x02\x0CV[[a\x02\x87\x84\x82\x85a\x02@V[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x02\xA3Wa\x02\xA2a\x01QV[[\x815a\x02\xB3\x84\x82` \x86\x01a\x02NV[\x91PP\x92\x91PPV[_a\x02\xCEa\x02\xC9\x84a\x01\xDDV[a\x01\xC3V[\x90P\x80\x83\x82R` \x82\x01\x90P` \x84\x02\x83\x01\x85\x81\x11\x15a\x02\xF1Wa\x02\xF0a\x02\x08V[[\x83[\x81\x81\x10\x15a\x038W\x805g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x03\x16Wa\x03\x15a\x01QV[[\x80\x86\x01a\x03#\x89\x82a\x02\x8FV[\x85R` \x85\x01\x94PPP` \x81\x01\x90Pa\x02\xF3V[PPP\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x03VWa\x03Ua\x01QV[[\x815a\x03f\x84\x82` \x86\x01a\x02\xBCV[\x91PP\x92\x91PPV[____`\x80\x85\x87\x03\x12\x15a\x03\x87Wa\x03\x86a\x01\x16V[[_a\x03\x94\x87\x82\x88\x01a\x01=V[\x94PP` a\x03\xA5\x87\x82\x88\x01a\x01=V[\x93PP`@a\x03\xB6\x87\x82\x88\x01a\x01=V[\x92PP``\x85\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x03\xD7Wa\x03\xD6a\x01\x1AV[[a\x03\xE3\x87\x82\x88\x01a\x03BV[\x91PP\x92\x95\x91\x94P\x92PV[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[_\x81\x90P` \x82\x01\x90P\x91\x90PV[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[\x82\x81\x83^_\x83\x83\x01RPPPV[_a\x04J\x82a\x04\x18V[a\x04T\x81\x85a\x04\"V[\x93Pa\x04d\x81\x85` \x86\x01a\x042V[a\x04m\x81a\x01UV[\x84\x01\x91PP\x92\x91PPV[_a\x04\x83\x83\x83a\x04@V[\x90P\x92\x91PPV[_` \x82\x01\x90P\x91\x90PV[_a\x04\xA1\x82a\x03\xEFV[a\x04\xAB\x81\x85a\x03\xF9V[\x93P\x83` \x82\x02\x85\x01a\x04\xBD\x85a\x04\tV[\x80_[\x85\x81\x10\x15a\x04\xF8W\x84\x84\x03\x89R\x81Qa\x04\xD9\x85\x82a\x04xV[\x94Pa\x04\xE4\x83a\x04\x8BV[\x92P` \x8A\x01\x99PP`\x01\x81\x01\x90Pa\x04\xC0V[P\x82\x97P\x87\x95PPPPPP\x92\x91PPV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x05\"\x81\x84a\x04\x97V[\x90P\x92\x91PPV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`2`\x04R`$_\xFD[_\x81Q\x90Pa\x05e\x81a\x01'V[\x92\x91PPV[_` \x82\x84\x03\x12\x15a\x05\x80Wa\x05\x7Fa\x01\x16V[[_a\x05\x8D\x84\x82\x85\x01a\x05WV[\x91PP\x92\x91PPV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`\x11`\x04R`$_\xFD[_a\x05\xCD\x82a\x01\x1EV[\x91Pa\x05\xD8\x83a\x01\x1EV[\x92P\x82\x82\x01\x90P\x80\x82\x11\x15a\x05\xF0Wa\x05\xEFa\x05\x96V[[\x92\x91PPV[a\x05\xFF\x81a\x01\x1EV[\x82RPPV[_` \x82\x01\x90Pa\x06\x18_\x83\x01\x84a\x05\xF6V[\x92\x91PPV\xFE\xA2dipfsX\"\x12 \x92e\xA2\xF6C6\xDDo\xE2\x17\x86\"\x15\x87\xD1\n\x8CPX7`\xFC:'\xB3s\xC6\xB6\x11=cWdsolcC\0\x08\x1E\x003",
     );
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `addSlots(uint256,uint256,uint256,bytes[])` and selector `0xd2f7de80`.
-```solidity
-function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state) external pure returns (bytes[] memory);
-```*/
+    ```solidity
+    function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state) external pure returns (bytes[] memory);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct addSlotsCall {
@@ -94,8 +93,7 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         #[allow(missing_docs)]
         pub state: alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`addSlots(uint256,uint256,uint256,bytes[])`](addSlotsCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -129,9 +127,7 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -161,18 +157,14 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         {
             #[doc(hidden)]
             #[allow(dead_code)]
-            type UnderlyingSolTuple<'a> = (
-                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
-            );
+            type UnderlyingSolTuple<'a> =
+                (alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,);
             #[doc(hidden)]
-            type UnderlyingRustTuple<'a> = (
-                alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
-            );
+            type UnderlyingRustTuple<'a> =
+                (alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -202,18 +194,11 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
                 alloy::sol_types::sol_data::Uint<256>,
                 alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
-            type Return = alloy::sol_types::private::Vec<
-                alloy::sol_types::private::Bytes,
-            >;
-            type ReturnTuple<'a> = (
-                alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
-            );
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
+            type Return = alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>;
+            type ReturnTuple<'a> =
+                (alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,);
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "addSlots(uint256,uint256,uint256,bytes[])";
             const SELECTOR: [u8; 4] = [210u8, 247u8, 222u8, 128u8];
             #[inline]
@@ -241,40 +226,33 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
             }
             #[inline]
             fn tokenize_returns(ret: &Self::Return) -> Self::ReturnToken<'_> {
-                (
-                    <alloy::sol_types::sol_data::Array<
-                        alloy::sol_types::sol_data::Bytes,
-                    > as alloy_sol_types::SolType>::tokenize(ret),
-                )
+                (<alloy::sol_types::sol_data::Array<
+                    alloy::sol_types::sol_data::Bytes,
+                > as alloy_sol_types::SolType>::tokenize(ret),)
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
-                    .map(|r| {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data).map(
+                    |r| {
                         let r: addSlotsReturn = r.into();
                         r._0
-                    })
+                    },
+                )
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(|r| {
-                        let r: addSlotsReturn = r.into();
-                        r._0
-                    })
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(|r| {
+                    let r: addSlotsReturn = r.into();
+                    r._0
+                })
             }
         }
     };
     ///Container for all the [`StateTest`](self) function calls.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive()]
+    #[derive(Clone, serde::Serialize, serde::Deserialize)]
     pub enum StateTestCalls {
         #[allow(missing_docs)]
         addSlots(addSlotsCall),
@@ -288,13 +266,10 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         /// Prefer using `SolInterface` methods instead.
         pub const SELECTORS: &'static [[u8; 4usize]] = &[[210u8, 247u8, 222u8, 128u8]];
         /// The names of the variants in the same order as `SELECTORS`.
-        pub const VARIANT_NAMES: &'static [&'static str] = &[
-            ::core::stringify!(addSlots),
-        ];
+        pub const VARIANT_NAMES: &'static [&'static str] = &[::core::stringify!(addSlots)];
         /// The signatures in the same order as `SELECTORS`.
-        pub const SIGNATURES: &'static [&'static str] = &[
-            <addSlotsCall as alloy_sol_types::SolCall>::SIGNATURE,
-        ];
+        pub const SIGNATURES: &'static [&'static str] =
+            &[<addSlotsCall as alloy_sol_types::SolCall>::SIGNATURE];
         /// Returns the signature for the given selector, if known.
         #[inline]
         pub fn signature_by_selector(
@@ -309,9 +284,7 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -337,28 +310,19 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
-            static DECODE_SHIMS: &[fn(
-                &[u8],
-            ) -> alloy_sol_types::Result<StateTestCalls>] = &[
-                {
-                    fn addSlots(data: &[u8]) -> alloy_sol_types::Result<StateTestCalls> {
-                        <addSlotsCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
-                            .map(StateTestCalls::addSlots)
-                    }
-                    addSlots
-                },
-            ];
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
+            static DECODE_SHIMS: &[fn(&[u8]) -> alloy_sol_types::Result<StateTestCalls>] = &[{
+                fn addSlots(data: &[u8]) -> alloy_sol_types::Result<StateTestCalls> {
+                    <addSlotsCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
+                        .map(StateTestCalls::addSlots)
+                }
+                addSlots
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -370,24 +334,19 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<StateTestCalls>] = &[
-                {
-                    fn addSlots(data: &[u8]) -> alloy_sol_types::Result<StateTestCalls> {
-                        <addSlotsCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(StateTestCalls::addSlots)
-                    }
-                    addSlots
-                },
-            ];
+            )
+                -> alloy_sol_types::Result<StateTestCalls>] = &[{
+                fn addSlots(data: &[u8]) -> alloy_sol_types::Result<StateTestCalls> {
+                    <addSlotsCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(data)
+                        .map(StateTestCalls::addSlots)
+                }
+                addSlots
+            }];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -403,10 +362,7 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
         fn abi_encode_raw(&self, out: &mut alloy_sol_types::private::Vec<u8>) {
             match self {
                 Self::addSlots(inner) => {
-                    <addSlotsCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <addSlotsCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
             }
         }
@@ -414,7 +370,7 @@ function addSlots(uint256 dest, uint256 src, uint256 src2, bytes[] memory state)
     use alloy::contract as alloy_contract;
     /**Creates a new wrapper around an on-chain [`StateTest`](self) contract instance.
 
-See the [wrapper's documentation](`StateTestInstance`) for more details.*/
+    See the [wrapper's documentation](`StateTestInstance`) for more details.*/
     #[inline]
     pub const fn new<
         P: alloy_contract::private::Provider<N>,
@@ -427,43 +383,40 @@ See the [wrapper's documentation](`StateTestInstance`) for more details.*/
     }
     /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+    Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+    For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
     #[inline]
-    pub fn deploy<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    >(
+    pub fn deploy<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>(
         __provider: P,
-    ) -> impl ::core::future::Future<
-        Output = alloy_contract::Result<StateTestInstance<P, N>>,
-    > {
+    ) -> impl ::core::future::Future<Output = alloy_contract::Result<StateTestInstance<P, N>>> {
         StateTestInstance::<P, N>::deploy(__provider)
     }
     /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+    and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+    This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+    the bytecode concatenated with the constructor's ABI-encoded arguments.*/
     #[inline]
     pub fn deploy_builder<
         P: alloy_contract::private::Provider<N>,
         N: alloy_contract::private::Network,
-    >(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
+    >(
+        __provider: P,
+    ) -> alloy_contract::RawCallBuilder<P, N> {
         StateTestInstance::<P, N>::deploy_builder(__provider)
     }
     /**A [`StateTest`](self) instance.
 
-Contains type-safe methods for interacting with an on-chain instance of the
-[`StateTest`](self) contract located at a given `address`, using a given
-provider `P`.
+    Contains type-safe methods for interacting with an on-chain instance of the
+    [`StateTest`](self) contract located at a given `address`, using a given
+    provider `P`.
 
-If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
-documentation on how to provide it), the `deploy` and `deploy_builder` methods can
-be used to deploy a new instance of the contract.
+    If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
+    documentation on how to provide it), the `deploy` and `deploy_builder` methods can
+    be used to deploy a new instance of the contract.
 
-See the [module-level documentation](self) for all the available methods.*/
+    See the [module-level documentation](self) for all the available methods.*/
     #[derive(Clone)]
     pub struct StateTestInstance<P, N = alloy_contract::private::Ethereum> {
         address: alloy_sol_types::private::Address,
@@ -474,22 +427,20 @@ See the [module-level documentation](self) for all the available methods.*/
     impl<P, N> ::core::fmt::Debug for StateTestInstance<P, N> {
         #[inline]
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple("StateTestInstance").field(&self.address).finish()
+            f.debug_tuple("StateTestInstance")
+                .field(&self.address)
+                .finish()
         }
     }
     /// Instantiation and getters/setters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > StateTestInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        StateTestInstance<P, N>
+    {
         /**Creates a new wrapper around an on-chain [`StateTest`](self) contract instance.
 
-See the [wrapper's documentation](`StateTestInstance`) for more details.*/
+        See the [wrapper's documentation](`StateTestInstance`) for more details.*/
         #[inline]
-        pub const fn new(
-            address: alloy_sol_types::private::Address,
-            __provider: P,
-        ) -> Self {
+        pub const fn new(address: alloy_sol_types::private::Address, __provider: P) -> Self {
             Self {
                 address,
                 provider: __provider,
@@ -498,22 +449,20 @@ See the [wrapper's documentation](`StateTestInstance`) for more details.*/
         }
         /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+        Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+        For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
         #[inline]
-        pub async fn deploy(
-            __provider: P,
-        ) -> alloy_contract::Result<StateTestInstance<P, N>> {
+        pub async fn deploy(__provider: P) -> alloy_contract::Result<StateTestInstance<P, N>> {
             let call_builder = Self::deploy_builder(__provider);
             let contract_address = call_builder.deploy().await?;
             Ok(Self::new(contract_address, call_builder.provider))
         }
         /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+        and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+        This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+        the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         #[inline]
         pub fn deploy_builder(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
             alloy_contract::RawCallBuilder::new_raw_deploy(
@@ -554,10 +503,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Function calls.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > StateTestInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        StateTestInstance<P, N>
+    {
         /// Creates a new call builder using this contract instance's provider and address.
         ///
         /// Note that the call can be any function call, not just those defined in this
@@ -576,21 +524,18 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
             src2: alloy::sol_types::private::primitives::aliases::U256,
             state: alloy::sol_types::private::Vec<alloy::sol_types::private::Bytes>,
         ) -> alloy_contract::SolCallBuilder<&P, addSlotsCall, N> {
-            self.call_builder(
-                &addSlotsCall {
-                    dest,
-                    src,
-                    src2,
-                    state,
-                },
-            )
+            self.call_builder(&addSlotsCall {
+                dest,
+                src,
+                src2,
+                state,
+            })
         }
     }
     /// Event filters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > StateTestInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        StateTestInstance<P, N>
+    {
         /// Creates a new event filter using this contract instance's provider and address.
         ///
         /// Note that the type can be any event, not just those defined in this contract.

@@ -1,9 +1,8 @@
 use crate::Planner;
 use crate::calls::FunctionCall;
+use alloy::dyn_abi::DynSolValue;
 use alloy::primitives::Bytes;
 use bitflags::bitflags;
-// use ethers::abi::{AbiEncode, Tokenizable};
-// use ethers::prelude::*;
 use slotmap::DefaultKey;
 use std::fmt::Debug;
 use std::hash::Hash;
@@ -42,18 +41,25 @@ pub struct Literal {
     bytes: Vec<u8>,
 }
 
-impl<T: Tokenizable + AbiEncode + Clone> From<T> for Literal {
+impl<T> From<T> for Literal
+where
+    T: Clone + Into<DynSolValue>,
+{
     fn from(token: T) -> Self {
+        let v: DynSolValue = token.into();
         Literal {
-            dynamic: token.clone().into_token().is_dynamic(),
-            bytes: token.encode(),
+            dynamic: v.is_dynamic(),
+            bytes: v.abi_encode(),
         }
     }
 }
 
-impl<T: Tokenizable + AbiEncode + Clone> From<T> for Value<'_> {
+impl<T> From<T> for Value<'_>
+where
+    T: Clone + Into<DynSolValue>,
+{
     fn from(token: T) -> Self {
-        Value::Literal(token.into())
+        Value::Literal(token.into().into())
     }
 }
 

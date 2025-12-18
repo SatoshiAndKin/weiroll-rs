@@ -179,12 +179,11 @@ pub mod CommandBuilderHarness {
     pub static DEPLOYED_BYTECODE: alloy_sol_types::private::Bytes = alloy_sol_types::private::Bytes::from_static(
         b"`\x80`@R4\x80\x15a\0\x0FW__\xFD[P`\x046\x10a\0UW_5`\xE0\x1C\x80c\x17\x1F\x98\xCB\x14a\0YW\x80c\x7F\x18\x03!\x14a\0\x8AW\x80c\x7F\xF6\xF3O\x14a\0\xBBW\x80c\xA4\x02`\x9A\x14a\0\xEBW\x80c\xED\xFFI\xF7\x14a\x01\x1BW[__\xFD[a\0s`\x04\x806\x03\x81\x01\x90a\0n\x91\x90a\x08\xFBV[a\x01%V[`@Qa\0\x81\x92\x91\x90a\n\xE6V[`@Q\x80\x91\x03\x90\xF3[a\0\xA4`\x04\x806\x03\x81\x01\x90a\0\x9F\x91\x90a\x08\xFBV[a\x01MV[`@Qa\0\xB2\x92\x91\x90a\n\xE6V[`@Q\x80\x91\x03\x90\xF3[a\0\xD5`\x04\x806\x03\x81\x01\x90a\0\xD0\x91\x90a\x0B\xA3V[a\x01\xABV[`@Qa\0\xE2\x91\x90a\x0C\x0FV[`@Q\x80\x91\x03\x90\xF3[a\x01\x05`\x04\x806\x03\x81\x01\x90a\x01\0\x91\x90a\x0B\xA3V[a\x01\xD0V[`@Qa\x01\x12\x91\x90a\x0C\x0FV[`@Q\x80\x91\x03\x90\xF3[a\x01#a\x01\xD9V[\0[``\x80a\x01=\x84\x84\x87a\x01\xDB\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[\x94P\x84\x83\x91P\x91P\x93P\x93\x91PPV[``\x80\x84` g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x01lWa\x01ka\x06\x9CV[[`@Q\x90\x80\x82R\x80`\x1F\x01`\x1F\x19\x16` \x01\x82\x01`@R\x80\x15a\x01\x9EW\x81` \x01`\x01\x82\x02\x806\x837\x80\x82\x01\x91PP\x90P[P\x91P\x91P\x93P\x93\x91PPV[``_a\x01\xC3\x84\x84\x87a\x03\x05\x90\x92\x91\x90c\xFF\xFF\xFF\xFF\x16V[\x90P\x80\x91PP\x93\x92PPPV[``\x93\x92PPPV[V[``_\x83`\xF8\x1C`\xFF\x16\x90P`\xFF\x81\x03a\x01\xF8W\x84\x91PPa\x02\xFEV[_`\x80\x82\x16\x14a\x02\x92W`\xFE\x81\x03a\x02%W\x82\x80` \x01\x90Q\x81\x01\x90a\x02\x1E\x91\x90a\rPV[\x94Pa\x02\x8DV[_` \x84\x01Q\x90P` \x81\x14a\x02pW`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x02g\x90a\x0E\x17V[`@Q\x80\x91\x03\x90\xFD[` \x84Q\x03` \x85\x01R` \x84\x01` `\x7F\x84\x16\x02` \x88\x01\x01RP[a\x02\xF9V[` \x83Q\x14a\x02\xD6W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x02\xCD\x90a\x0E\xA5V[`@Q\x80\x91\x03\x90\xFD[\x82\x85`\x7F\x83\x16\x81Q\x81\x10a\x02\xEDWa\x02\xECa\x0E\xC3V[[` \x02` \x01\x01\x81\x90RP[\x84\x91PP[\x93\x92PPPV[``__``__[` \x81\x10\x15a\x04\xA3W\x86\x81` \x81\x10a\x03*Wa\x03)a\x0E\xC3V[[\x1A`\xF8\x1B`\xF8\x1C`\xFF\x16\x91P`\xFF\x82\x03\x15a\x04\xA3W_`\x80\x83\x16\x14a\x04!W`\xFE\x82\x03a\x03\x90W_\x83Q\x03a\x03|W\x88`@Q` \x01a\x03j\x91\x90a\x0E\xF0V[`@Q` \x81\x83\x03\x03\x81R\x90`@R\x92P[\x82Q\x85a\x03\x89\x91\x90a\x0FFV[\x94Pa\x04\x1CV[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x03\xA7Wa\x03\xA6a\x0E\xC3V[[` \x02` \x01\x01QQ\x90P_` \x82a\x03\xC0\x91\x90a\x0F\xA6V[\x14a\x04\0W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x03\xF7\x90a\x10FV[`@Q\x80\x91\x03\x90\xFD[` \x81a\x04\r\x91\x90a\x0FFV[\x86a\x04\x18\x91\x90a\x0FFV[\x95PP[a\x04\x92V[` \x89`\x7F\x84\x16\x81Q\x81\x10a\x049Wa\x048a\x0E\xC3V[[` \x02` \x01\x01QQ\x14a\x04\x82W`@Q\x7F\x08\xC3y\xA0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x81R`\x04\x01a\x04y\x90a\x10\xD4V[`@Q\x80\x91\x03\x90\xFD[` \x85a\x04\x8F\x91\x90a\x0FFV[\x94P[` \x84\x01\x93P\x80`\x01\x01\x90Pa\x03\x0EV[P`\x04\x84a\x04\xB1\x91\x90a\x0FFV[g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x04\xCAWa\x04\xC9a\x06\x9CV[[`@Q\x90\x80\x82R\x80`\x1F\x01`\x1F\x19\x16` \x01\x82\x01`@R\x80\x15a\x04\xFCW\x81` \x01`\x01\x82\x02\x806\x837\x80\x82\x01\x91PP\x90P[P\x94P\x86` \x86\x01R_\x93P_[` \x81\x10\x15a\x06QW\x86\x81` \x81\x10a\x05&Wa\x05%a\x0E\xC3V[[\x1A`\xF8\x1B`\xF8\x1C`\xFF\x16\x91P`\xFF\x82\x03\x15a\x06QW_`\x80\x83\x16\x14a\x06\x11W`\xFE\x82\x03a\x05\x9CW\x83\x85`$\x88\x01\x01Ra\x05|\x83` \x88`\x04\x88a\x05i\x91\x90a\x0FFV[` \x88Qa\x05w\x91\x90a\x10\xF2V[a\x06]V[` \x83Qa\x05\x8A\x91\x90a\x10\xF2V[\x84a\x05\x95\x91\x90a\x0FFV[\x93Pa\x06\x0CV[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x05\xB3Wa\x05\xB2a\x0E\xC3V[[` \x02` \x01\x01QQ\x90P\x84\x86`$\x89\x01\x01Ra\x05\xFC\x8A`\x7F\x85\x16\x81Q\x81\x10a\x05\xDFWa\x05\xDEa\x0E\xC3V[[` \x02` \x01\x01Q_\x89`\x04\x89a\x05\xF6\x91\x90a\x0FFV[\x85a\x06]V[\x80\x85a\x06\x08\x91\x90a\x0FFV[\x94PP[a\x06@V[_\x89`\x7F\x84\x16\x81Q\x81\x10a\x06(Wa\x06'a\x0E\xC3V[[` \x02` \x01\x01Q\x90P` \x81\x01Q\x86`$\x89\x01\x01RP[` \x85\x01\x94P\x80`\x01\x01\x90Pa\x05\nV[PPPPP\x93\x92PPPV[\x80\x82` \x85\x01\x01\x82\x86` \x89\x01\x01`\x04Z\xFAPPPPPPV[_`@Q\x90P\x90V[__\xFD[__\xFD[__\xFD[_`\x1F\x19`\x1F\x83\x01\x16\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`A`\x04R`$_\xFD[a\x06\xD2\x82a\x06\x8CV[\x81\x01\x81\x81\x10g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x17\x15a\x06\xF1Wa\x06\xF0a\x06\x9CV[[\x80`@RPPPV[_a\x07\x03a\x06wV[\x90Pa\x07\x0F\x82\x82a\x06\xC9V[\x91\x90PV[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x07.Wa\x07-a\x06\x9CV[[` \x82\x02\x90P` \x81\x01\x90P\x91\x90PV[__\xFD[__\xFD[_g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x82\x11\x15a\x07aWa\x07`a\x06\x9CV[[a\x07j\x82a\x06\x8CV[\x90P` \x81\x01\x90P\x91\x90PV[\x82\x81\x837_\x83\x83\x01RPPPV[_a\x07\x97a\x07\x92\x84a\x07GV[a\x06\xFAV[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x07\xB3Wa\x07\xB2a\x07CV[[a\x07\xBE\x84\x82\x85a\x07wV[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x07\xDAWa\x07\xD9a\x06\x88V[[\x815a\x07\xEA\x84\x82` \x86\x01a\x07\x85V[\x91PP\x92\x91PPV[_a\x08\x05a\x08\0\x84a\x07\x14V[a\x06\xFAV[\x90P\x80\x83\x82R` \x82\x01\x90P` \x84\x02\x83\x01\x85\x81\x11\x15a\x08(Wa\x08'a\x07?V[[\x83[\x81\x81\x10\x15a\x08oW\x805g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x08MWa\x08La\x06\x88V[[\x80\x86\x01a\x08Z\x89\x82a\x07\xC6V[\x85R` \x85\x01\x94PPP` \x81\x01\x90Pa\x08*V[PPP\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x08\x8DWa\x08\x8Ca\x06\x88V[[\x815a\x08\x9D\x84\x82` \x86\x01a\x07\xF3V[\x91PP\x92\x91PPV[_\x7F\xFF\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x82\x16\x90P\x91\x90PV[a\x08\xDA\x81a\x08\xA6V[\x81\x14a\x08\xE4W__\xFD[PV[_\x815\x90Pa\x08\xF5\x81a\x08\xD1V[\x92\x91PPV[___``\x84\x86\x03\x12\x15a\t\x12Wa\t\x11a\x06\x80V[[_\x84\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\t/Wa\t.a\x06\x84V[[a\t;\x86\x82\x87\x01a\x08yV[\x93PP` a\tL\x86\x82\x87\x01a\x08\xE7V[\x92PP`@\x84\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\tmWa\tla\x06\x84V[[a\ty\x86\x82\x87\x01a\x07\xC6V[\x91PP\x92P\x92P\x92V[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[_\x81\x90P` \x82\x01\x90P\x91\x90PV[_\x81Q\x90P\x91\x90PV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[\x82\x81\x83^_\x83\x83\x01RPPPV[_a\t\xDE\x82a\t\xACV[a\t\xE8\x81\x85a\t\xB6V[\x93Pa\t\xF8\x81\x85` \x86\x01a\t\xC6V[a\n\x01\x81a\x06\x8CV[\x84\x01\x91PP\x92\x91PPV[_a\n\x17\x83\x83a\t\xD4V[\x90P\x92\x91PPV[_` \x82\x01\x90P\x91\x90PV[_a\n5\x82a\t\x83V[a\n?\x81\x85a\t\x8DV[\x93P\x83` \x82\x02\x85\x01a\nQ\x85a\t\x9DV[\x80_[\x85\x81\x10\x15a\n\x8CW\x84\x84\x03\x89R\x81Qa\nm\x85\x82a\n\x0CV[\x94Pa\nx\x83a\n\x1FV[\x92P` \x8A\x01\x99PP`\x01\x81\x01\x90Pa\nTV[P\x82\x97P\x87\x95PPPPPP\x92\x91PPV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[_a\n\xB8\x82a\t\xACV[a\n\xC2\x81\x85a\n\x9EV[\x93Pa\n\xD2\x81\x85` \x86\x01a\t\xC6V[a\n\xDB\x81a\x06\x8CV[\x84\x01\x91PP\x92\x91PPV[_`@\x82\x01\x90P\x81\x81\x03_\x83\x01Ra\n\xFE\x81\x85a\n+V[\x90P\x81\x81\x03` \x83\x01Ra\x0B\x12\x81\x84a\n\xAEV[\x90P\x93\x92PPPV[_\x7F\xFF\xFF\xFF\xFF\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\x82\x16\x90P\x91\x90PV[a\x0BO\x81a\x0B\x1BV[\x81\x14a\x0BYW__\xFD[PV[_\x815\x90Pa\x0Bj\x81a\x0BFV[\x92\x91PPV[_\x81\x90P\x91\x90PV[a\x0B\x82\x81a\x0BpV[\x81\x14a\x0B\x8CW__\xFD[PV[_\x815\x90Pa\x0B\x9D\x81a\x0ByV[\x92\x91PPV[___``\x84\x86\x03\x12\x15a\x0B\xBAWa\x0B\xB9a\x06\x80V[[_\x84\x015g\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x0B\xD7Wa\x0B\xD6a\x06\x84V[[a\x0B\xE3\x86\x82\x87\x01a\x08yV[\x93PP` a\x0B\xF4\x86\x82\x87\x01a\x0B\\V[\x92PP`@a\x0C\x05\x86\x82\x87\x01a\x0B\x8FV[\x91PP\x92P\x92P\x92V[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x0C'\x81\x84a\n\xAEV[\x90P\x92\x91PPV[_a\x0CAa\x0C<\x84a\x07GV[a\x06\xFAV[\x90P\x82\x81R` \x81\x01\x84\x84\x84\x01\x11\x15a\x0C]Wa\x0C\\a\x07CV[[a\x0Ch\x84\x82\x85a\t\xC6V[P\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\x0C\x84Wa\x0C\x83a\x06\x88V[[\x81Qa\x0C\x94\x84\x82` \x86\x01a\x0C/V[\x91PP\x92\x91PPV[_a\x0C\xAFa\x0C\xAA\x84a\x07\x14V[a\x06\xFAV[\x90P\x80\x83\x82R` \x82\x01\x90P` \x84\x02\x83\x01\x85\x81\x11\x15a\x0C\xD2Wa\x0C\xD1a\x07?V[[\x83[\x81\x81\x10\x15a\r\x19W\x80Qg\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\x0C\xF7Wa\x0C\xF6a\x06\x88V[[\x80\x86\x01a\r\x04\x89\x82a\x0CpV[\x85R` \x85\x01\x94PPP` \x81\x01\x90Pa\x0C\xD4V[PPP\x93\x92PPPV[_\x82`\x1F\x83\x01\x12a\r7Wa\r6a\x06\x88V[[\x81Qa\rG\x84\x82` \x86\x01a\x0C\x9DV[\x91PP\x92\x91PPV[_` \x82\x84\x03\x12\x15a\reWa\rda\x06\x80V[[_\x82\x01Qg\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x81\x11\x15a\r\x82Wa\r\x81a\x06\x84V[[a\r\x8E\x84\x82\x85\x01a\r#V[\x91PP\x92\x91PPV[_\x82\x82R` \x82\x01\x90P\x92\x91PPV[\x7FOnly one return value permitted _\x82\x01R\x7F(variable)\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x0E\x01`*\x83a\r\x97V[\x91Pa\x0E\x0C\x82a\r\xA7V[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x0E.\x81a\r\xF5V[\x90P\x91\x90PV[\x7FOnly one return value permitted _\x82\x01R\x7F(static)\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x0E\x8F`(\x83a\r\x97V[\x91Pa\x0E\x9A\x82a\x0E5V[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x0E\xBC\x81a\x0E\x83V[\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`2`\x04R`$_\xFD[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x0F\x08\x81\x84a\n+V[\x90P\x92\x91PPV[_\x81\x90P\x91\x90PV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`\x11`\x04R`$_\xFD[_a\x0FP\x82a\x0F\x10V[\x91Pa\x0F[\x83a\x0F\x10V[\x92P\x82\x82\x01\x90P\x80\x82\x11\x15a\x0FsWa\x0Fra\x0F\x19V[[\x92\x91PPV[\x7FNH{q\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0_R`\x12`\x04R`$_\xFD[_a\x0F\xB0\x82a\x0F\x10V[\x91Pa\x0F\xBB\x83a\x0F\x10V[\x92P\x82a\x0F\xCBWa\x0F\xCAa\x0FyV[[\x82\x82\x06\x90P\x92\x91PPV[\x7FDynamic state variables must be _\x82\x01R\x7Fa multiple of 32 bytes\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x100`6\x83a\r\x97V[\x91Pa\x10;\x82a\x0F\xD6V[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x10]\x81a\x10$V[\x90P\x91\x90PV[\x7FStatic state variables must be 3_\x82\x01R\x7F2 bytes\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0` \x82\x01RPV[_a\x10\xBE`'\x83a\r\x97V[\x91Pa\x10\xC9\x82a\x10dV[`@\x82\x01\x90P\x91\x90PV[_` \x82\x01\x90P\x81\x81\x03_\x83\x01Ra\x10\xEB\x81a\x10\xB2V[\x90P\x91\x90PV[_a\x10\xFC\x82a\x0F\x10V[\x91Pa\x11\x07\x83a\x0F\x10V[\x92P\x82\x82\x03\x90P\x81\x81\x11\x15a\x11\x1FWa\x11\x1Ea\x0F\x19V[[\x92\x91PPV\xFE\xA2dipfsX\"\x12 \nF\x83\tW**\x13_\xA5QV\x16\xF5E47dt\xA0\xE8q}\xC1^`\xAE\xAD\x12\x84\xD5\x92dsolcC\0\x08\x1E\x003",
     );
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `basecall()` and selector `0xedff49f7`.
-```solidity
-function basecall() external pure;
-```*/
+    ```solidity
+    function basecall() external pure;
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct basecallCall;
@@ -208,9 +207,7 @@ function basecall() external pure;
             type UnderlyingRustTuple<'a> = ();
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -240,9 +237,7 @@ function basecall() external pure;
             type UnderlyingRustTuple<'a> = ();
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -265,23 +260,17 @@ function basecall() external pure;
             }
         }
         impl basecallReturn {
-            fn _tokenize(
-                &self,
-            ) -> <basecallCall as alloy_sol_types::SolCall>::ReturnToken<'_> {
+            fn _tokenize(&self) -> <basecallCall as alloy_sol_types::SolCall>::ReturnToken<'_> {
                 ()
             }
         }
         #[automatically_derived]
         impl alloy_sol_types::SolCall for basecallCall {
             type Parameters<'a> = ();
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = basecallReturn;
             type ReturnTuple<'a> = ();
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "basecall()";
             const SELECTOR: [u8; 4] = [237u8, 255u8, 73u8, 247u8];
             #[inline]
@@ -300,28 +289,23 @@ function basecall() external pure;
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data)
                     .map(Into::into)
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Into::into)
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Into::into)
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `testBuildInputs(bytes[],bytes4,bytes32)` and selector `0x7ff6f34f`.
-```solidity
-function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices) external view returns (bytes memory);
-```*/
+    ```solidity
+    function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices) external view returns (bytes memory);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct testBuildInputsCall {
@@ -332,8 +316,7 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
         #[allow(missing_docs)]
         pub indices: alloy::sol_types::private::FixedBytes<32>,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`testBuildInputs(bytes[],bytes4,bytes32)`](testBuildInputsCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -365,9 +348,7 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -401,9 +382,7 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
             type UnderlyingRustTuple<'a> = (alloy::sol_types::private::Bytes,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -412,16 +391,14 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testBuildInputsReturn>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testBuildInputsReturn> for UnderlyingRustTuple<'_> {
                 fn from(value: testBuildInputsReturn) -> Self {
                     (value._0,)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testBuildInputsReturn {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testBuildInputsReturn {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self { _0: tuple.0 }
                 }
@@ -434,14 +411,10 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
                 alloy::sol_types::sol_data::FixedBytes<4>,
                 alloy::sol_types::sol_data::FixedBytes<32>,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = alloy::sol_types::private::Bytes;
             type ReturnTuple<'a> = (alloy::sol_types::sol_data::Bytes,);
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "testBuildInputs(bytes[],bytes4,bytes32)";
             const SELECTOR: [u8; 4] = [127u8, 246u8, 243u8, 79u8];
             #[inline]
@@ -466,42 +439,34 @@ function testBuildInputs(bytes[] memory state, bytes4 selector, bytes32 indices)
             }
             #[inline]
             fn tokenize_returns(ret: &Self::Return) -> Self::ReturnToken<'_> {
-                (
-                    <alloy::sol_types::sol_data::Bytes as alloy_sol_types::SolType>::tokenize(
-                        ret,
-                    ),
-                )
+                (<alloy::sol_types::sol_data::Bytes as alloy_sol_types::SolType>::tokenize(ret),)
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
-                    .map(|r| {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data).map(
+                    |r| {
                         let r: testBuildInputsReturn = r.into();
                         r._0
-                    })
+                    },
+                )
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(|r| {
-                        let r: testBuildInputsReturn = r.into();
-                        r._0
-                    })
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(|r| {
+                    let r: testBuildInputsReturn = r.into();
+                    r._0
+                })
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `testBuildInputsBaseGas(bytes[],bytes4,bytes32)` and selector `0xa402609a`.
-```solidity
-function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 indices) external view returns (bytes memory out);
-```*/
+    ```solidity
+    function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 indices) external view returns (bytes memory out);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct testBuildInputsBaseGasCall {
@@ -512,8 +477,7 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
         #[allow(missing_docs)]
         pub indices: alloy::sol_types::private::FixedBytes<32>,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`testBuildInputsBaseGas(bytes[],bytes4,bytes32)`](testBuildInputsBaseGasCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -545,9 +509,7 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -556,16 +518,14 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testBuildInputsBaseGasCall>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testBuildInputsBaseGasCall> for UnderlyingRustTuple<'_> {
                 fn from(value: testBuildInputsBaseGasCall) -> Self {
                     (value.state, value.selector, value.indices)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testBuildInputsBaseGasCall {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testBuildInputsBaseGasCall {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self {
                         state: tuple.0,
@@ -583,9 +543,7 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
             type UnderlyingRustTuple<'a> = (alloy::sol_types::private::Bytes,);
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -594,16 +552,14 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testBuildInputsBaseGasReturn>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testBuildInputsBaseGasReturn> for UnderlyingRustTuple<'_> {
                 fn from(value: testBuildInputsBaseGasReturn) -> Self {
                     (value.out,)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testBuildInputsBaseGasReturn {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testBuildInputsBaseGasReturn {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self { out: tuple.0 }
                 }
@@ -616,14 +572,10 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
                 alloy::sol_types::sol_data::FixedBytes<4>,
                 alloy::sol_types::sol_data::FixedBytes<32>,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = alloy::sol_types::private::Bytes;
             type ReturnTuple<'a> = (alloy::sol_types::sol_data::Bytes,);
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "testBuildInputsBaseGas(bytes[],bytes4,bytes32)";
             const SELECTOR: [u8; 4] = [164u8, 2u8, 96u8, 154u8];
             #[inline]
@@ -648,42 +600,34 @@ function testBuildInputsBaseGas(bytes[] memory state, bytes4 selector, bytes32 i
             }
             #[inline]
             fn tokenize_returns(ret: &Self::Return) -> Self::ReturnToken<'_> {
-                (
-                    <alloy::sol_types::sol_data::Bytes as alloy_sol_types::SolType>::tokenize(
-                        ret,
-                    ),
-                )
+                (<alloy::sol_types::sol_data::Bytes as alloy_sol_types::SolType>::tokenize(ret),)
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
-                    .map(|r| {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data).map(
+                    |r| {
                         let r: testBuildInputsBaseGasReturn = r.into();
                         r.out
-                    })
+                    },
+                )
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(|r| {
-                        let r: testBuildInputsBaseGasReturn = r.into();
-                        r.out
-                    })
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(|r| {
+                    let r: testBuildInputsBaseGasReturn = r.into();
+                    r.out
+                })
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `testWriteOutputs(bytes[],bytes1,bytes)` and selector `0x171f98cb`.
-```solidity
-function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory output) external pure returns (bytes[] memory, bytes memory);
-```*/
+    ```solidity
+    function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory output) external pure returns (bytes[] memory, bytes memory);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct testWriteOutputsCall {
@@ -694,8 +638,7 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
         #[allow(missing_docs)]
         pub output: alloy::sol_types::private::Bytes,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`testWriteOutputs(bytes[],bytes1,bytes)`](testWriteOutputsCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -729,9 +672,7 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -740,16 +681,14 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testWriteOutputsCall>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testWriteOutputsCall> for UnderlyingRustTuple<'_> {
                 fn from(value: testWriteOutputsCall) -> Self {
                     (value.state, value.index, value.output)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testWriteOutputsCall {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testWriteOutputsCall {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self {
                         state: tuple.0,
@@ -773,9 +712,7 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -784,18 +721,19 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testWriteOutputsReturn>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testWriteOutputsReturn> for UnderlyingRustTuple<'_> {
                 fn from(value: testWriteOutputsReturn) -> Self {
                     (value._0, value._1)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testWriteOutputsReturn {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testWriteOutputsReturn {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
-                    Self { _0: tuple.0, _1: tuple.1 }
+                    Self {
+                        _0: tuple.0,
+                        _1: tuple.1,
+                    }
                 }
             }
         }
@@ -820,17 +758,13 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
                 alloy::sol_types::sol_data::FixedBytes<1>,
                 alloy::sol_types::sol_data::Bytes,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = testWriteOutputsReturn;
             type ReturnTuple<'a> = (
                 alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
                 alloy::sol_types::sol_data::Bytes,
             );
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "testWriteOutputs(bytes[],bytes1,bytes)";
             const SELECTOR: [u8; 4] = [23u8, 31u8, 152u8, 203u8];
             #[inline]
@@ -859,28 +793,23 @@ function testWriteOutputs(bytes[] memory state, bytes1 index, bytes memory outpu
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data)
                     .map(Into::into)
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Into::into)
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Into::into)
             }
         }
     };
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     /**Function with signature `testWriteOutputsBaseGas(bytes[],bytes1,bytes)` and selector `0x7f180321`.
-```solidity
-function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memory output) external pure returns (bytes[] memory, bytes memory);
-```*/
+    ```solidity
+    function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memory output) external pure returns (bytes[] memory, bytes memory);
+    ```*/
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
     pub struct testWriteOutputsBaseGasCall {
@@ -891,8 +820,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
         #[allow(missing_docs)]
         pub output: alloy::sol_types::private::Bytes,
     }
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive(Default, Debug, PartialEq, Eq, Hash)]
+    #[derive(serde::Serialize, serde::Deserialize, Default, Debug, PartialEq, Eq, Hash)]
     ///Container type for the return parameters of the [`testWriteOutputsBaseGas(bytes[],bytes1,bytes)`](testWriteOutputsBaseGasCall) function.
     #[allow(non_camel_case_types, non_snake_case, clippy::pub_underscore_fields)]
     #[derive(Clone)]
@@ -926,9 +854,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -937,16 +863,14 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testWriteOutputsBaseGasCall>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testWriteOutputsBaseGasCall> for UnderlyingRustTuple<'_> {
                 fn from(value: testWriteOutputsBaseGasCall) -> Self {
                     (value.state, value.index, value.output)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testWriteOutputsBaseGasCall {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testWriteOutputsBaseGasCall {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
                     Self {
                         state: tuple.0,
@@ -970,9 +894,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
             );
             #[cfg(test)]
             #[allow(dead_code, unreachable_patterns)]
-            fn _type_assertion(
-                _t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>,
-            ) {
+            fn _type_assertion(_t: alloy_sol_types::private::AssertTypeEq<UnderlyingRustTuple>) {
                 match _t {
                     alloy_sol_types::private::AssertTypeEq::<
                         <UnderlyingSolTuple as alloy_sol_types::SolType>::RustType,
@@ -981,27 +903,27 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<testWriteOutputsBaseGasReturn>
-            for UnderlyingRustTuple<'_> {
+            impl ::core::convert::From<testWriteOutputsBaseGasReturn> for UnderlyingRustTuple<'_> {
                 fn from(value: testWriteOutputsBaseGasReturn) -> Self {
                     (value._0, value._1)
                 }
             }
             #[automatically_derived]
             #[doc(hidden)]
-            impl ::core::convert::From<UnderlyingRustTuple<'_>>
-            for testWriteOutputsBaseGasReturn {
+            impl ::core::convert::From<UnderlyingRustTuple<'_>> for testWriteOutputsBaseGasReturn {
                 fn from(tuple: UnderlyingRustTuple<'_>) -> Self {
-                    Self { _0: tuple.0, _1: tuple.1 }
+                    Self {
+                        _0: tuple.0,
+                        _1: tuple.1,
+                    }
                 }
             }
         }
         impl testWriteOutputsBaseGasReturn {
             fn _tokenize(
                 &self,
-            ) -> <testWriteOutputsBaseGasCall as alloy_sol_types::SolCall>::ReturnToken<
-                '_,
-            > {
+            ) -> <testWriteOutputsBaseGasCall as alloy_sol_types::SolCall>::ReturnToken<'_>
+            {
                 (
                     <alloy::sol_types::sol_data::Array<
                         alloy::sol_types::sol_data::Bytes,
@@ -1019,17 +941,13 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                 alloy::sol_types::sol_data::FixedBytes<1>,
                 alloy::sol_types::sol_data::Bytes,
             );
-            type Token<'a> = <Self::Parameters<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type Token<'a> = <Self::Parameters<'a> as alloy_sol_types::SolType>::Token<'a>;
             type Return = testWriteOutputsBaseGasReturn;
             type ReturnTuple<'a> = (
                 alloy::sol_types::sol_data::Array<alloy::sol_types::sol_data::Bytes>,
                 alloy::sol_types::sol_data::Bytes,
             );
-            type ReturnToken<'a> = <Self::ReturnTuple<
-                'a,
-            > as alloy_sol_types::SolType>::Token<'a>;
+            type ReturnToken<'a> = <Self::ReturnTuple<'a> as alloy_sol_types::SolType>::Token<'a>;
             const SIGNATURE: &'static str = "testWriteOutputsBaseGas(bytes[],bytes1,bytes)";
             const SELECTOR: [u8; 4] = [127u8, 24u8, 3u8, 33u8];
             #[inline]
@@ -1058,26 +976,20 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
             }
             #[inline]
             fn abi_decode_returns(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence(data)
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence(data)
                     .map(Into::into)
             }
             #[inline]
-            fn abi_decode_returns_validate(
-                data: &[u8],
-            ) -> alloy_sol_types::Result<Self::Return> {
-                <Self::ReturnTuple<
-                    '_,
-                > as alloy_sol_types::SolType>::abi_decode_sequence_validate(data)
-                    .map(Into::into)
+            fn abi_decode_returns_validate(data: &[u8]) -> alloy_sol_types::Result<Self::Return> {
+                <Self::ReturnTuple<'_> as alloy_sol_types::SolType>::abi_decode_sequence_validate(
+                    data,
+                )
+                .map(Into::into)
             }
         }
     };
     ///Container for all the [`CommandBuilderHarness`](self) function calls.
-    #[derive(Clone)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[derive()]
+    #[derive(Clone, serde::Serialize, serde::Deserialize)]
     pub enum CommandBuilderHarnessCalls {
         #[allow(missing_docs)]
         basecall(basecallCall),
@@ -1134,9 +1046,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
         }
         /// Returns the enum variant name for the given selector, if known.
         #[inline]
-        pub fn name_by_selector(
-            selector: [u8; 4usize],
-        ) -> ::core::option::Option<&'static str> {
+        pub fn name_by_selector(selector: [u8; 4usize]) -> ::core::option::Option<&'static str> {
             let sig = Self::signature_by_selector(selector)?;
             sig.split_once('(').map(|(name, _)| name)
         }
@@ -1174,20 +1084,16 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
         }
         #[inline]
         #[allow(non_snake_case)]
-        fn abi_decode_raw(
-            selector: [u8; 4],
-            data: &[u8],
-        ) -> alloy_sol_types::Result<Self> {
+        fn abi_decode_raw(selector: [u8; 4], data: &[u8]) -> alloy_sol_types::Result<Self> {
             static DECODE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls>] = &[
+            )
+                -> alloy_sol_types::Result<CommandBuilderHarnessCalls>] = &[
                 {
                     fn testWriteOutputs(
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
-                        <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
+                        <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
                             .map(CommandBuilderHarnessCalls::testWriteOutputs)
                     }
                     testWriteOutputs
@@ -1197,9 +1103,9 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
                         <testWriteOutputsBaseGasCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
-                            .map(CommandBuilderHarnessCalls::testWriteOutputsBaseGas)
+                            data,
+                        )
+                        .map(CommandBuilderHarnessCalls::testWriteOutputsBaseGas)
                     }
                     testWriteOutputsBaseGas
                 },
@@ -1207,9 +1113,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                     fn testBuildInputs(
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
-                        <testBuildInputsCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
+                        <testBuildInputsCall as alloy_sol_types::SolCall>::abi_decode_raw(data)
                             .map(CommandBuilderHarnessCalls::testBuildInputs)
                     }
                     testBuildInputs
@@ -1219,9 +1123,9 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
                         <testBuildInputsBaseGasCall as alloy_sol_types::SolCall>::abi_decode_raw(
-                                data,
-                            )
-                            .map(CommandBuilderHarnessCalls::testBuildInputsBaseGas)
+                            data,
+                        )
+                        .map(CommandBuilderHarnessCalls::testBuildInputsBaseGas)
                     }
                     testBuildInputsBaseGas
                 },
@@ -1236,12 +1140,10 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                 },
             ];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_SHIMS[idx](data)
         }
@@ -1253,15 +1155,17 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
         ) -> alloy_sol_types::Result<Self> {
             static DECODE_VALIDATE_SHIMS: &[fn(
                 &[u8],
-            ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls>] = &[
+            ) -> alloy_sol_types::Result<
+                CommandBuilderHarnessCalls,
+            >] = &[
                 {
                     fn testWriteOutputs(
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
                         <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(CommandBuilderHarnessCalls::testWriteOutputs)
+                            data,
+                        )
+                        .map(CommandBuilderHarnessCalls::testWriteOutputs)
                     }
                     testWriteOutputs
                 },
@@ -1281,9 +1185,9 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
                         <testBuildInputsCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
-                            .map(CommandBuilderHarnessCalls::testBuildInputs)
+                            data,
+                        )
+                        .map(CommandBuilderHarnessCalls::testBuildInputs)
                     }
                     testBuildInputs
                 },
@@ -1302,21 +1206,17 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                     fn basecall(
                         data: &[u8],
                     ) -> alloy_sol_types::Result<CommandBuilderHarnessCalls> {
-                        <basecallCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(
-                                data,
-                            )
+                        <basecallCall as alloy_sol_types::SolCall>::abi_decode_raw_validate(data)
                             .map(CommandBuilderHarnessCalls::basecall)
                     }
                     basecall
                 },
             ];
             let Ok(idx) = Self::SELECTORS.binary_search(&selector) else {
-                return Err(
-                    alloy_sol_types::Error::unknown_selector(
-                        <Self as alloy_sol_types::SolInterface>::NAME,
-                        selector,
-                    ),
-                );
+                return Err(alloy_sol_types::Error::unknown_selector(
+                    <Self as alloy_sol_types::SolInterface>::NAME,
+                    selector,
+                ));
             };
             DECODE_VALIDATE_SHIMS[idx](data)
         }
@@ -1327,9 +1227,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                     <basecallCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
                 Self::testBuildInputs(inner) => {
-                    <testBuildInputsCall as alloy_sol_types::SolCall>::abi_encoded_size(
-                        inner,
-                    )
+                    <testBuildInputsCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
                 Self::testBuildInputsBaseGas(inner) => {
                     <testBuildInputsBaseGasCall as alloy_sol_types::SolCall>::abi_encoded_size(
@@ -1337,9 +1235,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
                     )
                 }
                 Self::testWriteOutputs(inner) => {
-                    <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_encoded_size(
-                        inner,
-                    )
+                    <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_encoded_size(inner)
                 }
                 Self::testWriteOutputsBaseGas(inner) => {
                     <testWriteOutputsBaseGasCall as alloy_sol_types::SolCall>::abi_encoded_size(
@@ -1352,33 +1248,22 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
         fn abi_encode_raw(&self, out: &mut alloy_sol_types::private::Vec<u8>) {
             match self {
                 Self::basecall(inner) => {
-                    <basecallCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <basecallCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
                 Self::testBuildInputs(inner) => {
-                    <testBuildInputsCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <testBuildInputsCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
                 Self::testBuildInputsBaseGas(inner) => {
                     <testBuildInputsBaseGasCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
+                        inner, out,
                     )
                 }
                 Self::testWriteOutputs(inner) => {
-                    <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
-                    )
+                    <testWriteOutputsCall as alloy_sol_types::SolCall>::abi_encode_raw(inner, out)
                 }
                 Self::testWriteOutputsBaseGas(inner) => {
                     <testWriteOutputsBaseGasCall as alloy_sol_types::SolCall>::abi_encode_raw(
-                        inner,
-                        out,
+                        inner, out,
                     )
                 }
             }
@@ -1387,7 +1272,7 @@ function testWriteOutputsBaseGas(bytes[] memory state, bytes1 index, bytes memor
     use alloy::contract as alloy_contract;
     /**Creates a new wrapper around an on-chain [`CommandBuilderHarness`](self) contract instance.
 
-See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more details.*/
+    See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more details.*/
     #[inline]
     pub const fn new<
         P: alloy_contract::private::Provider<N>,
@@ -1400,43 +1285,41 @@ See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more deta
     }
     /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+    Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+    For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
     #[inline]
-    pub fn deploy<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    >(
+    pub fn deploy<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>(
         __provider: P,
-    ) -> impl ::core::future::Future<
-        Output = alloy_contract::Result<CommandBuilderHarnessInstance<P, N>>,
-    > {
+    ) -> impl ::core::future::Future<Output = alloy_contract::Result<CommandBuilderHarnessInstance<P, N>>>
+    {
         CommandBuilderHarnessInstance::<P, N>::deploy(__provider)
     }
     /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+    and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+    This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+    the bytecode concatenated with the constructor's ABI-encoded arguments.*/
     #[inline]
     pub fn deploy_builder<
         P: alloy_contract::private::Provider<N>,
         N: alloy_contract::private::Network,
-    >(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
+    >(
+        __provider: P,
+    ) -> alloy_contract::RawCallBuilder<P, N> {
         CommandBuilderHarnessInstance::<P, N>::deploy_builder(__provider)
     }
     /**A [`CommandBuilderHarness`](self) instance.
 
-Contains type-safe methods for interacting with an on-chain instance of the
-[`CommandBuilderHarness`](self) contract located at a given `address`, using a given
-provider `P`.
+    Contains type-safe methods for interacting with an on-chain instance of the
+    [`CommandBuilderHarness`](self) contract located at a given `address`, using a given
+    provider `P`.
 
-If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
-documentation on how to provide it), the `deploy` and `deploy_builder` methods can
-be used to deploy a new instance of the contract.
+    If the contract bytecode is available (see the [`sol!`](alloy_sol_types::sol!)
+    documentation on how to provide it), the `deploy` and `deploy_builder` methods can
+    be used to deploy a new instance of the contract.
 
-See the [module-level documentation](self) for all the available methods.*/
+    See the [module-level documentation](self) for all the available methods.*/
     #[derive(Clone)]
     pub struct CommandBuilderHarnessInstance<P, N = alloy_contract::private::Ethereum> {
         address: alloy_sol_types::private::Address,
@@ -1447,22 +1330,20 @@ See the [module-level documentation](self) for all the available methods.*/
     impl<P, N> ::core::fmt::Debug for CommandBuilderHarnessInstance<P, N> {
         #[inline]
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple("CommandBuilderHarnessInstance").field(&self.address).finish()
+            f.debug_tuple("CommandBuilderHarnessInstance")
+                .field(&self.address)
+                .finish()
         }
     }
     /// Instantiation and getters/setters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > CommandBuilderHarnessInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        CommandBuilderHarnessInstance<P, N>
+    {
         /**Creates a new wrapper around an on-chain [`CommandBuilderHarness`](self) contract instance.
 
-See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more details.*/
+        See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more details.*/
         #[inline]
-        pub const fn new(
-            address: alloy_sol_types::private::Address,
-            __provider: P,
-        ) -> Self {
+        pub const fn new(address: alloy_sol_types::private::Address, __provider: P) -> Self {
             Self {
                 address,
                 provider: __provider,
@@ -1471,9 +1352,9 @@ See the [wrapper's documentation](`CommandBuilderHarnessInstance`) for more deta
         }
         /**Deploys this contract using the given `provider` and constructor arguments, if any.
 
-Returns a new instance of the contract, if the deployment was successful.
+        Returns a new instance of the contract, if the deployment was successful.
 
-For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
+        For more fine-grained control over the deployment process, use [`deploy_builder`] instead.*/
         #[inline]
         pub async fn deploy(
             __provider: P,
@@ -1483,10 +1364,10 @@ For more fine-grained control over the deployment process, use [`deploy_builder`
             Ok(Self::new(contract_address, call_builder.provider))
         }
         /**Creates a `RawCallBuilder` for deploying this contract using the given `provider`
-and constructor arguments, if any.
+        and constructor arguments, if any.
 
-This is a simple wrapper around creating a `RawCallBuilder` with the data set to
-the bytecode concatenated with the constructor's ABI-encoded arguments.*/
+        This is a simple wrapper around creating a `RawCallBuilder` with the data set to
+        the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         #[inline]
         pub fn deploy_builder(__provider: P) -> alloy_contract::RawCallBuilder<P, N> {
             alloy_contract::RawCallBuilder::new_raw_deploy(
@@ -1527,10 +1408,9 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
         }
     }
     /// Function calls.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > CommandBuilderHarnessInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        CommandBuilderHarnessInstance<P, N>
+    {
         /// Creates a new call builder using this contract instance's provider and address.
         ///
         /// Note that the call can be any function call, not just those defined in this
@@ -1552,13 +1432,11 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
             selector: alloy::sol_types::private::FixedBytes<4>,
             indices: alloy::sol_types::private::FixedBytes<32>,
         ) -> alloy_contract::SolCallBuilder<&P, testBuildInputsCall, N> {
-            self.call_builder(
-                &testBuildInputsCall {
-                    state,
-                    selector,
-                    indices,
-                },
-            )
+            self.call_builder(&testBuildInputsCall {
+                state,
+                selector,
+                indices,
+            })
         }
         ///Creates a new call builder for the [`testBuildInputsBaseGas`] function.
         pub fn testBuildInputsBaseGas(
@@ -1567,13 +1445,11 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
             selector: alloy::sol_types::private::FixedBytes<4>,
             indices: alloy::sol_types::private::FixedBytes<32>,
         ) -> alloy_contract::SolCallBuilder<&P, testBuildInputsBaseGasCall, N> {
-            self.call_builder(
-                &testBuildInputsBaseGasCall {
-                    state,
-                    selector,
-                    indices,
-                },
-            )
+            self.call_builder(&testBuildInputsBaseGasCall {
+                state,
+                selector,
+                indices,
+            })
         }
         ///Creates a new call builder for the [`testWriteOutputs`] function.
         pub fn testWriteOutputs(
@@ -1582,13 +1458,11 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
             index: alloy::sol_types::private::FixedBytes<1>,
             output: alloy::sol_types::private::Bytes,
         ) -> alloy_contract::SolCallBuilder<&P, testWriteOutputsCall, N> {
-            self.call_builder(
-                &testWriteOutputsCall {
-                    state,
-                    index,
-                    output,
-                },
-            )
+            self.call_builder(&testWriteOutputsCall {
+                state,
+                index,
+                output,
+            })
         }
         ///Creates a new call builder for the [`testWriteOutputsBaseGas`] function.
         pub fn testWriteOutputsBaseGas(
@@ -1597,20 +1471,17 @@ the bytecode concatenated with the constructor's ABI-encoded arguments.*/
             index: alloy::sol_types::private::FixedBytes<1>,
             output: alloy::sol_types::private::Bytes,
         ) -> alloy_contract::SolCallBuilder<&P, testWriteOutputsBaseGasCall, N> {
-            self.call_builder(
-                &testWriteOutputsBaseGasCall {
-                    state,
-                    index,
-                    output,
-                },
-            )
+            self.call_builder(&testWriteOutputsBaseGasCall {
+                state,
+                index,
+                output,
+            })
         }
     }
     /// Event filters.
-    impl<
-        P: alloy_contract::private::Provider<N>,
-        N: alloy_contract::private::Network,
-    > CommandBuilderHarnessInstance<P, N> {
+    impl<P: alloy_contract::private::Provider<N>, N: alloy_contract::private::Network>
+        CommandBuilderHarnessInstance<P, N>
+    {
         /// Creates a new event filter using this contract instance's provider and address.
         ///
         /// Note that the type can be any event, not just those defined in this contract.

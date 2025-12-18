@@ -2,10 +2,12 @@ use crate::calls::FunctionCall;
 use crate::cmds::{Command, CommandFlags, CommandType, Literal, ReturnValue, Value};
 use crate::error::WeirollError;
 
-use alloy::dyn_abi::{DynSolType, DynSolValue};
-use alloy::primitives::{Address, Bytes, U256};
+use alloy::dyn_abi::DynSolType;
+use alloy::primitives::{Address, Bytes, FixedBytes, U256};
+use alloy::sol_types::SolCall;
 use bytes::BufMut;
 use bytes::BytesMut;
+#[allow(deprecated)]
 use slotmap::{DefaultKey, HopSlotMap};
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -28,18 +30,18 @@ pub struct PlannerState {
 }
 
 impl<'a> Planner<'a> {
-    pub fn call<C: EthCall>(
+    pub fn call<C: SolCall>(
         &mut self,
         address: Address,
         args: Vec<Value<'a>>,
-        return_type: DynSolValue,
+        return_type: DynSolType,
     ) -> Result<ReturnValue, WeirollError> {
         let dynamic = return_type.is_dynamic();
         let call = FunctionCall {
             address,
             flags: CommandFlags::empty(),
-            value: Some(U256::zero()),
-            selector: C::selector(),
+            value: Some(U256::ZERO),
+            selector: C::SELECTOR,
             args,
             return_type,
         };
@@ -52,7 +54,7 @@ impl<'a> Planner<'a> {
         Ok(ReturnValue { command, dynamic })
     }
 
-    pub fn add_subplan<C: EthCall>(
+    pub fn add_subplan<C: SolCall>(
         &mut self,
         address: Address,
         args: Vec<Value<'a>>,
@@ -94,7 +96,7 @@ impl<'a> Planner<'a> {
                 address,
                 flags: CommandFlags::DELEGATECALL,
                 value: None,
-                selector: C::selector(),
+                selector: C::SELECTOR,
                 args,
                 return_type,
             },
@@ -104,12 +106,12 @@ impl<'a> Planner<'a> {
         Ok(ReturnValue { dynamic, command })
     }
 
-    pub fn replace_state<C: EthCall>(&mut self, address: Address, args: Vec<Value<'a>>) {
+    pub fn replace_state<C: SolCall>(&mut self, address: Address, args: Vec<Value<'a>>) {
         let call = FunctionCall {
             address,
             flags: CommandFlags::DELEGATECALL,
             value: None,
-            selector: C::selector(),
+            selector: C::SELECTOR,
             args,
             return_type: DynSolType::Array(Box::new(DynSolType::Bytes)),
         };
@@ -259,7 +261,7 @@ impl<'a> Planner<'a> {
                 cmd.put(&flags.bits().to_le_bytes()[..]);
                 cmd.put(&[0u8; 6][..]);
                 cmd.put_u8(ret);
-                cmd.put(&command.call.address.to_fixed_bytes()[..]);
+                cmd.put(&command.call.address.0.0[..]);
 
                 // push first command, indicating extended cmd
                 encoded_commands.push(cmd.to_vec().try_into().unwrap());
@@ -279,7 +281,7 @@ impl<'a> Planner<'a> {
 
                 cmd.put(&args[..]);
                 cmd.put_u8(ret.to_le());
-                cmd.put(&command.call.address.to_fixed_bytes()[..]);
+                cmd.put(&command.call.address.0.0[..]);
 
                 encoded_commands.push(cmd.to_vec().try_into().unwrap());
             }
@@ -389,36 +391,45 @@ impl<'a> Planner<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::bindings::{
-        math::AddCall,
-        strings::{StrcatCall, StrlenCall},
-    };
-    use alloy::dyn_abi::AbiEncode;
+    use crate::bindings::{math::Math, strings::Strings};
+    use alloy::dyn_abi::DynSolValue;
     use alloy::{
         dyn_abi::DynSolType,
         primitives::{U256, address},
         sol,
     };
 
-    sol!(
-        SampleContract,
-        ["function useState(bytes[] state) returns(bytes[])"],
-    );
+    sol! {
+        interface SampleContract {
+            function useState(bytes[] state) external returns (bytes[]);
+        }
+    }
 
-    sol!(
-        SubplanContract,
-        ["function execute(bytes32[] commands, bytes[] state) returns(bytes[])"],
-    );
+    sol! {
+        interface SubplanContract {
+            function execute(bytes32[] commands, bytes[] state) external returns (bytes[]);
+        }
+    }
 
-    sol!(
-        ReadOnlySubplanContract,
-        ["function execute(bytes32[] commands, bytes[] state)"],
-    );
+    sol! {
+        interface ReadOnlySubplanContract {
+            function execute(bytes32[] commands, bytes[] state) external;
+        }
+    }
 
-    sol!(
-        ExtendedCommandContract,
-        ["function test(uint a, uint b, uint c, uint d, uint e, uint f, uint g) returns(uint)"],
-    );
+    sol! {
+        interface ExtendedCommandContract {
+            function test(
+                uint256 a,
+                uint256 b,
+                uint256 c,
+                uint256 d,
+                uint256 e,
+                uint256 f,
+                uint256 g
+            ) external returns (uint256);
+        }
+    }
 
     fn addr() -> Address {
         address!("0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
@@ -428,7 +439,7 @@ mod tests {
     fn test_planner_add() {
         let mut planner = Planner::default();
         planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(2).into()],
                 DynSolType::Uint(256),
@@ -445,15 +456,15 @@ mod tests {
         );
 
         assert_eq!(state.len(), 2);
-        assert_eq!(state[0], U256::from(1).encode());
-        assert_eq!(state[1], U256::from(2).encode());
+        assert_eq!(state[0], DynSolValue::from(U256::from(1)).abi_encode());
+        assert_eq!(state[1], DynSolValue::from(U256::from(2)).abi_encode());
     }
 
     #[test]
     fn test_planner_deduplicates_literals() {
         let mut planner = Planner::default();
         planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(1).into()],
                 DynSolType::Uint(256),
@@ -467,14 +478,14 @@ mod tests {
     fn test_planner_return_values() {
         let mut planner = Planner::default();
         let ret = planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(2).into()],
                 DynSolType::Uint(256),
             )
             .expect("can add call");
         planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![ret.into(), U256::from(3).into()],
                 DynSolType::Uint(256),
@@ -495,9 +506,9 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 3);
-        assert_eq!(state[0], U256::from(1).encode());
-        assert_eq!(state[1], U256::from(2).encode());
-        assert_eq!(state[2], U256::from(3).encode());
+        assert_eq!(state[0], DynSolValue::from(U256::from(1)).abi_encode());
+        assert_eq!(state[1], DynSolValue::from(U256::from(2)).abi_encode());
+        assert_eq!(state[2], DynSolValue::from(U256::from(3)).abi_encode());
     }
 
     #[test]
@@ -505,14 +516,14 @@ mod tests {
         // todo: how is this different from test_planner_return_values?
         let mut planner = Planner::default();
         let ret = planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(1).into()],
                 DynSolType::Uint(256),
             )
             .expect("can add call");
         planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), ret.into()],
                 DynSolType::Uint(256),
@@ -533,7 +544,7 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 2);
-        assert_eq!(state[0], U256::from(1).encode());
+        assert_eq!(state[0], DynSolValue::from(U256::from(1)).abi_encode());
         assert_eq!(state[1], Bytes::default());
     }
 
@@ -541,7 +552,7 @@ mod tests {
     fn test_planner_dynamic_arguments() {
         let mut planner = Planner::default();
         planner
-            .call::<StrlenCall>(
+            .call::<Strings::strlenCall>(
                 addr(),
                 vec![String::from("Hello, world!").into()],
                 DynSolType::Uint(256),
@@ -556,14 +567,17 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 1);
-        assert_eq!(state[0], "Hello, world!".to_string().encode());
+        assert_eq!(
+            state[0],
+            DynSolValue::from("Hello, world!".to_string()).abi_encode()
+        );
     }
 
     #[test]
     fn test_planner_dynamic_return_values() {
         let mut planner = Planner::default();
         planner
-            .call::<StrcatCall>(
+            .call::<Strings::strcatCall>(
                 addr(),
                 vec![
                     String::from("Hello, ").into(),
@@ -581,15 +595,21 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 2);
-        assert_eq!(state[0], "Hello, ".to_string().encode());
-        assert_eq!(state[1], "world!".to_string().encode());
+        assert_eq!(
+            state[0],
+            DynSolValue::from("Hello, ".to_string()).abi_encode()
+        );
+        assert_eq!(
+            state[1],
+            DynSolValue::from("world!".to_string()).abi_encode()
+        );
     }
 
     #[test]
     fn test_planner_dynamic_return_values_with_dynamic_arguments() {
         let mut planner = Planner::default();
         let ret = planner
-            .call::<StrcatCall>(
+            .call::<Strings::strcatCall>(
                 addr(),
                 vec![
                     String::from("Hello, ").into(),
@@ -599,7 +619,7 @@ mod tests {
             )
             .expect("can add call");
         planner
-            .call::<StrlenCall>(addr(), vec![ret.into()], DynSolType::Uint(256))
+            .call::<Strings::strlenCall>(addr(), vec![ret.into()], DynSolType::Uint(256))
             .expect("can add call with return val");
         let (commands, state) = planner.plan().expect("plan");
         assert_eq!(commands.len(), 2);
@@ -616,14 +636,20 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 2);
-        assert_eq!(state[0], "Hello, ".to_string().encode());
-        assert_eq!(state[1], "world!".to_string().encode());
+        assert_eq!(
+            state[0],
+            DynSolValue::from("Hello, ".to_string()).abi_encode()
+        );
+        assert_eq!(
+            state[1],
+            DynSolValue::from("world!".to_string()).abi_encode()
+        );
     }
 
     #[test]
     fn test_planner_argument_count_mismatch() {
         let mut planner = Planner::default();
-        let ret = planner.add_subplan::<AddCall>(
+        let ret = planner.add_subplan::<Math::addCall>(
             addr(),
             vec![U256::from(1).into()],
             DynSolType::Uint(256),
@@ -634,7 +660,10 @@ mod tests {
     #[test]
     fn test_planner_replace_state() {
         let mut planner = Planner::default();
-        planner.replace_state::<UseStateCall>(addr(), vec![Value::State(Default::default())]);
+        planner.replace_state::<SampleContract::useStateCall>(
+            addr(),
+            vec![Value::State(Default::default())],
+        );
         let (commands, state) = planner.plan().expect("plan");
         assert_eq!(commands.len(), 1);
         assert_eq!(
@@ -650,7 +679,7 @@ mod tests {
     fn test_planner_supports_subplans() {
         let mut subplanner = Planner::default();
         subplanner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(2).into()],
                 DynSolType::Uint(256),
@@ -658,7 +687,7 @@ mod tests {
             .expect("can add call");
         let mut planner = Planner::default();
         planner
-            .add_subplan::<subplan_contract::ExecuteCall>(
+            .add_subplan::<SubplanContract::executeCall>(
                 addr(),
                 vec![
                     Value::Subplan(&subplanner),
@@ -676,8 +705,8 @@ mod tests {
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 3);
-        assert_eq!(state[0], U256::from(1).encode());
-        assert_eq!(state[1], U256::from(2).encode());
+        assert_eq!(state[0], DynSolValue::from(U256::from(1)).abi_encode());
+        assert_eq!(state[1], DynSolValue::from(U256::from(2)).abi_encode());
         assert_eq!(
             state[2],
             "0x771602f7000001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
@@ -691,7 +720,7 @@ mod tests {
     fn test_planner_allows_return_value_access_in_parent_scope() {
         let mut subplanner = Planner::default();
         let sum = subplanner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(2).into()],
                 DynSolType::Uint(256),
@@ -699,7 +728,7 @@ mod tests {
             .expect("can add call");
         let mut planner = Planner::default();
         planner
-            .add_subplan::<subplan_contract::ExecuteCall>(
+            .add_subplan::<SubplanContract::executeCall>(
                 addr(),
                 vec![
                     Value::Subplan(&subplanner),
@@ -709,7 +738,7 @@ mod tests {
             )
             .expect("can add subplan");
         planner
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![sum.into(), U256::from(3).into()],
                 DynSolType::Uint(256),
@@ -738,7 +767,7 @@ mod tests {
     fn test_planner_allows_return_value_access_across_scopes() {
         let mut subplanner1 = Planner::default();
         let sum = subplanner1
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![U256::from(1).into(), U256::from(2).into()],
                 DynSolType::Uint(256),
@@ -747,7 +776,7 @@ mod tests {
 
         let mut subplanner2 = Planner::default();
         subplanner2
-            .call::<AddCall>(
+            .call::<Math::addCall>(
                 addr(),
                 vec![sum.into(), U256::from(3).into()],
                 DynSolType::Uint(256),
@@ -756,7 +785,7 @@ mod tests {
 
         let mut planner = Planner::default();
         planner
-            .add_subplan::<subplan_contract::ExecuteCall>(
+            .add_subplan::<SubplanContract::executeCall>(
                 addr(),
                 vec![
                     Value::Subplan(&subplanner1),
@@ -766,7 +795,7 @@ mod tests {
             )
             .expect("can add subplan");
         planner
-            .add_subplan::<subplan_contract::ExecuteCall>(
+            .add_subplan::<SubplanContract::executeCall>(
                 addr(),
                 vec![
                     Value::Subplan(&subplanner2),
@@ -783,7 +812,7 @@ mod tests {
     fn test_uses_extended_commands_where_necessary() {
         let mut planner = Planner::default();
         planner
-            .call::<TestCall>(
+            .call::<ExtendedCommandContract::testCall>(
                 addr(),
                 vec![
                     U256::from(1).into(),
