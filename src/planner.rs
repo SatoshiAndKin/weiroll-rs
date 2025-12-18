@@ -3,8 +3,8 @@ use crate::cmds::{Command, CommandFlags, CommandType, Literal, ReturnValue, Valu
 use crate::error::WeirollError;
 
 use alloy::dyn_abi::DynSolType;
-use alloy::primitives::{Address, Bytes, FixedBytes, U256};
-use alloy::sol_types::SolCall;
+use alloy::primitives::{Address, Bytes, U256};
+use alloy::sol_types::{SolCall, SolType};
 use bytes::BufMut;
 use bytes::BytesMut;
 #[allow(deprecated)]
@@ -29,6 +29,89 @@ pub struct PlannerState {
     state: Vec<Bytes>,
 }
 
+pub trait IntoValues<'a> {
+    fn into_values(self) -> Vec<Value<'a>>;
+}
+
+impl<'a> IntoValues<'a> for Vec<Value<'a>> {
+    fn into_values(self) -> Vec<Value<'a>> {
+        self
+    }
+}
+
+impl<'a> IntoValues<'a> for () {
+    fn into_values(self) -> Vec<Value<'a>> {
+        vec![]
+    }
+}
+
+impl<'a, A> IntoValues<'a> for (A,)
+where
+    A: Into<Value<'a>>,
+{
+    fn into_values(self) -> Vec<Value<'a>> {
+        vec![self.0.into()]
+    }
+}
+
+macro_rules! impl_into_values_tuple {
+    ($($name:ident),+ $(,)?) => {
+        impl<'a, $($name),+> IntoValues<'a> for ($($name,)+)
+        where
+            $($name: Into<Value<'a>>,)+
+        {
+            fn into_values(self) -> Vec<Value<'a>> {
+                #[allow(non_snake_case)]
+                let ($($name,)+) = self;
+                vec![$($name.into(),)+]
+            }
+        }
+    };
+}
+
+impl_into_values_tuple!(A, B);
+impl_into_values_tuple!(A, B, C);
+impl_into_values_tuple!(A, B, C, D);
+impl_into_values_tuple!(A, B, C, D, E);
+impl_into_values_tuple!(A, B, C, D, E, F);
+impl_into_values_tuple!(A, B, C, D, E, F, G);
+impl_into_values_tuple!(A, B, C, D, E, F, G, H);
+
+pub trait ContractAddress {
+    fn contract_address(&self) -> Address;
+}
+
+impl<P, N> ContractAddress for crate::bindings::erc20::ERC20::ERC20Instance<P, N>
+where
+    P: alloy::contract::private::Provider<N>,
+    N: alloy::contract::private::Network,
+{
+    fn contract_address(&self) -> Address {
+        *self.address()
+    }
+}
+
+impl<P, N> ContractAddress for crate::bindings::events::Events::EventsInstance<P, N>
+where
+    P: alloy::contract::private::Provider<N>,
+    N: alloy::contract::private::Network,
+{
+    fn contract_address(&self) -> Address {
+        *self.address()
+    }
+}
+
+impl<P, N> ContractAddress for crate::bindings::testable_vm::TestableVM::TestableVMInstance<P, N>
+where
+    P: alloy::contract::private::Provider<N>,
+    N: alloy::contract::private::Network,
+{
+    fn contract_address(&self) -> Address {
+        *self.address()
+    }
+}
+
+
 impl<'a> Planner<'a> {
     pub fn call<C: SolCall>(
         &mut self,
@@ -52,6 +135,26 @@ impl<'a> Planner<'a> {
         });
 
         Ok(ReturnValue { command, dynamic })
+    }
+
+    pub fn call_contract<C, A>(
+        &mut self,
+        contract: &impl ContractAddress,
+        args: A,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+        A: IntoValues<'a>,
+    {
+        let address = contract.contract_address();
+
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call::<C>(address, args.into_values(), return_type)
     }
 
     pub fn add_subplan<C: SolCall>(

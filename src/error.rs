@@ -38,4 +38,7 @@ pub enum WeirollError {
 
     #[error("command not visible here")]
     CommandNotVisible,
+
+    #[error("unable to parse Solidity type")]
+    AbiTypeParse(#[from] alloy::dyn_abi::Error),
 }

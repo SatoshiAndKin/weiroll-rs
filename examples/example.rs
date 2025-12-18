@@ -2,7 +2,7 @@ use alloy::primitives::{Address, FixedBytes, address};
 use alloy::providers::ProviderBuilder;
 use alloy::signers::local::PrivateKeySigner;
 use alloy::sol_types::SolEventInterface;
-use alloy::{dyn_abi::DynSolType, node_bindings::Anvil};
+use alloy::node_bindings::Anvil;
 // use ethers::abi::RawLog;
 // use ethers::{abi::ParamType, prelude::*, utils::Anvil};
 use weiroll::{
@@ -38,25 +38,13 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Deploying contracts..");
     let events = Events::deploy(&provider).await?;
     let vm = TestableVM::deploy(&provider).await?;
+    let weth = ERC20::new(WETH_ADDR, &provider);
 
     println!("Planner..");
     let mut planner = Planner::default();
-    planner
-        .call::<Events::logStringCall>(
-            *events.address(),
-            vec![String::from("Checking balance..").into()],
-            DynSolType::Uint(256),
-        )
-        ?;
-    let balance = planner
-        .call::<ERC20::balanceOfCall>(WETH_ADDR, vec![VIT_ADDR.into()], DynSolType::Uint(256))?;
-    planner
-        .call::<Events::logUintCall>(
-            *events.address(),
-            vec![balance.into()],
-            DynSolType::Uint(256),
-        )
-        ?;
+    planner.call_contract::<Events::logStringCall, _>(&events, (String::from("Checking balance.."),))?;
+    let balance = planner.call_contract::<ERC20::balanceOfCall, _>(&weth, (VIT_ADDR,))?;
+    planner.call_contract::<Events::logUintCall, _>(&events, (balance,))?;
     let (commands, state) = planner.plan()?;
     let commands: Vec<FixedBytes<32>> = commands.into_iter().map(Into::into).collect();
 
