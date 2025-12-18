@@ -71,17 +71,6 @@ impl<'a> Planner<'a> {
         Ok(ReturnValue { command, dynamic })
     }
 
-    pub fn call_contract<C>(
-        &mut self,
-        address: Address,
-        args: Vec<Value<'a>>,
-    ) -> Result<ReturnValue, WeirollError>
-    where
-        C: SolCall,
-    {
-        self.call_address::<C>(address, args)
-    }
-
     pub fn add_subplan<C: SolCall>(
         &mut self,
         address: Address,
