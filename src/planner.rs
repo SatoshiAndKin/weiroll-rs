@@ -76,6 +76,10 @@ impl_into_values_tuple!(A, B, C, D, E);
 impl_into_values_tuple!(A, B, C, D, E, F);
 impl_into_values_tuple!(A, B, C, D, E, F, G);
 impl_into_values_tuple!(A, B, C, D, E, F, G, H);
+impl_into_values_tuple!(A, B, C, D, E, F, G, H, I);
+impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J);
+impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J, K);
+impl_into_values_tuple!(A, B, C, D, E, F, G, H, I, J, K, L);
 
 pub trait HasAddress {
     fn address(&self) -> Address;
@@ -113,7 +117,6 @@ impl_has_address_for_instance!(crate::bindings::state_test::StateTest::StateTest
 impl_has_address_for_instance!(crate::bindings::strings::Strings::StringsInstance<P, N>);
 impl_has_address_for_instance!(crate::bindings::testable_vm::TestableVM::TestableVMInstance<P, N>);
 impl_has_address_for_instance!(crate::bindings::vm::VM::VMInstance<P, N>);
-
 
 impl<'a> Planner<'a> {
     pub fn call<C: SolCall>(

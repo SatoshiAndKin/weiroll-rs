@@ -1,22 +1,18 @@
+use alloy::node_bindings::Anvil;
 use alloy::primitives::{Address, FixedBytes, address};
 use alloy::providers::ProviderBuilder;
 use alloy::signers::local::PrivateKeySigner;
 use alloy::sol_types::SolEventInterface;
-use alloy::node_bindings::Anvil;
 // use ethers::abi::RawLog;
 // use ethers::{abi::ParamType, prelude::*, utils::Anvil};
 use weiroll::{
     Planner,
-    bindings::{
-        erc20::ERC20,
-        events::Events,
-        testable_vm::TestableVM,
-    },
+    bindings::{erc20::ERC20, events::Events, testable_vm::TestableVM},
 };
 
 const WETH_ADDR: Address = address!("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2");
 const VIT_ADDR: Address = address!("0xab5801a7d398351b8be11c439e05c5b3259aec9b");
-const PROVIDER_URL: &str = "http://localhost:8545";
+const PROVIDER_URL: &str = "http://ski-nuc-3a:8545";
 
 #[tokio::main]
 pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -26,14 +22,13 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .keys()
         .first()
         .cloned()
-        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::Other, "anvil returned no keys"))?;
+        .ok_or_else(|| std::io::Error::other("anvil returned no keys"))?;
     let wallet: PrivateKeySigner = wallet.into();
 
     let provider = ProviderBuilder::new()
         .wallet(wallet)
         .connect(&anvil.endpoint())
-        .await
-        ?;
+        .await?;
 
     println!("Deploying contracts..");
     let events = Events::deploy(&provider).await?;
@@ -42,7 +37,10 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Planner..");
     let mut planner = Planner::default();
-    planner.call_contract::<Events::logStringCall, _>(&events, (String::from("Checking balance.."),))?;
+    planner.call_contract::<Events::logStringCall, _>(
+        &events,
+        (String::from("Checking balance.."),),
+    )?;
     let balance = planner.call_contract::<ERC20::balanceOfCall, _>(&weth, (VIT_ADDR,))?;
     planner.call_contract::<Events::logUintCall, _>(&events, (balance,))?;
     let (commands, state) = planner.plan()?;
@@ -52,16 +50,13 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let receipt = vm
         .execute(commands, state)
         .send()
-        .await
-        ?
+        .await?
         .get_receipt()
-        .await
-        ?;
+        .await?;
 
     println!("Logs:");
     for log in receipt.logs() {
-        let topics: Vec<alloy::sol_types::Word> =
-            log.data().topics().iter().copied().map(Into::into).collect();
+        let topics: Vec<alloy::sol_types::Word> = log.data().topics().to_vec();
         let call = Events::EventsEvents::decode_raw_log(&topics, log.data().data.as_ref())?;
         println!("{:?}", call);
     }
