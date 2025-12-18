@@ -3,7 +3,8 @@ use crate::cmds::{Command, CommandFlags, CommandType, Literal, ReturnValue, Valu
 use crate::error::WeirollError;
 
 use alloy::dyn_abi::DynSolType;
-use alloy::primitives::{Address, Bytes, U256};
+use alloy::dyn_abi::DynSolValue;
+use alloy::primitives::{Address, Bytes, FixedBytes, U256};
 use alloy::sol_types::{SolCall, SolType};
 use bytes::BufMut;
 use bytes::BytesMut;
@@ -30,6 +31,33 @@ pub struct PlannerState {
 }
 
 impl<'a> Planner<'a> {
+    pub fn call_sol<C>(&mut self, address: Address, call: C) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let params_type: DynSolType = <C::Parameters<'_> as SolType>::SOL_NAME.parse()?;
+
+        let mut encoded_args = Vec::new();
+        <C as SolCall>::abi_encode_raw(&call, &mut encoded_args);
+
+        let decoded = match params_type {
+            DynSolType::Tuple(_) => params_type.abi_decode_sequence(&encoded_args)?,
+            other => other.abi_decode(&encoded_args)?,
+        };
+
+        let values: Vec<DynSolValue> = match decoded {
+            DynSolValue::Tuple(v) => v,
+            v => vec![v],
+        };
+
+        let args = values
+            .into_iter()
+            .map(|v| Value::Literal(Literal::from(v)))
+            .collect();
+
+        self.call_address::<C>(address, args)
+    }
+
     pub fn call_address<C>(
         &mut self,
         address: Address,
@@ -56,7 +84,7 @@ impl<'a> Planner<'a> {
         let dynamic = return_type.is_dynamic();
         let call = FunctionCall {
             address,
-            flags: CommandFlags::empty(),
+            flags: CommandFlags::CALL,
             value: Some(U256::ZERO),
             selector: C::SELECTOR,
             args,
@@ -193,7 +221,7 @@ impl<'a> Planner<'a> {
         Ok(args)
     }
 
-    fn build_commands(&self, ps: &mut PlannerState) -> Result<Vec<[u8; 32]>, WeirollError> {
+    fn build_commands(&self, ps: &mut PlannerState) -> Result<Vec<FixedBytes<32>>, WeirollError> {
         let mut encoded_commands = vec![];
 
         // Build commands, and add state entries as needed
@@ -281,11 +309,13 @@ impl<'a> Planner<'a> {
                 cmd.put(&command.call.address.0.0[..]);
 
                 // push first command, indicating extended cmd
-                encoded_commands.push(cmd.to_vec().try_into().unwrap());
+                let word: [u8; 32] = cmd.to_vec().try_into().unwrap();
+                encoded_commands.push(word.into());
 
                 // use the next command for the actual args
                 args.resize(32, 0xff);
-                encoded_commands.push(args.try_into().unwrap());
+                let word: [u8; 32] = args.try_into().unwrap();
+                encoded_commands.push(word.into());
             } else {
                 // Standard command
                 let mut cmd = BytesMut::with_capacity(32);
@@ -300,7 +330,8 @@ impl<'a> Planner<'a> {
                 cmd.put_u8(ret.to_le());
                 cmd.put(&command.call.address.0.0[..]);
 
-                encoded_commands.push(cmd.to_vec().try_into().unwrap());
+                let word: [u8; 32] = cmd.to_vec().try_into().unwrap();
+                encoded_commands.push(word.into());
             }
         }
 
@@ -356,7 +387,7 @@ impl<'a> Planner<'a> {
         Ok(())
     }
 
-    pub fn plan(&self) -> Result<(Vec<[u8; 32]>, Vec<Bytes>), WeirollError> {
+    pub fn plan(&self) -> Result<(Vec<FixedBytes<32>>, Vec<Bytes>), WeirollError> {
         // Tracks the last time a literal is used in the program
         let mut literal_visibility = Default::default();
 
@@ -467,7 +498,7 @@ mod tests {
         assert_eq!(commands.len(), 1);
         assert_eq!(
             commands[0],
-            "0x771602f7000001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
@@ -512,13 +543,13 @@ mod tests {
         assert_eq!(commands.len(), 2);
         assert_eq!(
             commands[0],
-            "0x771602f7000001ffffffff01eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010001ffffffff01eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(
             commands[1],
-            "0x771602f7000102ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010102ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
@@ -550,13 +581,13 @@ mod tests {
         assert_eq!(commands.len(), 2);
         assert_eq!(
             commands[0],
-            "0x771602f7000000ffffffff01eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010000ffffffff01eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(
             commands[1],
-            "0x771602f7000001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
@@ -579,14 +610,14 @@ mod tests {
         assert_eq!(commands.len(), 1);
         assert_eq!(
             commands[0],
-            "0x367bbd780080ffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x367bbd780180ffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 1);
         assert_eq!(
             state[0],
-            DynSolValue::from("Hello, world!".to_string()).abi_encode()
+            DynSolValue::from("Hello, world!".to_string()).abi_encode()[32..]
         );
     }
 
@@ -607,18 +638,18 @@ mod tests {
         assert_eq!(commands.len(), 1);
         assert_eq!(
             commands[0],
-            "0xd824ccf3008081ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0xd824ccf3018081ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 2);
         assert_eq!(
             state[0],
-            DynSolValue::from("Hello, ".to_string()).abi_encode()
+            DynSolValue::from("Hello, ".to_string()).abi_encode()[32..]
         );
         assert_eq!(
             state[1],
-            DynSolValue::from("world!".to_string()).abi_encode()
+            DynSolValue::from("world!".to_string()).abi_encode()[32..]
         );
     }
 
@@ -642,24 +673,24 @@ mod tests {
         assert_eq!(commands.len(), 2);
         assert_eq!(
             commands[0],
-            "0xd824ccf3008081ffffffff81eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0xd824ccf3018081ffffffff81eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(
             commands[1],
-            "0x367bbd780081ffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x367bbd780181ffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
         assert_eq!(state.len(), 2);
         assert_eq!(
             state[0],
-            DynSolValue::from("Hello, ".to_string()).abi_encode()
+            DynSolValue::from("Hello, ".to_string()).abi_encode()[32..]
         );
         assert_eq!(
             state[1],
-            DynSolValue::from("world!".to_string()).abi_encode()
+            DynSolValue::from("world!".to_string()).abi_encode()[32..]
         );
     }
 
@@ -726,7 +757,7 @@ mod tests {
         assert_eq!(state[1], DynSolValue::from(U256::from(2)).abi_encode());
         assert_eq!(
             state[2],
-            "0x771602f7000001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010001ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()
         );
@@ -773,7 +804,7 @@ mod tests {
         assert_eq!(
             commands[1],
             // sum + 3
-            "0x771602f7000102ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0x771602f7010102ffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );
@@ -847,7 +878,7 @@ mod tests {
         assert_eq!(commands.len(), 2);
         assert_eq!(
             commands[0],
-            "0xe473580d40000000000000ffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            "0xe473580d41000000000000ffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 .parse::<Bytes>()
                 .unwrap()[..]
         );

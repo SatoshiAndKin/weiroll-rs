@@ -9,14 +9,17 @@ pub use planner::Planner;
 
 #[macro_export]
 macro_rules! call_contract {
-    ($planner:expr, $contract:expr, $call:path { $($field:ident : $value:expr),+ $(,)? }) => {{
+    // Values mode: positional args turned into `Value`s in order.
+    ($planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ] ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
-        __planner.call_address::<$call>(__address, vec![$($value.into(),)+])
+        __planner.call_address::<$call>(__address, vec![$($arg.into(),)*])
     }};
-    ($planner:expr, $contract:expr, $call:path { $(,)? }) => {{
+
+    // SolCall mode: pass an actual generated call struct (type-checked by Rust).
+    ($planner:expr, $contract:expr, ( $call:expr ) ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
-        __planner.call_address::<$call>(__address, vec![])
+        __planner.call_sol(__address, $call)
     }};
 }

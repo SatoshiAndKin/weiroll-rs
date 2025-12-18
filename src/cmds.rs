@@ -47,9 +47,13 @@ where
 {
     fn from(token: T) -> Self {
         let v: DynSolValue = token.into();
+        let mut bytes = v.abi_encode();
+        if v.is_dynamic() {
+            bytes.drain(..32);
+        }
         Literal {
             dynamic: v.is_dynamic(),
-            bytes: v.abi_encode(),
+            bytes,
         }
     }
 }

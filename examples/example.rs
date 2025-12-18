@@ -1,5 +1,5 @@
 use alloy::node_bindings::Anvil;
-use alloy::primitives::{Address, FixedBytes, address};
+use alloy::primitives::{Address, address};
 use alloy::providers::ProviderBuilder;
 use alloy::signers::local::PrivateKeySigner;
 use alloy::sol_types::SolEventInterface;
@@ -11,7 +11,7 @@ use weiroll::{
 };
 
 const WETH_ADDR: Address = address!("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2");
-const VIT_ADDR: Address = address!("0xab5801a7d398351b8be11c439e05c5b3259aec9b");
+const AAVE_ADDR: Address = address!("0x4d5F47FA6A74757f35C14fD3a6Ef8E3C9BC514E8");
 const PROVIDER_URL: &str = "http://ski-nuc-3a:8545";
 
 #[tokio::main]
@@ -35,27 +35,21 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let vm = TestableVM::deploy(&provider).await?;
     let weth = ERC20::new(WETH_ADDR, &provider);
 
+    let direct_balance = weth.balanceOf(AAVE_ADDR).call().await?;
+    println!("Direct WETH balanceOf(AAVE_ADDR): {direct_balance}");
+
     println!("Planner..");
     let mut planner = Planner::default();
     weiroll::call_contract!(
         &mut planner,
         &events,
-        Events::logStringCall {
+        (Events::logStringCall {
             message: String::from("Checking balance.."),
-        }
+        })
     )?;
-    let balance = weiroll::call_contract!(
-        &mut planner,
-        &weth,
-        ERC20::balanceOfCall { account: VIT_ADDR }
-    )?;
-    weiroll::call_contract!(
-        &mut planner,
-        &events,
-        Events::logUintCall { message: balance }
-    )?;
+    let balance = weiroll::call_contract!(&mut planner, &weth, ERC20::balanceOfCall[AAVE_ADDR])?;
+    weiroll::call_contract!(&mut planner, &events, Events::logUintCall[balance])?;
     let (commands, state) = planner.plan()?;
-    let commands: Vec<FixedBytes<32>> = commands.into_iter().map(Into::into).collect();
 
     println!("Executing..");
     let receipt = vm
@@ -64,6 +58,8 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?
         .get_receipt()
         .await?;
+
+    // dbg!(&receipt);
 
     println!("Logs:");
     for log in receipt.logs() {
