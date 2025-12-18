@@ -1,15 +1,15 @@
-use alloy::primitives::{Address, address};
+use alloy::primitives::{Address, FixedBytes, address};
 use alloy::providers::ProviderBuilder;
-use alloy::rpc::types::RawLog;
 use alloy::signers::local::PrivateKeySigner;
+use alloy::sol_types::SolEventInterface;
 use alloy::{dyn_abi::DynSolType, node_bindings::Anvil};
 // use ethers::abi::RawLog;
 // use ethers::{abi::ParamType, prelude::*, utils::Anvil};
 use weiroll::{
     Planner,
     bindings::{
-        erc20::BalanceOfCall,
-        events::{Events, EventsEvents, LogStringCall, LogUintCall},
+        erc20::ERC20,
+        events::Events,
         testable_vm::TestableVM,
     },
 };
@@ -37,23 +37,24 @@ pub async fn main() {
     println!("Planner..");
     let mut planner = Planner::default();
     planner
-        .call::<LogStringCall>(
+        .call::<Events::logStringCall>(
             *events.address(),
             vec![String::from("Checking balance..").into()],
             DynSolType::Uint(256),
         )
         .unwrap();
     let balance = planner
-        .call::<BalanceOfCall>(WETH_ADDR, vec![VIT_ADDR.into()], DynSolType::Uint(256))
+        .call::<ERC20::balanceOfCall>(WETH_ADDR, vec![VIT_ADDR.into()], DynSolType::Uint(256))
         .unwrap();
     planner
-        .call::<LogUintCall>(
+        .call::<Events::logUintCall>(
             *events.address(),
             vec![balance.into()],
             DynSolType::Uint(256),
         )
         .unwrap();
     let (commands, state) = planner.plan().unwrap();
+    let commands: Vec<FixedBytes<32>> = commands.into_iter().map(Into::into).collect();
 
     println!("Executing..");
     let receipt = vm
@@ -67,12 +68,9 @@ pub async fn main() {
 
     println!("Logs:");
     for log in receipt.logs() {
-        let raw = RawLog {
-            address: log.address(),
-            topics: log.topics(),
-            data: log.data(),
-        };
-        let call = EventsEvents::decode_log(&raw).unwrap();
+        let topics: Vec<alloy::sol_types::Word> =
+            log.data().topics().iter().copied().map(Into::into).collect();
+        let call = Events::EventsEvents::decode_raw_log(&topics, log.data().data.as_ref()).unwrap();
         println!("{:?}", call);
     }
 }
