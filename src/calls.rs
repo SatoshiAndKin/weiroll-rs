@@ -35,8 +35,51 @@ impl FunctionCall<'_> {
         if (self.flags & CommandFlags::CALLTYPE_MASK) != CommandFlags::CALL {
             panic!("Only CALL operations can be made static");
         }
-        self.flags |= CommandFlags::TUPLE_RETURN;
+        self.flags = (self.flags & !CommandFlags::CALLTYPE_MASK) | CommandFlags::STATICCALL;
         self
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use alloy::dyn_abi::DynSolType;
+    use alloy::primitives::{U256, address};
+
+    fn sample_call() -> FunctionCall<'static> {
+        FunctionCall {
+            address: address!("0x0000000000000000000000000000000000000001"),
+            selector: [0u8; 4],
+            flags: CommandFlags::CALL,
+            value: Some(U256::ZERO),
+            args: vec![],
+            return_type: DynSolType::Uint(256),
+        }
+    }
+
+    #[test]
+    fn function_call_with_value_sets_call_with_value_flag() {
+        let c = sample_call().with_value(U256::from(123));
+        assert_eq!(
+            c.flags & CommandFlags::CALLTYPE_MASK,
+            CommandFlags::CALL_WITH_VALUE
+        );
+        assert_eq!(c.value, Some(U256::from(123)));
+    }
+
+    #[test]
+    fn function_call_raw_value_sets_tuple_return() {
+        let c = sample_call().raw_value();
+        assert!(c.flags.contains(CommandFlags::TUPLE_RETURN));
+    }
+
+    #[test]
+    fn function_call_static_call_switches_to_staticcall() {
+        let c = sample_call().static_call();
+        assert_eq!(
+            c.flags & CommandFlags::CALLTYPE_MASK,
+            CommandFlags::STATICCALL
+        );
     }
 }
 

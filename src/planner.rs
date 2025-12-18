@@ -58,6 +58,60 @@ impl<'a> Planner<'a> {
         self.call_address::<C>(address, args)
     }
 
+    pub fn delegatecall_sol<C>(
+        &mut self,
+        address: Address,
+        call: C,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        self.call_sol_with_calltype(address, call, CommandFlags::DELEGATECALL)
+    }
+
+    pub fn staticcall_sol<C>(
+        &mut self,
+        address: Address,
+        call: C,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        self.call_sol_with_calltype(address, call, CommandFlags::STATICCALL)
+    }
+
+    fn call_sol_with_calltype<C>(
+        &mut self,
+        address: Address,
+        call: C,
+        calltype: CommandFlags,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let params_type: DynSolType = <C::Parameters<'_> as SolType>::SOL_NAME.parse()?;
+
+        let mut encoded_args = Vec::new();
+        <C as SolCall>::abi_encode_raw(&call, &mut encoded_args);
+
+        let decoded = match params_type {
+            DynSolType::Tuple(_) => params_type.abi_decode_sequence(&encoded_args)?,
+            other => other.abi_decode(&encoded_args)?,
+        };
+
+        let values: Vec<DynSolValue> = match decoded {
+            DynSolValue::Tuple(v) => v,
+            v => vec![v],
+        };
+
+        let args = values
+            .into_iter()
+            .map(|v| Value::Literal(Literal::from(v)))
+            .collect();
+
+        self.call_address_with_calltype::<C>(address, args, calltype)
+    }
+
     pub fn call_address<C>(
         &mut self,
         address: Address,
@@ -72,7 +126,59 @@ impl<'a> Planner<'a> {
             other => other,
         };
 
-        self.call::<C>(address, args, return_type)
+        self.call_with_calltype::<C>(address, args, return_type, CommandFlags::CALL)
+    }
+
+    pub fn delegatecall_address<C>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call_with_calltype::<C>(address, args, return_type, CommandFlags::DELEGATECALL)
+    }
+
+    pub fn staticcall_address<C>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call_with_calltype::<C>(address, args, return_type, CommandFlags::STATICCALL)
+    }
+
+    fn call_address_with_calltype<C>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+        calltype: CommandFlags,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call_with_calltype::<C>(address, args, return_type, calltype)
     }
 
     pub fn call<C: SolCall>(
@@ -81,10 +187,25 @@ impl<'a> Planner<'a> {
         args: Vec<Value<'a>>,
         return_type: DynSolType,
     ) -> Result<ReturnValue, WeirollError> {
+        self.call_with_calltype::<C>(address, args, return_type, CommandFlags::CALL)
+    }
+
+    fn call_with_calltype<C: SolCall>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+        return_type: DynSolType,
+        calltype: CommandFlags,
+    ) -> Result<ReturnValue, WeirollError> {
+        debug_assert!(
+            (calltype & CommandFlags::CALLTYPE_MASK) == calltype,
+            "calltype must be one of CALL/DELEGATECALL/STATICCALL/CALL_WITH_VALUE"
+        );
+
         let dynamic = return_type.is_dynamic();
         let call = FunctionCall {
             address,
-            flags: CommandFlags::CALL,
+            flags: calltype,
             value: Some(U256::ZERO),
             selector: C::SELECTOR,
             args,
@@ -481,6 +602,35 @@ mod tests {
 
     fn addr() -> Address {
         address!("0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    }
+
+    #[test]
+    fn test_planner_calltype_flags() {
+        let mut planner = Planner::default();
+
+        let _ = planner
+            .call_address::<Math::addCall>(addr(), vec![U256::from(1).into(), U256::from(2).into()])
+            .unwrap();
+        let _ = planner
+            .delegatecall_address::<Math::addCall>(
+                addr(),
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap();
+        let _ = planner
+            .staticcall_address::<Math::addCall>(
+                addr(),
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap();
+
+        let (commands, _state) = planner.plan().unwrap();
+        assert_eq!(commands.len(), 3);
+
+        // Flag byte is immediately after the 4-byte selector.
+        assert_eq!(commands[0].as_slice()[4], CommandFlags::CALL.bits());
+        assert_eq!(commands[1].as_slice()[4], CommandFlags::DELEGATECALL.bits());
+        assert_eq!(commands[2].as_slice()[4], CommandFlags::STATICCALL.bits());
     }
 
     #[test]
