@@ -80,6 +80,43 @@ impl<'a> Planner<'a> {
         self.call_sol_with_calltype(address, call, CommandFlags::STATICCALL)
     }
 
+    pub fn call_sol_with_value<C>(
+        &mut self,
+        address: Address,
+        value: U256,
+        call: C,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let params_type: DynSolType = <C::Parameters<'_> as SolType>::SOL_NAME.parse()?;
+
+        let mut encoded_args = Vec::new();
+        <C as SolCall>::abi_encode_raw(&call, &mut encoded_args);
+
+        let decoded = match params_type {
+            DynSolType::Tuple(_) => params_type.abi_decode_sequence(&encoded_args)?,
+            other => other.abi_decode(&encoded_args)?,
+        };
+
+        let values: Vec<DynSolValue> = match decoded {
+            DynSolValue::Tuple(v) => v,
+            v => vec![v],
+        };
+
+        let args = values
+            .into_iter()
+            .map(|v| Value::Literal(Literal::from(v)))
+            .collect();
+
+        self.call_address_with_calltype_and_value::<C>(
+            address,
+            args,
+            CommandFlags::CALL_WITH_VALUE,
+            Some(value),
+        )
+    }
+
     fn call_sol_with_calltype<C>(
         &mut self,
         address: Address,
@@ -127,6 +164,30 @@ impl<'a> Planner<'a> {
         };
 
         self.call_with_calltype::<C>(address, args, return_type, CommandFlags::CALL)
+    }
+
+    pub fn call_address_with_value<C>(
+        &mut self,
+        address: Address,
+        value: U256,
+        args: Vec<Value<'a>>,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call_with_calltype_and_value::<C>(
+            address,
+            args,
+            return_type,
+            CommandFlags::CALL_WITH_VALUE,
+            Some(value),
+        )
     }
 
     pub fn delegatecall_address<C>(
@@ -181,6 +242,25 @@ impl<'a> Planner<'a> {
         self.call_with_calltype::<C>(address, args, return_type, calltype)
     }
 
+    fn call_address_with_calltype_and_value<C>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+        calltype: CommandFlags,
+        value: Option<U256>,
+    ) -> Result<ReturnValue, WeirollError>
+    where
+        C: SolCall,
+    {
+        let return_type: DynSolType = <C::ReturnTuple<'_> as SolType>::SOL_NAME.parse()?;
+        let return_type = match return_type {
+            DynSolType::Tuple(mut elems) if elems.len() == 1 => elems.remove(0),
+            other => other,
+        };
+
+        self.call_with_calltype_and_value::<C>(address, args, return_type, calltype, value)
+    }
+
     pub fn call<C: SolCall>(
         &mut self,
         address: Address,
@@ -197,16 +277,31 @@ impl<'a> Planner<'a> {
         return_type: DynSolType,
         calltype: CommandFlags,
     ) -> Result<ReturnValue, WeirollError> {
+        self.call_with_calltype_and_value::<C>(address, args, return_type, calltype, None)
+    }
+
+    fn call_with_calltype_and_value<C: SolCall>(
+        &mut self,
+        address: Address,
+        args: Vec<Value<'a>>,
+        return_type: DynSolType,
+        calltype: CommandFlags,
+        value: Option<U256>,
+    ) -> Result<ReturnValue, WeirollError> {
         debug_assert!(
             (calltype & CommandFlags::CALLTYPE_MASK) == calltype,
             "calltype must be one of CALL/DELEGATECALL/STATICCALL/CALL_WITH_VALUE"
+        );
+        debug_assert!(
+            (calltype == CommandFlags::CALL_WITH_VALUE) == value.is_some(),
+            "value must be set iff calltype is CALL_WITH_VALUE"
         );
 
         let dynamic = return_type.is_dynamic();
         let call = FunctionCall {
             address,
             flags: calltype,
-            value: Some(U256::ZERO),
+            value,
             selector: C::SELECTOR,
             args,
             return_type,
@@ -305,7 +400,8 @@ impl<'a> Planner<'a> {
         }
 
         let mut args = vec![];
-        for arg in in_args.into_iter().chain(extra_args.iter()) {
+        // NOTE: for CALL_WITH_VALUE, the value is treated as the first argument.
+        for arg in extra_args.iter().chain(in_args.into_iter()) {
             let mut slot = match arg {
                 Value::Return(val) => {
                     if let Some(slot) = return_slot_map.get(&val.command) {
@@ -477,7 +573,8 @@ impl<'a> Planner<'a> {
                 }
             }
 
-            for arg in in_args.iter().chain(extra_args.iter()) {
+            // NOTE: for CALL_WITH_VALUE, the value is treated as the first argument.
+            for arg in extra_args.iter().chain(in_args.iter()) {
                 match arg {
                     Value::Return(val) => {
                         if !seen.contains(&val.command) {
@@ -631,6 +728,40 @@ mod tests {
         assert_eq!(commands[0].as_slice()[4], CommandFlags::CALL.bits());
         assert_eq!(commands[1].as_slice()[4], CommandFlags::DELEGATECALL.bits());
         assert_eq!(commands[2].as_slice()[4], CommandFlags::STATICCALL.bits());
+    }
+
+    #[test]
+    fn test_planner_call_with_value() {
+        let mut planner = Planner::default();
+
+        let value = U256::from(5);
+        let _ = planner
+            .call_address_with_value::<Math::addCall>(
+                addr(),
+                value,
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap();
+
+        let (commands, state) = planner.plan().unwrap();
+        assert_eq!(commands.len(), 1);
+        assert_eq!(
+            commands[0].as_slice()[4],
+            CommandFlags::CALL_WITH_VALUE.bits()
+        );
+
+        // Value is injected as the first argument.
+        assert_eq!(state.len(), 3);
+
+        let value_bytes = DynSolValue::from(value).abi_encode();
+        let value_slot = state
+            .iter()
+            .position(|b| b.as_ref() == value_bytes)
+            .expect("value is present in state") as u8;
+
+        // Arg0 byte is immediately after selector(4) + flags(1).
+        let arg0 = commands[0].as_slice()[5];
+        assert_eq!(arg0, value_slot);
     }
 
     #[test]

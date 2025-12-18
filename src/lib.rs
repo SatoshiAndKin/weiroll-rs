@@ -9,53 +9,104 @@ pub use planner::Planner;
 
 #[macro_export]
 macro_rules! call_contract {
-    // Values mode: positional args turned into `Value`s in order.
-    ($planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ] ) => {{
+    // ---- Public API: values mode (positional args) ----
+    ($planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch call, $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    (call, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch call, $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    (delegate, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch delegatecall, $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    (delegatecall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch delegatecall, $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    (staticcall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch staticcall, $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    (value($value:expr), $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        $crate::call_contract!(@dispatch value($value), $planner, $contract, $call [ $($arg),* ])
+    }};
+
+    // ---- Public API: SolCall mode (type-checked struct literal) ----
+    ($planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch call, $planner, $contract, ( $call ))
+    }};
+
+    (call, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch call, $planner, $contract, ( $call ))
+    }};
+
+    (delegate, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch delegatecall, $planner, $contract, ( $call ))
+    }};
+
+    (delegatecall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch delegatecall, $planner, $contract, ( $call ))
+    }};
+
+    (staticcall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch staticcall, $planner, $contract, ( $call ))
+    }};
+
+    (value($value:expr), $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        $crate::call_contract!(@dispatch value($value), $planner, $contract, ( $call ))
+    }};
+
+    // ---- Internal implementation (ONLY these arms actually do work) ----
+    (@dispatch call, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.call_address::<$call>(__address, vec![$($arg.into(),)*])
     }};
 
-    (call, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ] ) => {{
-        let __planner = &mut *$planner;
-        let __address = *$contract.address();
-        __planner.call_address::<$call>(__address, vec![$($arg.into(),)*])
-    }};
-
-    (delegatecall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ] ) => {{
+    (@dispatch delegatecall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.delegatecall_address::<$call>(__address, vec![$($arg.into(),)*])
     }};
 
-    (staticcall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ] ) => {{
+    (@dispatch staticcall, $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.staticcall_address::<$call>(__address, vec![$($arg.into(),)*])
     }};
 
-    // SolCall mode: pass an actual generated call struct (type-checked by Rust).
-    ($planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (@dispatch value($value:expr), $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
+        let __planner = &mut *$planner;
+        let __address = *$contract.address();
+        let __value: ::alloy::primitives::U256 = ($value).into();
+        __planner.call_with_value_address::<$call>(__address, __value, vec![$($arg.into(),)*])
+    }};
+
+    (@dispatch call, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.call_sol(__address, $call)
     }};
 
-    (call, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
-        let __planner = &mut *$planner;
-        let __address = *$contract.address();
-        __planner.call_sol(__address, $call)
-    }};
-
-    (delegatecall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (@dispatch delegatecall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.delegatecall_sol(__address, $call)
     }};
 
-    (staticcall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (@dispatch staticcall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
         __planner.staticcall_sol(__address, $call)
+    }};
+
+    (@dispatch value($value:expr), $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+        let __planner = &mut *$planner;
+        let __address = *$contract.address();
+        let __value: ::alloy::primitives::U256 = ($value).into();
+        __planner.call_with_value_sol(__address, __value, $call)
     }};
 }
