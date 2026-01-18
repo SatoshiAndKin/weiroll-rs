@@ -4,6 +4,8 @@ mod cmds;
 mod error;
 mod planner;
 
+pub use calls::FunctionCall;
+pub use cmds::ReturnValue;
 pub use error::WeirollError;
 pub use planner::Planner;
 
