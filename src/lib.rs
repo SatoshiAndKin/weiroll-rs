@@ -146,7 +146,7 @@ mod tests {
     }
 
     #[test]
-    fn accepts_struct_literal_without_parens() {
+    fn accepts_calls_both_ways() {
         let mut planner = Planner::default();
         let contract = DummyContract {
             address: address!("0xdead00000000000000000000000000000000beef"),
