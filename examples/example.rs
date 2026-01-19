@@ -44,15 +44,15 @@ pub async fn main() -> Result<(), Box<dyn std::error::Error>> {
     weiroll::call_contract!(
         &mut planner,
         &events,
-        (Events::logStringCall {
+        Events::logStringCall {
             message: String::from("Checking balance.."),
-        })
+        }
     )?;
     let balance = weiroll::call_contract!(
         staticcall,
         &mut planner,
         &weth,
-        ERC20::balanceOfCall[AAVE_ADDR]
+        ERC20::balanceOfCall { account: AAVE_ADDR }
     )?;
     weiroll::call_contract!(&mut planner, &events, Events::logUintCall[balance])?;
     let (commands, state) = planner.plan()?;

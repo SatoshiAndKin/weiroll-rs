@@ -46,27 +46,27 @@ macro_rules! call_contract {
     }};
 
     // ---- Public API: SolCall mode (type-checked struct literal) ----
-    ($planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    ($planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch call, $planner, $contract, ( $call ))
     }};
 
-    (call, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (call, $planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch call, $planner, $contract, ( $call ))
     }};
 
-    (delegate, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (delegate, $planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch delegatecall, $planner, $contract, ( $call ))
     }};
 
-    (delegatecall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (delegatecall, $planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch delegatecall, $planner, $contract, ( $call ))
     }};
 
-    (staticcall, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (staticcall, $planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch staticcall, $planner, $contract, ( $call ))
     }};
 
-    (value($value:expr), $planner:expr, $contract:expr, ( $call:expr ) ) => {{
+    (value($value:expr), $planner:expr, $contract:expr, $call:expr) => {{
         $crate::call_contract!(@dispatch value($value), $planner, $contract, ( $call ))
     }};
 
@@ -120,4 +120,57 @@ macro_rules! call_contract {
         let __value: ::alloy::primitives::U256 = ($value).into();
         __planner.call_with_value_sol(__address, __value, $call)
     }};
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use alloy::primitives::{Address, U256, address};
+
+    alloy::sol! {
+        interface MacroTestContract {
+            function setValue(uint256 value) external;
+        }
+    }
+
+    /// mock contract so we don't need to create a provider
+    #[derive(Clone, Copy)]
+    struct DummyContract {
+        address: Address,
+    }
+
+    impl DummyContract {
+        fn address(&self) -> &Address {
+            &self.address
+        }
+    }
+
+    #[test]
+    fn accepts_struct_literal_without_parens() {
+        let mut planner = Planner::default();
+        let contract = DummyContract {
+            address: address!("0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"),
+        };
+
+        crate::call_contract!(
+            &mut planner,
+            &contract,
+            MacroTestContract::setValueCall {
+                value: U256::from(1),
+            }
+        )
+        .expect("macro should accept struct literal without extra parens");
+
+        crate::call_contract!(
+            &mut planner,
+            &contract,
+            MacroTestContract::setValueCall[1u64]
+        )
+        .expect("values mode should still work");
+
+        let (commands, _state) = planner.plan().expect("plan");
+        assert_eq!(commands.len(), 2);
+
+        // TODO: assert the commands are identical
+    }
 }
