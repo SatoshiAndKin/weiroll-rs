@@ -171,6 +171,6 @@ mod tests {
         let (commands, _state) = planner.plan().expect("plan");
         assert_eq!(commands.len(), 2);
 
-        // TODO: assert the commands are identical
+        assert_eq!(commands[0], commands[1]);
     }
 }
