@@ -149,7 +149,7 @@ mod tests {
     fn accepts_struct_literal_without_parens() {
         let mut planner = Planner::default();
         let contract = DummyContract {
-            address: address!("0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"),
+            address: address!("0xdead00000000000000000000000000000000beef"),
         };
 
         crate::call_contract!(
