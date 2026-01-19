@@ -17,7 +17,7 @@ pub use planner::Planner;
 ///   This is the mode you want when passing prior planner outputs like [`ReturnValue`].
 /// - `Contract::callName { field: value, ... }` (**struct-literal mode**): expands to a real
 ///   `callName { ... }` struct literal and is fully type-checked, but cannot accept [`ReturnValue`]
-///   fields. Use `[]` whenever you need to thread return values into later calls.
+///   fields.
 #[macro_export]
 macro_rules! call_contract {
     // ---- Public API: values mode (positional args) ----

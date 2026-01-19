@@ -3,8 +3,6 @@ use alloy::primitives::{Address, address};
 use alloy::providers::ProviderBuilder;
 use alloy::signers::local::PrivateKeySigner;
 use alloy::sol_types::SolEventInterface;
-// use ethers::abi::RawLog;
-// use ethers::{abi::ParamType, prelude::*, utils::Anvil};
 use weiroll::{
     Planner,
     bindings::{erc20::ERC20, events::Events, testable_vm::TestableVM},
