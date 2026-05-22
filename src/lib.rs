@@ -5,7 +5,7 @@ mod error;
 mod planner;
 
 pub use calls::FunctionCall;
-pub use cmds::{Value, ReturnValue};
+pub use cmds::{CallValue, ReturnValue, Value};
 pub use error::WeirollError;
 pub use planner::Planner;
 
@@ -92,8 +92,7 @@ macro_rules! call_contract {
     (@dispatch value($value:expr), $planner:expr, $contract:expr, $call:path [ $($arg:expr),* $(,)? ]) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
-        let __value: ::alloy::primitives::U256 = ($value).into();
-        __planner.call_with_value_address::<$call>(__address, __value, vec![$($arg.into(),)*])
+        __planner.call_address_with_value::<$call>(__address, $value, vec![$($arg.into(),)*])
     }};
 
     (@dispatch call, $planner:expr, $contract:expr, ( $call:expr ) ) => {{
@@ -117,8 +116,7 @@ macro_rules! call_contract {
     (@dispatch value($value:expr), $planner:expr, $contract:expr, ( $call:expr ) ) => {{
         let __planner = &mut *$planner;
         let __address = *$contract.address();
-        let __value: ::alloy::primitives::U256 = ($value).into();
-        __planner.call_with_value_sol(__address, __value, $call)
+        __planner.call_sol_with_value(__address, $value, $call)
     }};
 }
 
@@ -130,6 +128,7 @@ mod tests {
     alloy::sol! {
         interface MacroTestContract {
             function setValue(uint256 value) external;
+            function getValue() external returns (uint256);
         }
     }
 
@@ -172,5 +171,43 @@ mod tests {
         assert_eq!(commands.len(), 2);
 
         assert_eq!(commands[0], commands[1]);
+    }
+
+    #[test]
+    fn value_macro_accepts_literals_and_return_values() {
+        let mut planner = Planner::default();
+        let contract = DummyContract {
+            address: address!("0xdead00000000000000000000000000000000beef"),
+        };
+
+        crate::call_contract!(
+            value(U256::from(1)),
+            &mut planner,
+            &contract,
+            MacroTestContract::setValueCall[2u64]
+        )
+        .expect("values mode should accept literal call value");
+
+        let value = crate::call_contract!(
+            &mut planner,
+            &contract,
+            MacroTestContract::getValueCall[]
+        )
+        .expect("values mode should return a planner value");
+
+        crate::call_contract!(
+            value(value),
+            &mut planner,
+            &contract,
+            MacroTestContract::setValueCall[4u64]
+        )
+        .expect("values mode should accept return-value call value");
+
+        let (commands, _state) = planner.plan().expect("plan");
+        assert_eq!(commands.len(), 3);
+        assert_eq!(
+            commands[2].as_slice()[4],
+            crate::cmds::CommandFlags::CALL_WITH_VALUE.bits()
+        );
     }
 }

@@ -1,10 +1,10 @@
 use crate::calls::FunctionCall;
-use crate::cmds::{Command, CommandFlags, CommandType, Literal, ReturnValue, Value};
+use crate::cmds::{CallValue, Command, CommandFlags, CommandType, Literal, ReturnValue, Value};
 use crate::error::WeirollError;
 
 use alloy::dyn_abi::DynSolType;
 use alloy::dyn_abi::DynSolValue;
-use alloy::primitives::{Address, Bytes, FixedBytes, U256};
+use alloy::primitives::{Address, Bytes, FixedBytes};
 use alloy::sol_types::{SolCall, SolType};
 use bytes::BufMut;
 use bytes::BytesMut;
@@ -13,6 +13,7 @@ use slotmap::{DefaultKey, HopSlotMap};
 use std::collections::{BTreeMap, BTreeSet};
 
 type CommandKey = DefaultKey;
+const CALL_VALUE_WORDS: usize = 1;
 
 #[derive(Debug, Default)]
 pub struct Planner<'a> {
@@ -44,6 +45,18 @@ impl CallKind {
             CallKind::DelegateCall => CommandFlags::DELEGATECALL,
             CallKind::StaticCall => CommandFlags::STATICCALL,
         }
+    }
+}
+
+fn is_call_value_compatible(return_type: &DynSolType) -> bool {
+    !return_type.is_dynamic() && return_type.minimum_words() == CALL_VALUE_WORDS
+}
+
+fn validate_call_value(value: CallValue) -> Result<CallValue, WeirollError> {
+    if value.is_valid_call_value() {
+        Ok(value)
+    } else {
+        Err(WeirollError::InvalidCallValue)
     }
 }
 
@@ -100,7 +113,7 @@ impl<'a> Planner<'a> {
     pub fn call_sol_with_value<C>(
         &mut self,
         address: Address,
-        value: U256,
+        value: impl Into<CallValue>,
         call: C,
     ) -> Result<ReturnValue, WeirollError>
     where
@@ -181,7 +194,7 @@ impl<'a> Planner<'a> {
     pub fn call_address_with_value<C>(
         &mut self,
         address: Address,
-        value: U256,
+        value: impl Into<CallValue>,
         args: Vec<Value<'a>>,
     ) -> Result<ReturnValue, WeirollError>
     where
@@ -265,6 +278,7 @@ impl<'a> Planner<'a> {
         calltype: CallKind,
     ) -> Result<ReturnValue, WeirollError> {
         let dynamic = return_type.is_dynamic();
+        let call_value_compatible = is_call_value_compatible(&return_type);
         let call = FunctionCall {
             address,
             flags: calltype.flags(),
@@ -279,7 +293,11 @@ impl<'a> Planner<'a> {
             kind: CommandType::Call,
         });
 
-        Ok(ReturnValue { command, dynamic })
+        Ok(ReturnValue {
+            command,
+            dynamic,
+            call_value_compatible,
+        })
     }
 
     fn insert_call_with_value<C: SolCall>(
@@ -287,9 +305,11 @@ impl<'a> Planner<'a> {
         address: Address,
         args: Vec<Value<'a>>,
         return_type: DynSolType,
-        value: U256,
+        value: impl Into<CallValue>,
     ) -> Result<ReturnValue, WeirollError> {
+        let value = validate_call_value(value.into())?;
         let dynamic = return_type.is_dynamic();
+        let call_value_compatible = is_call_value_compatible(&return_type);
         let call = FunctionCall {
             address,
             flags: CommandFlags::CALL_WITH_VALUE,
@@ -304,7 +324,11 @@ impl<'a> Planner<'a> {
             kind: CommandType::Call,
         });
 
-        Ok(ReturnValue { command, dynamic })
+        Ok(ReturnValue {
+            command,
+            dynamic,
+            call_value_compatible,
+        })
     }
 
     pub fn add_subplan<C: SolCall>(
@@ -314,6 +338,7 @@ impl<'a> Planner<'a> {
         return_type: DynSolType,
     ) -> Result<ReturnValue, WeirollError> {
         let dynamic = return_type.is_dynamic();
+        let call_value_compatible = is_call_value_compatible(&return_type);
 
         let mut has_subplan = false;
         let mut has_state = false;
@@ -356,7 +381,11 @@ impl<'a> Planner<'a> {
             kind: CommandType::SubPlan,
         });
 
-        Ok(ReturnValue { dynamic, command })
+        Ok(ReturnValue {
+            dynamic,
+            call_value_compatible,
+            command,
+        })
     }
 
     pub fn replace_state<C: SolCall>(&mut self, address: Address, args: Vec<Value<'a>>) {
@@ -384,8 +413,9 @@ impl<'a> Planner<'a> {
         let in_args = Vec::from_iter(command.call.args.iter());
         let mut extra_args: Vec<Value> = vec![];
         if command.call.flags & CommandFlags::CALLTYPE_MASK == CommandFlags::CALL_WITH_VALUE {
-            if let Some(value) = command.call.value {
-                extra_args.push(Value::Literal(value.into()));
+            if let Some(value) = &command.call.value {
+                let value = validate_call_value(value.clone())?;
+                extra_args.push(value.into());
             } else {
                 return Err(WeirollError::MissingValue);
             }
@@ -393,7 +423,7 @@ impl<'a> Planner<'a> {
 
         let mut args = vec![];
         // NOTE: for CALL_WITH_VALUE, the value is treated as the first argument.
-        for arg in extra_args.iter().chain(in_args.into_iter()) {
+        for arg in extra_args.iter().chain(in_args) {
             let mut slot = match arg {
                 Value::Return(val) => {
                     if let Some(slot) = return_slot_map.get(&val.command) {
@@ -558,7 +588,8 @@ impl<'a> Planner<'a> {
             let mut extra_args = vec![];
 
             if command.call.flags & CommandFlags::CALLTYPE_MASK == CommandFlags::CALL_WITH_VALUE {
-                if let Some(value) = command.call.value {
+                if let Some(value) = &command.call.value {
+                    let value = validate_call_value(value.clone())?;
                     extra_args.push(value.into());
                 } else {
                     return Err(WeirollError::MissingValue);
@@ -649,7 +680,7 @@ impl<'a> Planner<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::bindings::{math::Math, strings::Strings};
+    use crate::bindings::{math::Math, multi_return::MultiReturn, strings::Strings};
     use alloy::dyn_abi::DynSolValue;
     use alloy::{
         dyn_abi::DynSolType,
@@ -754,6 +785,105 @@ mod tests {
         // Arg0 byte is immediately after selector(4) + flags(1).
         let arg0 = commands[0].as_slice()[5];
         assert_eq!(arg0, value_slot);
+    }
+
+    #[test]
+    fn test_planner_call_with_return_value_as_value() {
+        let mut planner = Planner::default();
+
+        let value = planner
+            .call::<Math::addCall>(
+                addr(),
+                vec![U256::from(1).into(), U256::from(2).into()],
+                DynSolType::Uint(256),
+            )
+            .unwrap();
+        let _ = planner
+            .call_address_with_value::<Math::addCall>(
+                addr(),
+                value,
+                vec![U256::from(3).into(), U256::from(4).into()],
+            )
+            .unwrap();
+
+        let (commands, _state) = planner.plan().unwrap();
+        assert_eq!(commands.len(), 2);
+        assert_eq!(
+            commands[1].as_slice()[4],
+            CommandFlags::CALL_WITH_VALUE.bits()
+        );
+
+        let return_slot = commands[0].as_slice()[11];
+        assert_ne!(return_slot, 0xff);
+        assert_eq!(commands[1].as_slice()[5], return_slot);
+    }
+
+    #[test]
+    fn test_planner_rejects_dynamic_return_value_as_value() {
+        let mut planner = Planner::default();
+
+        let value = planner
+            .call::<Strings::strcatCall>(
+                addr(),
+                vec![
+                    String::from("Hello, ").into(),
+                    String::from("world!").into(),
+                ],
+                DynSolType::String,
+            )
+            .unwrap();
+        let err = planner
+            .call_address_with_value::<Math::addCall>(
+                addr(),
+                value,
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap_err();
+
+        assert_eq!(err, WeirollError::InvalidCallValue);
+    }
+
+    #[test]
+    fn test_planner_rejects_empty_return_value_as_value() {
+        let mut planner = Planner::default();
+
+        let value = planner
+            .call::<ReadOnlySubplanContract::executeCall>(
+                addr(),
+                vec![
+                    Value::State(Default::default()),
+                    Value::State(Default::default()),
+                ],
+                DynSolType::Tuple(vec![]),
+            )
+            .unwrap();
+        let err = planner
+            .call_address_with_value::<Math::addCall>(
+                addr(),
+                value,
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap_err();
+
+        assert_eq!(err, WeirollError::InvalidCallValue);
+    }
+
+    #[test]
+    fn test_planner_rejects_multi_word_return_value_as_value() {
+        let mut planner = Planner::default();
+
+        let value = planner
+            .call_address::<MultiReturn::intTupleCall>(addr(), vec![])
+            .unwrap();
+        let err = planner
+            .call_address_with_value::<Math::addCall>(
+                addr(),
+                value,
+                vec![U256::from(1).into(), U256::from(2).into()],
+            )
+            .unwrap_err();
+
+        assert_eq!(err, WeirollError::InvalidCallValue);
     }
 
     #[test]

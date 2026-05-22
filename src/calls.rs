@@ -1,26 +1,23 @@
-use alloy::{
-    dyn_abi::DynSolType,
-    primitives::{Address, U256},
-};
+use alloy::{dyn_abi::DynSolType, primitives::Address};
 // use ethers::{abi::ParamType, prelude::*};
 
-use crate::cmds::{CommandFlags, Value};
+use crate::cmds::{CallValue, CommandFlags, Value};
 
 #[derive(Debug)]
 pub struct FunctionCall<'a> {
     pub(crate) address: Address,
     pub(crate) selector: [u8; 4],
     pub(crate) flags: CommandFlags,
-    pub(crate) value: Option<U256>,
+    pub(crate) value: Option<CallValue>,
     pub(crate) args: Vec<Value<'a>>,
     pub(crate) return_type: DynSolType,
 }
 
 impl FunctionCall<'_> {
     #[allow(dead_code)]
-    pub fn with_value(mut self, value: U256) -> Self {
+    pub fn with_value(mut self, value: impl Into<CallValue>) -> Self {
         self.flags = (self.flags & !CommandFlags::CALLTYPE_MASK) | CommandFlags::CALL_WITH_VALUE;
-        self.value = Some(value);
+        self.value = Some(value.into());
         self
     }
 
@@ -51,7 +48,7 @@ mod tests {
             address: address!("0x0000000000000000000000000000000000000001"),
             selector: [0u8; 4],
             flags: CommandFlags::CALL,
-            value: Some(U256::ZERO),
+            value: Some(CallValue::Literal(U256::ZERO)),
             args: vec![],
             return_type: DynSolType::Uint(256),
         }
@@ -64,7 +61,7 @@ mod tests {
             c.flags & CommandFlags::CALLTYPE_MASK,
             CommandFlags::CALL_WITH_VALUE
         );
-        assert_eq!(c.value, Some(U256::from(123)));
+        assert_eq!(c.value, Some(CallValue::Literal(U256::from(123))));
     }
 
     #[test]

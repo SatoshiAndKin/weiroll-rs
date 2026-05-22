@@ -8,6 +8,9 @@ pub enum WeirollError {
     #[error("Call with value must have a value parameter")]
     MissingValue,
 
+    #[error("call value must be a 32-byte static value")]
+    InvalidCallValue,
+
     // todo: panic on these?
     #[error("internal error: missing return slot")]
     MissingReturnSlot,

@@ -1,7 +1,7 @@
 use crate::Planner;
 use crate::calls::FunctionCall;
 use alloy::dyn_abi::DynSolValue;
-use alloy::primitives::Bytes;
+use alloy::primitives::{Bytes, U256};
 use bitflags::bitflags;
 use slotmap::DefaultKey;
 use std::fmt::Debug;
@@ -87,6 +87,15 @@ impl From<ReturnValue> for Value<'_> {
     }
 }
 
+impl From<CallValue> for Value<'_> {
+    fn from(value: CallValue) -> Self {
+        match value {
+            CallValue::Literal(value) => Self::Literal(value.into()),
+            CallValue::Return(value) => Self::Return(value),
+        }
+    }
+}
+
 impl Value<'_> {
     pub fn is_dynamic_type(&self) -> bool {
         match self {
@@ -105,7 +114,38 @@ pub struct Command<'a> {
 }
 
 #[derive(Clone, Debug, PartialEq)]
+pub enum CallValue {
+    Literal(U256),
+    Return(ReturnValue),
+}
+
+impl<T> From<T> for CallValue
+where
+    T: Into<U256>,
+{
+    fn from(value: T) -> Self {
+        Self::Literal(value.into())
+    }
+}
+
+impl From<ReturnValue> for CallValue {
+    fn from(value: ReturnValue) -> Self {
+        Self::Return(value)
+    }
+}
+
+impl CallValue {
+    pub(crate) fn is_valid_call_value(&self) -> bool {
+        match self {
+            Self::Literal(_) => true,
+            Self::Return(value) => value.call_value_compatible,
+        }
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
 pub struct ReturnValue {
     pub(crate) dynamic: bool,
+    pub(crate) call_value_compatible: bool,
     pub(crate) command: DefaultKey,
 }
