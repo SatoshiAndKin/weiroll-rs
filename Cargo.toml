@@ -12,7 +12,7 @@ include = ["**/*.rs"]
 doctest = false
 
 [dependencies]
-alloy = "2"
+alloy = { version = "2", default-features = false, features = ["contract", "std"] }
 bitflags = "2"
 bytes = "1.12.1"
 serde = "1.0.229"
@@ -21,5 +21,10 @@ thiserror = "2.0.19"
 tracing = "0.1.44"
 
 [dev-dependencies]
-alloy = {version = "2", features = ["node-bindings"]}
+alloy = { version = "2", default-features = false, features = [
+    "node-bindings",
+    "provider-http",
+    "reqwest",
+    "signer-local",
+] }
 tokio = { version = "1.53", features = ["macros", "rt-multi-thread"] }
