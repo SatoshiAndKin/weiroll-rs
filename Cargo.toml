@@ -12,14 +12,14 @@ include = ["**/*.rs"]
 doctest = false
 
 [dependencies]
-alloy = "1"
+alloy = "2"
 bitflags = "2"
-bytes = "1.11.0"
-serde = "1.0.228"
+bytes = "1.12.1"
+serde = "1.0.229"
 slotmap = "1.1.1"
-thiserror = "2.0.17"
-tracing = "0.1.43"
+thiserror = "2.0.19"
+tracing = "0.1.44"
 
 [dev-dependencies]
-alloy = {version = "1", features = ["node-bindings"]}
-tokio = { version = "1.48", features = ["macros", "rt-multi-thread"] }
+alloy = {version = "2", features = ["node-bindings"]}
+tokio = { version = "1.53", features = ["macros", "rt-multi-thread"] }
