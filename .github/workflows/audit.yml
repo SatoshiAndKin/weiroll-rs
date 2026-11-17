@@ -10,6 +10,10 @@ on:
       - '**/Cargo.lock'
   pull_request:
 
+concurrency:
+  group: pr-ci-audit.yml-${{ github.event_name }}-${{ github.event.pull_request.number || (github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != github.event.repository.default_branch && github.ref) || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   audit:
     runs-on: ubuntu-latest
